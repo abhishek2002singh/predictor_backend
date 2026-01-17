@@ -1,0 +1,308 @@
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 16:07:55"}
+{"level":"http","message":"POST /api/auth/admin/login 200 373.476 ms","timestamp":"2026-01-16 16:07:55"}
+{"level":"http","message":"GET /api/admin/stats 200 80.514 ms","timestamp":"2026-01-16 16:07:55"}
+{"level":"http","message":"GET /api/admin/stats 304 20.587 ms","timestamp":"2026-01-16 16:07:55"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 26.374 ms","timestamp":"2026-01-16 16:08:33"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 14.797 ms","timestamp":"2026-01-16 16:08:33"}
+{"level":"http","message":"GET /api/admin/stats 304 13.561 ms","timestamp":"2026-01-16 16:08:47"}
+{"level":"http","message":"GET /api/admin/stats 304 21.925 ms","timestamp":"2026-01-16 16:08:47"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.604 ms","timestamp":"2026-01-16 16:08:53"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 19.226 ms","timestamp":"2026-01-16 16:08:53"}
+{"level":"http","message":"GET /api/admin/stats 304 18.227 ms","timestamp":"2026-01-16 16:08:54"}
+{"level":"http","message":"GET /api/admin/stats 304 19.014 ms","timestamp":"2026-01-16 16:08:54"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 25.191 ms","timestamp":"2026-01-16 16:21:29"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 9.390 ms","timestamp":"2026-01-16 16:21:29"}
+{"level":"http","message":"GET /api/admin/stats 304 18.928 ms","timestamp":"2026-01-16 16:21:32"}
+{"level":"http","message":"GET /api/admin/stats 304 15.321 ms","timestamp":"2026-01-16 16:21:32"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.616 ms","timestamp":"2026-01-16 16:21:32"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.026 ms","timestamp":"2026-01-16 16:21:32"}
+{"level":"http","message":"GET /api/admin/stats 304 18.286 ms","timestamp":"2026-01-16 16:21:33"}
+{"level":"http","message":"GET /api/admin/stats 304 19.065 ms","timestamp":"2026-01-16 16:21:33"}
+{"level":"http","message":"GET /api/admin/stats 304 21.613 ms","timestamp":"2026-01-16 16:21:34"}
+{"level":"http","message":"GET /api/admin/stats 304 18.626 ms","timestamp":"2026-01-16 16:21:34"}
+{"level":"http","message":"GET /api/admin/stats 304 18.404 ms","timestamp":"2026-01-16 16:21:35"}
+{"level":"http","message":"GET /api/admin/stats 304 14.455 ms","timestamp":"2026-01-16 16:21:35"}
+{"level":"http","message":"GET /api/admin/stats 304 12.493 ms","timestamp":"2026-01-16 16:21:36"}
+{"level":"http","message":"GET /api/admin/stats 304 21.007 ms","timestamp":"2026-01-16 16:21:36"}
+{"level":"http","message":"GET /api/admin/stats 304 28.706 ms","timestamp":"2026-01-16 16:21:45"}
+{"level":"http","message":"GET /api/admin/stats 304 26.427 ms","timestamp":"2026-01-16 16:21:45"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 16:24:05"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 16:24:05"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 17:10:43"}
+{"level":"http","message":"POST /api/auth/admin/login 200 611.222 ms","timestamp":"2026-01-16 17:10:43"}
+{"level":"http","message":"GET /api/admin/stats 304 92.269 ms","timestamp":"2026-01-16 17:10:43"}
+{"level":"http","message":"GET /api/admin/stats 304 22.622 ms","timestamp":"2026-01-16 17:10:43"}
+{"level":"http","message":"GET /api/admin/stats 304 19.596 ms","timestamp":"2026-01-16 17:12:48"}
+{"level":"http","message":"GET /api/admin/stats 304 12.226 ms","timestamp":"2026-01-16 17:12:48"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 39.768 ms","timestamp":"2026-01-16 17:12:53"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.240 ms","timestamp":"2026-01-16 17:12:53"}
+{"level":"info","message":"User status updated: abhi@gmail.com - Active: false","timestamp":"2026-01-16 17:13:00"}
+{"level":"http","message":"PUT /api/admin/users/696a0fa4378c1460572e74b1/status 200 33.075 ms","timestamp":"2026-01-16 17:13:00"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 11.627 ms","timestamp":"2026-01-16 17:13:01"}
+{"level":"info","message":"User status updated: abhi@gmail.com - Active: true","timestamp":"2026-01-16 17:13:04"}
+{"level":"http","message":"PUT /api/admin/users/696a0fa4378c1460572e74b1/status 200 10.140 ms","timestamp":"2026-01-16 17:13:04"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 8.577 ms","timestamp":"2026-01-16 17:13:04"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&role=USER 200 22.749 ms","timestamp":"2026-01-16 17:13:14"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&role=ADMIN 200 9.225 ms","timestamp":"2026-01-16 17:13:17"}
+{"level":"http","message":"GET /api/admin/stats 304 18.239 ms","timestamp":"2026-01-16 17:13:28"}
+{"level":"http","message":"GET /api/admin/stats 304 13.258 ms","timestamp":"2026-01-16 17:13:28"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 19.181 ms","timestamp":"2026-01-16 17:13:44"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 15.499 ms","timestamp":"2026-01-16 17:13:44"}
+{"level":"http","message":"GET /api/admin/stats 304 38.193 ms","timestamp":"2026-01-16 17:21:41"}
+{"level":"http","message":"GET /api/admin/stats 304 16.730 ms","timestamp":"2026-01-16 17:21:41"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 17:45:45"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 17:45:45"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 17:46:36"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 17:46:36"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 17:48:19"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 17:48:19"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 17:48:34"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 17:48:34"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 20:29:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 20:29:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 20:56:12"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 20:56:12"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 22:46:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 22:46:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 22:47:22"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 22:47:22"}
+{"level":"http","message":"POST /api/auth/admin/login 404 33.858 ms","timestamp":"2026-01-16 23:06:19"}
+{"level":"http","message":"POST /api/auth/admin/login 404 0.876 ms","timestamp":"2026-01-16 23:06:27"}
+{"level":"http","message":"POST /api/auth/admin/login 404 0.664 ms","timestamp":"2026-01-16 23:07:02"}
+{"level":"http","message":"POST /api/auth/admin/login 404 6.170 ms","timestamp":"2026-01-16 23:14:54"}
+{"level":"http","message":"POST /api/auth/admin/login 404 1.571 ms","timestamp":"2026-01-16 23:18:51"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-16 23:21:07"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-16 23:21:07"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 23:21:10"}
+{"level":"http","message":"POST /api/auth/admin/login 200 717.182 ms","timestamp":"2026-01-16 23:21:10"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 23:21:46"}
+{"level":"http","message":"POST /api/auth/admin/login 200 405.578 ms","timestamp":"2026-01-16 23:21:46"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 23:21:47"}
+{"level":"http","message":"POST /api/auth/admin/login 200 370.589 ms","timestamp":"2026-01-16 23:21:47"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 23:22:23"}
+{"level":"http","message":"POST /api/auth/admin/login 200 379.820 ms","timestamp":"2026-01-16 23:22:23"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 23:23:23"}
+{"level":"http","message":"POST /api/auth/admin/login 200 429.790 ms","timestamp":"2026-01-16 23:23:23"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-16 23:26:43"}
+{"level":"http","message":"POST /api/auth/admin/login 200 480.236 ms","timestamp":"2026-01-16 23:26:43"}
+{"level":"http","message":"GET /api/admin/stats 304 154.747 ms","timestamp":"2026-01-16 23:26:44"}
+{"level":"http","message":"GET /api/admin/stats 304 23.139 ms","timestamp":"2026-01-16 23:26:44"}
+{"level":"http","message":"GET /api/admin/stats 304 17.321 ms","timestamp":"2026-01-16 23:26:56"}
+{"level":"http","message":"GET /api/admin/stats 304 17.553 ms","timestamp":"2026-01-16 23:26:56"}
+{"level":"http","message":"GET /api/admin/stats 304 41.389 ms","timestamp":"2026-01-16 23:27:22"}
+{"level":"http","message":"GET /api/admin/stats 304 46.030 ms","timestamp":"2026-01-16 23:27:22"}
+{"level":"http","message":"GET /api/admin/stats 304 71.823 ms","timestamp":"2026-01-16 23:40:55"}
+{"level":"http","message":"GET /api/admin/stats 304 46.211 ms","timestamp":"2026-01-16 23:40:55"}
+{"level":"http","message":"GET /api/admin/stats 304 143.388 ms","timestamp":"2026-01-17 00:02:28"}
+{"level":"http","message":"GET /api/admin/stats 304 16.212 ms","timestamp":"2026-01-17 00:02:28"}
+{"level":"http","message":"GET /api/admin/stats 304 43.271 ms","timestamp":"2026-01-17 00:02:34"}
+{"level":"http","message":"GET /api/admin/stats 304 53.453 ms","timestamp":"2026-01-17 00:02:34"}
+{"level":"http","message":"GET /api/admin/stats 304 176.466 ms","timestamp":"2026-01-17 00:31:33"}
+{"level":"http","message":"GET /api/admin/stats 304 49.211 ms","timestamp":"2026-01-17 00:31:33"}
+{"level":"http","message":"GET /api/admin/stats 304 82.908 ms","timestamp":"2026-01-17 08:55:15"}
+{"level":"http","message":"GET /api/admin/stats 304 143.119 ms","timestamp":"2026-01-17 08:55:15"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 09:49:15"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 09:49:15"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:00:07"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:00:07"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:03:55"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:03:55"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:11:21"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:11:21"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:11:42"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:11:42"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:12:01"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:12:01"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:12:06"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:12:06"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:12:11"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:12:11"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:12:21"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:12:21"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:12:54"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:12:54"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:25:16"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:25:16"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:25:44"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:25:44"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:52:26"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:52:26"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 10:55:01"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 10:55:01"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:03:48"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:03:48"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:06:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:06:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:10:37"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:10:37"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:11:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:11:59"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:13:19"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:13:19"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:14:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:14:38"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:18:41"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:18:41"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:19:03"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:19:03"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:19:23"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:19:23"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:19:27"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:19:27"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:22:18"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:22:18"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:23:53"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:23:53"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:24:37"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:24:37"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:25:25"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:25:25"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:25:37"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:25:37"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:25:55"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:25:55"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 11:26:08"}
+{"level":"http","message":"POST /api/auth/admin/login 200 440.376 ms","timestamp":"2026-01-17 11:26:08"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:26:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:26:38"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:27:20"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:27:20"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:28:56"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:28:56"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:29:26"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:29:26"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:30:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:30:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 11:34:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 11:34:38"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 11:48:15"}
+{"level":"http","message":"POST /api/auth/admin/login 200 568.389 ms","timestamp":"2026-01-17 11:48:15"}
+{"level":"http","message":"GET /api/admin/stats 304 67.490 ms","timestamp":"2026-01-17 11:48:15"}
+{"level":"http","message":"GET /api/admin/stats 304 20.277 ms","timestamp":"2026-01-17 11:48:15"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:02:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:02:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:05:10"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:05:10"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:06:24"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:06:24"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:08:45"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:08:46"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:08:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:08:59"}
+{"level":"http","message":"POST /api/create 400 19.459 ms","timestamp":"2026-01-17 12:23:32"}
+{"level":"http","message":"POST /api/create 400 1.516 ms","timestamp":"2026-01-17 12:23:53"}
+{"email":"kamal@gmail.com","level":"error","message":"Create user data error UserData validation failed: checkHistory.0.category: `OBC-NCL` is not a valid enum value for path `category`., checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.category: `OBC-NCL` is not a valid enum value for path `category`., checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 2)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 4)","timestamp":"2026-01-17 12:28:45"}
+{"level":"http","message":"POST /api/create 500 171.755 ms","timestamp":"2026-01-17 12:28:45"}
+{"email":"kamal@gmail.com","level":"error","message":"Create user data error UserData validation failed: checkHistory.0.category: `OBC-NCL` is not a valid enum value for path `category`., checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.category: `OBC-NCL` is not a valid enum value for path `category`., checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 2)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 4)","timestamp":"2026-01-17 12:34:00"}
+{"level":"http","message":"POST /api/create 500 16.893 ms","timestamp":"2026-01-17 12:34:00"}
+{"email":"kamal@gmail.com","level":"error","message":"Create user data error UserData validation failed: checkHistory.0.category: `OBC-NCL` is not a valid enum value for path `category`., checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.category: `OBC-NCL` is not a valid enum value for path `category`., checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 2)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 4)","timestamp":"2026-01-17 12:34:01"}
+{"level":"http","message":"POST /api/create 500 11.872 ms","timestamp":"2026-01-17 12:34:01"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:40:56"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:40:56"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 12:41:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 12:41:08"}
+{"level":"info","message":"New user created: kamal@gmail.com for KCET","timestamp":"2026-01-17 12:41:23"}
+{"level":"http","message":"POST /api/create 201 56.952 ms","timestamp":"2026-01-17 12:41:23"}
+{"level":"info","message":"Check history added for user: kamal@gmail.com, exam: JEE_MAINS, total checks: 2","timestamp":"2026-01-17 12:42:09"}
+{"level":"http","message":"POST /api/create 201 31.428 ms","timestamp":"2026-01-17 12:42:09"}
+{"level":"info","message":"Check history added for user: kamal@gmail.com, exam: JEE_ADVANCED, total checks: 3","timestamp":"2026-01-17 12:44:25"}
+{"level":"http","message":"POST /api/create 201 12.361 ms","timestamp":"2026-01-17 12:44:25"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 12:46:45"}
+{"level":"http","message":"POST /api/auth/admin/login 200 396.890 ms","timestamp":"2026-01-17 12:46:45"}
+{"level":"http","message":"GET /api/admin/stats 304 86.084 ms","timestamp":"2026-01-17 12:46:46"}
+{"level":"http","message":"GET /api/admin/stats 304 32.299 ms","timestamp":"2026-01-17 12:46:46"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 48.658 ms","timestamp":"2026-01-17 12:53:35"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 16.997 ms","timestamp":"2026-01-17 12:53:35"}
+{"level":"http","message":"GET /api/admin/stats 304 23.160 ms","timestamp":"2026-01-17 12:53:39"}
+{"level":"http","message":"GET /api/admin/stats 304 26.511 ms","timestamp":"2026-01-17 12:53:39"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 13.951 ms","timestamp":"2026-01-17 12:54:03"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 19.842 ms","timestamp":"2026-01-17 12:54:03"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 20.391 ms","timestamp":"2026-01-17 12:54:09"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 15.888 ms","timestamp":"2026-01-17 12:54:09"}
+{"level":"http","message":"GET /api/admin/stats 304 25.154 ms","timestamp":"2026-01-17 12:54:14"}
+{"level":"http","message":"GET /api/admin/stats 304 26.650 ms","timestamp":"2026-01-17 12:54:14"}
+{"level":"http","message":"GET /api/admin/stats 304 28.306 ms","timestamp":"2026-01-17 12:54:19"}
+{"level":"http","message":"GET /api/admin/stats 304 30.589 ms","timestamp":"2026-01-17 12:54:19"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.880 ms","timestamp":"2026-01-17 12:54:21"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 15.648 ms","timestamp":"2026-01-17 12:54:21"}
+{"level":"http","message":"GET /api/admin/stats 304 54.724 ms","timestamp":"2026-01-17 12:54:23"}
+{"level":"http","message":"GET /api/admin/stats 304 37.194 ms","timestamp":"2026-01-17 12:54:23"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 17.718 ms","timestamp":"2026-01-17 12:55:22"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 15.890 ms","timestamp":"2026-01-17 12:55:22"}
+{"level":"http","message":"GET /api/admin/stats 304 22.353 ms","timestamp":"2026-01-17 12:55:40"}
+{"level":"http","message":"GET /api/admin/stats 304 21.624 ms","timestamp":"2026-01-17 12:55:40"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 13:07:02"}
+{"level":"http","message":"POST /api/auth/admin/login 200 656.068 ms","timestamp":"2026-01-17 13:07:02"}
+{"level":"http","message":"GET /api/admin/stats 304 30.256 ms","timestamp":"2026-01-17 13:07:02"}
+{"level":"http","message":"GET /api/admin/stats 304 45.964 ms","timestamp":"2026-01-17 13:07:02"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 16.335 ms","timestamp":"2026-01-17 13:09:04"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 23.039 ms","timestamp":"2026-01-17 13:09:04"}
+{"level":"http","message":"GET /api/admin/stats 304 25.304 ms","timestamp":"2026-01-17 13:10:40"}
+{"level":"http","message":"GET /api/admin/stats 304 31.705 ms","timestamp":"2026-01-17 13:10:40"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.734 ms","timestamp":"2026-01-17 13:10:45"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 15.211 ms","timestamp":"2026-01-17 13:10:45"}
+{"level":"http","message":"GET /api/admin/stats 304 15.927 ms","timestamp":"2026-01-17 13:10:52"}
+{"level":"http","message":"GET /api/admin/stats 304 20.729 ms","timestamp":"2026-01-17 13:10:52"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:20:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:20:59"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:21:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:21:38"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:21:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:21:59"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 96.277 ms","timestamp":"2026-01-17 13:22:04"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 35.535 ms","timestamp":"2026-01-17 13:22:04"}
+{"level":"http","message":"GET /api/admin/stats 304 112.170 ms","timestamp":"2026-01-17 13:22:08"}
+{"level":"http","message":"GET /api/admin/stats 304 63.628 ms","timestamp":"2026-01-17 13:22:08"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:22:15"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:22:15"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:22:24"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:22:24"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:22:51"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:22:51"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:22:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:22:59"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:23:07"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:23:07"}
+{"level":"http","message":"GET /api/admin/stats 304 224.116 ms","timestamp":"2026-01-17 13:25:39"}
+{"level":"http","message":"GET /api/admin/stats 304 118.553 ms","timestamp":"2026-01-17 13:25:39"}
+{"level":"http","message":"GET /api/admin/stats 304 25.373 ms","timestamp":"2026-01-17 13:25:45"}
+{"level":"http","message":"GET /api/admin/stats 304 170.973 ms","timestamp":"2026-01-17 13:25:45"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:28:16"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:28:16"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:28:23"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:28:23"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:28:42"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:28:42"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 13:28:50"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 13:28:50"}
+{"level":"http","message":"GET /api/admin/stats 304 117.539 ms","timestamp":"2026-01-17 13:30:21"}
+{"level":"http","message":"GET /api/admin/stats 304 40.202 ms","timestamp":"2026-01-17 13:30:22"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 51.376 ms","timestamp":"2026-01-17 13:30:23"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 55.807 ms","timestamp":"2026-01-17 13:30:23"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 31.267 ms","timestamp":"2026-01-17 13:51:44"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 15.198 ms","timestamp":"2026-01-17 13:51:44"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 13:55:40"}
+{"level":"http","message":"POST /api/auth/admin/login 200 774.775 ms","timestamp":"2026-01-17 13:55:40"}
+{"level":"http","message":"GET /api/admin/stats 304 48.665 ms","timestamp":"2026-01-17 13:55:41"}
+{"level":"http","message":"GET /api/admin/stats 304 24.670 ms","timestamp":"2026-01-17 13:55:41"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 18.184 ms","timestamp":"2026-01-17 13:55:43"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 24.604 ms","timestamp":"2026-01-17 13:55:44"}
+{"level":"info","message":"Assistant created: lalu@gmail.com by admin: abh2i@gmail.com","timestamp":"2026-01-17 13:56:37"}
+{"level":"http","message":"POST /api/assistant 201 703.730 ms","timestamp":"2026-01-17 13:56:37"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 40.472 ms","timestamp":"2026-01-17 13:56:37"}
+{"level":"http","message":"GET /api/admin/stats 304 27.099 ms","timestamp":"2026-01-17 13:57:12"}
+{"level":"http","message":"GET /api/admin/stats 304 24.201 ms","timestamp":"2026-01-17 13:57:12"}
+{"level":"info","message":"Assistant logged in successfully: lalu@gmail.com","timestamp":"2026-01-17 13:57:59"}
+{"level":"http","message":"POST /api/auth/assistant/login 200 656.628 ms","timestamp":"2026-01-17 13:57:59"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 15.621 ms","timestamp":"2026-01-17 13:58:00"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 36.083 ms","timestamp":"2026-01-17 13:58:00"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 11.369 ms","timestamp":"2026-01-17 13:58:19"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 19.137 ms","timestamp":"2026-01-17 13:58:19"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.554 ms","timestamp":"2026-01-17 13:58:28"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 12.327 ms","timestamp":"2026-01-17 13:58:28"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 14:00:35"}
+{"level":"http","message":"POST /api/auth/admin/login 200 705.892 ms","timestamp":"2026-01-17 14:00:35"}
+{"level":"http","message":"GET /api/admin/stats 304 27.735 ms","timestamp":"2026-01-17 14:00:36"}
+{"level":"http","message":"GET /api/admin/stats 304 23.854 ms","timestamp":"2026-01-17 14:00:36"}
+{"level":"http","message":"GET /api/admin/stats 304 23.069 ms","timestamp":"2026-01-17 14:09:42"}
+{"level":"http","message":"GET /api/admin/stats 304 44.026 ms","timestamp":"2026-01-17 14:09:42"}
