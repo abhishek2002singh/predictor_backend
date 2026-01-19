@@ -625,3 +625,14 @@
 {"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:45:37"}
 {"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 12:12:36"}
 {"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 12:12:36"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 12:13:16"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 12:13:16"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 194.652 ms","timestamp":"2026-01-19 12:23:09"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 13.141 ms","timestamp":"2026-01-19 12:23:09"}
+{"level":"info","message":"Assistant created: aman@gmail.com by admin: abh2i@gmail.com","timestamp":"2026-01-19 12:23:50"}
+{"level":"http","message":"POST /api/assistant 201 545.515 ms","timestamp":"2026-01-19 12:23:50"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 27.078 ms","timestamp":"2026-01-19 12:23:50"}
+{"level":"info","message":"Assistant logged in successfully: aman@gmail.com","timestamp":"2026-01-19 12:24:09"}
+{"level":"http","message":"POST /api/auth/assistant/login 200 452.217 ms","timestamp":"2026-01-19 12:24:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 9.481 ms","timestamp":"2026-01-19 12:24:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.892 ms","timestamp":"2026-01-19 12:24:09"}
