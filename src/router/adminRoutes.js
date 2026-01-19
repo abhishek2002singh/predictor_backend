@@ -1,60 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../model/auth/auth");
+const UserData = require("../model/userData/user");
 const { protect, adminOnly } = require("../middleware/auth.middleware");
 const logger = require("../config/logger");
+const {allAdmin} = require('../controllers/adminController/adminController')
+const { API_ROUTES_FOR_ROUTER, } = require("../utils/routePath");
 
 // All admin routes require authentication and admin role
 router.use(protect);
 router.use(adminOnly);
 
-// @desc    Get all users
+// @desc    Get all admin
 // @route   GET /api/admin/users
 // @access  Admin
-router.get("/users", async (req, res) => {
-  try {
-    const { page = 1, limit = 10, role, search } = req.query;
+router.get(API_ROUTES_FOR_ROUTER.ADMIN_ROUTER_PATH.ALL_ADMIN , allAdmin)
 
-    const query = {};
+// 
 
-    if (role) {
-      query.role = role;
-    }
 
-    if (search) {
-      query.$or = [
-        { firstName: { $regex: search, $options: "i" } },
-        { lastName: { $regex: search, $options: "i" } },
-        { emailId: { $regex: search, $options: "i" } },
-      ];
-    }
 
-    const users = await User.find(query)
-      .select("-password")
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
-
-    const total = await User.countDocuments(query);
-
-    res.status(200).json({
-      success: true,
-      data: users,
-      pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
-        total,
-        pages: Math.ceil(total / limit),
-      },
-    });
-  } catch (error) {
-    logger.error("Get users error", { message: error.message });
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch users",
-    });
-  }
-});
 
 // @desc    Get single user
 // @route   GET /api/admin/users/:id
@@ -163,15 +128,15 @@ router.delete("/users/:id", async (req, res) => {
 // @access  Admin
 router.get("/stats", async (req, res) => {
   try {
-    const totalUsers = await User.countDocuments({ role: "USER" });
+    const totalUsers = await UserData.countDocuments();
     const activeUsers = await User.countDocuments({ role: "USER", isActive: true });
     const totalAdmins = await User.countDocuments({ role: "ADMIN" });
 
-    // Users registered in last 7 days
+    // Users registered in last 7 day
     const lastWeek = new Date();
     lastWeek.setDate(lastWeek.getDate() - 7);
-    const newUsersThisWeek = await User.countDocuments({
-      role: "USER",
+    const newUsersThisWeek = await UserData.countDocuments({
+      // role: "USER",
       createdAt: { $gte: lastWeek },
     });
 

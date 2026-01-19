@@ -26,6 +26,9 @@ const API_ROUTES_FOR_ROUTER = {
     USER_DETAILS:"userDetails/:id",
     UPDATE_USER:"updateUser/:id"
 
+  },
+  ADMIN_ROUTER_PATH:{
+    ALL_ADMIN:"/AllAdmin"
   }
 };
 

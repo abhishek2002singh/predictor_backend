@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  getMyPermissions,
+} = require("../controllers/assistantController");
+
+const {
   createAssistant,
   getAllAssistants,
   getAssistant,
   updatePermissions,
   updateAssistantStatus,
-  deleteAssistant,
-  getMyPermissions,
-} = require("../controllers/assistantController");
+  deleteAssistant,} = require('../controllers/adminController/assistanceManageByAdmin/assistanceManageByAdmin')
 
 const { protect, adminOnly, adminOrAssistant } = require("../middleware/auth.middleware");
 
@@ -27,4 +29,4 @@ router.put("/:id/permissions", adminOnly, updatePermissions);
 router.put("/:id/status", adminOnly, updateAssistantStatus);
 router.delete("/:id", adminOnly, deleteAssistant);
 
-module.exports = router;
+module.exports = router

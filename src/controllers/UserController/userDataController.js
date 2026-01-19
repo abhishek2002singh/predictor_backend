@@ -30,7 +30,7 @@ const genderMap = {
   "EWS-PwD": "EWS-PwD",
   "OBC-NCL-PwD": "OBC-NCL-PwD",
   "SC-PwD": "SC-PwD",
-  "ST-PwD": "ST-PwD",
+  "ST-PwD": "ST-PwD"
 };
 
 const createUserData = async (req, res) => {

@@ -306,3 +306,322 @@
 {"level":"http","message":"GET /api/admin/stats 304 23.854 ms","timestamp":"2026-01-17 14:00:36"}
 {"level":"http","message":"GET /api/admin/stats 304 23.069 ms","timestamp":"2026-01-17 14:09:42"}
 {"level":"http","message":"GET /api/admin/stats 304 44.026 ms","timestamp":"2026-01-17 14:09:42"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:25:26"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:25:26"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-17 14:25:32"}
+{"level":"http","message":"POST /api/auth/admin/login 200 525.128 ms","timestamp":"2026-01-17 14:25:32"}
+{"level":"http","message":"GET /api/admin/stats 304 85.645 ms","timestamp":"2026-01-17 14:25:32"}
+{"level":"http","message":"GET /api/admin/stats 304 31.679 ms","timestamp":"2026-01-17 14:25:32"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 23.979 ms","timestamp":"2026-01-17 14:25:37"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 17.383 ms","timestamp":"2026-01-17 14:25:37"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 14.893 ms","timestamp":"2026-01-17 14:25:48"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 13.849 ms","timestamp":"2026-01-17 14:25:48"}
+{"level":"info","message":"Assistant status updated: lalu@gmail.com - Active: false","timestamp":"2026-01-17 14:26:14"}
+{"level":"http","message":"PUT /api/assistant/696b47bca006504794b6c4ff/status 200 27.176 ms","timestamp":"2026-01-17 14:26:14"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 11.622 ms","timestamp":"2026-01-17 14:26:14"}
+{"level":"info","message":"Assistant status updated: lalu@gmail.com - Active: true","timestamp":"2026-01-17 14:26:20"}
+{"level":"http","message":"PUT /api/assistant/696b47bca006504794b6c4ff/status 200 11.773 ms","timestamp":"2026-01-17 14:26:20"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 12.746 ms","timestamp":"2026-01-17 14:26:20"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 9.441 ms","timestamp":"2026-01-17 14:27:57"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 10.620 ms","timestamp":"2026-01-17 14:27:57"}
+{"level":"http","message":"GET /api/admin/stats 304 12.881 ms","timestamp":"2026-01-17 14:28:00"}
+{"level":"http","message":"GET /api/admin/stats 304 14.092 ms","timestamp":"2026-01-17 14:28:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:28:18"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:28:18"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:28:41"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:28:41"}
+{"level":"http","message":"GET /api/admin/stats 304 53.161 ms","timestamp":"2026-01-17 14:28:48"}
+{"level":"http","message":"GET /api/admin/stats 304 25.649 ms","timestamp":"2026-01-17 14:28:48"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:29:45"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:29:45"}
+{"level":"http","message":"GET /api/admin/stats 304 67.843 ms","timestamp":"2026-01-17 14:29:49"}
+{"level":"http","message":"GET /api/admin/stats 304 24.752 ms","timestamp":"2026-01-17 14:29:49"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:30:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:30:29"}
+{"level":"http","message":"GET /api/admin/stats 304 88.966 ms","timestamp":"2026-01-17 14:30:33"}
+{"level":"http","message":"GET /api/admin/stats 304 40.453 ms","timestamp":"2026-01-17 14:30:33"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:31:01"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:31:01"}
+{"level":"http","message":"GET /api/admin/stats 200 81.442 ms","timestamp":"2026-01-17 14:31:04"}
+{"level":"http","message":"GET /api/admin/stats 304 35.159 ms","timestamp":"2026-01-17 14:31:04"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:37:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:37:38"}
+{"level":"http","message":"GET /api/admin/stats 200 74.312 ms","timestamp":"2026-01-17 14:37:46"}
+{"level":"http","message":"GET /api/admin/stats 304 45.679 ms","timestamp":"2026-01-17 14:37:47"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:41:37"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:41:37"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 46.155 ms","timestamp":"2026-01-17 14:46:07"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 14.956 ms","timestamp":"2026-01-17 14:46:07"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:48:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:48:38"}
+{"level":"http","message":"GET /api/admin/stats 304 130.570 ms","timestamp":"2026-01-17 14:48:42"}
+{"level":"http","message":"GET /api/admin/stats 304 79.611 ms","timestamp":"2026-01-17 14:48:42"}
+{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:48:45"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 500 7.563 ms","timestamp":"2026-01-17 14:48:45"}
+{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:48:45"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 500 5.016 ms","timestamp":"2026-01-17 14:48:45"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:49:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:49:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:49:40"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:49:40"}
+{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:49:45"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 500 59.166 ms","timestamp":"2026-01-17 14:49:45"}
+{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:49:45"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 500 33.126 ms","timestamp":"2026-01-17 14:49:45"}
+{"level":"http","message":"GET /api/admin/stats 304 22.968 ms","timestamp":"2026-01-17 14:49:48"}
+{"level":"http","message":"GET /api/admin/stats 304 31.898 ms","timestamp":"2026-01-17 14:49:48"}
+{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:50:00"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 500 7.322 ms","timestamp":"2026-01-17 14:50:00"}
+{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:50:00"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 500 4.717 ms","timestamp":"2026-01-17 14:50:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:50:19"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:50:19"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:52:31"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:52:31"}
+{"level":"http","message":"GET /api/admin/stats 304 46.473 ms","timestamp":"2026-01-17 14:52:34"}
+{"level":"http","message":"GET /api/admin/stats 304 39.880 ms","timestamp":"2026-01-17 14:52:35"}
+{"level":"http","message":"GET /api/admin/stats 304 26.899 ms","timestamp":"2026-01-17 14:52:37"}
+{"level":"http","message":"GET /api/admin/stats 304 37.780 ms","timestamp":"2026-01-17 14:52:37"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 11.146 ms","timestamp":"2026-01-17 14:52:38"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.771 ms","timestamp":"2026-01-17 14:52:38"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:52:48"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:52:48"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:53:31"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:53:31"}
+{"level":"http","message":"GET /api/admin/stats 304 58.273 ms","timestamp":"2026-01-17 14:53:35"}
+{"level":"http","message":"GET /api/admin/stats 304 32.310 ms","timestamp":"2026-01-17 14:53:35"}
+{"level":"http","message":"GET /api/admin/stats 304 46.724 ms","timestamp":"2026-01-17 14:53:37"}
+{"level":"http","message":"GET /api/admin/stats 304 54.777 ms","timestamp":"2026-01-17 14:53:37"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 14.999 ms","timestamp":"2026-01-17 14:53:38"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 25.245 ms","timestamp":"2026-01-17 14:53:38"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:54:43"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:54:43"}
+{"level":"http","message":"GET /api/admin/stats 304 53.180 ms","timestamp":"2026-01-17 14:54:50"}
+{"level":"http","message":"GET /api/admin/stats 304 65.970 ms","timestamp":"2026-01-17 14:54:50"}
+{"level":"http","message":"GET /api/admin/stats 304 34.732 ms","timestamp":"2026-01-17 14:54:51"}
+{"level":"http","message":"GET /api/admin/stats 304 29.057 ms","timestamp":"2026-01-17 14:54:51"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 21.113 ms","timestamp":"2026-01-17 14:54:54"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 28.175 ms","timestamp":"2026-01-17 14:54:54"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:55:20"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:55:20"}
+{"level":"http","message":"GET /api/admin/stats 304 48.435 ms","timestamp":"2026-01-17 14:55:24"}
+{"level":"http","message":"GET /api/admin/stats 304 20.432 ms","timestamp":"2026-01-17 14:55:24"}
+{"level":"http","message":"GET /api/admin/stats 304 26.979 ms","timestamp":"2026-01-17 14:55:25"}
+{"level":"http","message":"GET /api/admin/stats 304 32.576 ms","timestamp":"2026-01-17 14:55:25"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 18.253 ms","timestamp":"2026-01-17 14:55:26"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 21.498 ms","timestamp":"2026-01-17 14:55:26"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 18.395 ms","timestamp":"2026-01-17 14:57:31"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 16.835 ms","timestamp":"2026-01-17 14:57:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-17 14:58:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-17 14:58:08"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 200 58.829 ms","timestamp":"2026-01-17 14:58:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=aj 200 15.470 ms","timestamp":"2026-01-17 14:58:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=aje 200 19.641 ms","timestamp":"2026-01-17 14:58:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ajee 200 8.098 ms","timestamp":"2026-01-17 14:58:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ajeet 200 17.565 ms","timestamp":"2026-01-17 14:58:59"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ajee 304 17.143 ms","timestamp":"2026-01-17 14:59:17"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=aje 304 17.458 ms","timestamp":"2026-01-17 14:59:17"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=aj 304 20.447 ms","timestamp":"2026-01-17 14:59:17"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 18.977 ms","timestamp":"2026-01-17 14:59:17"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 14.258 ms","timestamp":"2026-01-17 14:59:18"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 7.978 ms","timestamp":"2026-01-17 14:59:20"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ab 200 11.741 ms","timestamp":"2026-01-17 14:59:20"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=abh 200 16.371 ms","timestamp":"2026-01-17 14:59:20"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=abhi 200 13.824 ms","timestamp":"2026-01-17 14:59:20"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 25.152 ms","timestamp":"2026-01-17 15:07:42"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 9.234 ms","timestamp":"2026-01-17 15:09:37"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.357 ms","timestamp":"2026-01-17 15:15:07"}
+{"level":"http","message":"GET /api/admin/stats 304 280.492 ms","timestamp":"2026-01-17 15:54:33"}
+{"level":"http","message":"GET /api/admin/stats 304 23.303 ms","timestamp":"2026-01-17 15:54:33"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 40.474 ms","timestamp":"2026-01-17 15:54:37"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 28.740 ms","timestamp":"2026-01-17 15:54:37"}
+{"level":"http","message":"GET /api/admin/stats 304 24.713 ms","timestamp":"2026-01-17 15:54:39"}
+{"level":"http","message":"GET /api/admin/stats 304 20.691 ms","timestamp":"2026-01-17 15:54:39"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 18.791 ms","timestamp":"2026-01-17 15:54:59"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 13.325 ms","timestamp":"2026-01-17 15:54:59"}
+{"level":"info","message":"Assistant logged in successfully: lalu@gmail.com","timestamp":"2026-01-17 15:56:15"}
+{"level":"http","message":"POST /api/auth/assistant/login 200 570.755 ms","timestamp":"2026-01-17 15:56:15"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 192.907 ms","timestamp":"2026-01-17 15:56:15"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 13.426 ms","timestamp":"2026-01-17 15:56:15"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 09:41:57"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 09:41:57"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-19 09:44:20"}
+{"level":"http","message":"POST /api/auth/admin/login 200 571.832 ms","timestamp":"2026-01-19 09:44:20"}
+{"level":"http","message":"GET /api/admin/stats 304 82.248 ms","timestamp":"2026-01-19 09:44:20"}
+{"level":"http","message":"GET /api/admin/stats 304 19.488 ms","timestamp":"2026-01-19 09:44:20"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 27.450 ms","timestamp":"2026-01-19 09:45:54"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 8.026 ms","timestamp":"2026-01-19 09:45:54"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 7.021 ms","timestamp":"2026-01-19 09:45:59"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 8.758 ms","timestamp":"2026-01-19 09:45:59"}
+{"level":"http","message":"GET /api/admin/stats 304 11.050 ms","timestamp":"2026-01-19 09:47:11"}
+{"level":"http","message":"GET /api/admin/stats 304 18.673 ms","timestamp":"2026-01-19 09:47:11"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.762 ms","timestamp":"2026-01-19 09:53:54"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 10.526 ms","timestamp":"2026-01-19 09:53:54"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.023 ms","timestamp":"2026-01-19 09:53:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 8.286 ms","timestamp":"2026-01-19 09:53:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 10.210 ms","timestamp":"2026-01-19 09:54:03"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 7.564 ms","timestamp":"2026-01-19 09:54:03"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 19.381 ms","timestamp":"2026-01-19 09:54:04"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 16.249 ms","timestamp":"2026-01-19 09:54:04"}
+{"level":"http","message":"GET /api/admin/stats 304 48.487 ms","timestamp":"2026-01-19 09:54:55"}
+{"level":"http","message":"GET /api/admin/stats 304 32.965 ms","timestamp":"2026-01-19 09:54:55"}
+{"level":"http","message":"GET /api/admin/stats 304 24.911 ms","timestamp":"2026-01-19 09:54:57"}
+{"level":"http","message":"GET /api/admin/stats 304 21.571 ms","timestamp":"2026-01-19 09:54:57"}
+{"level":"info","message":"Assistant logged in successfully: lalu@gmail.com","timestamp":"2026-01-19 09:55:38"}
+{"level":"http","message":"POST /api/auth/assistant/login 200 467.319 ms","timestamp":"2026-01-19 09:55:38"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 12.021 ms","timestamp":"2026-01-19 09:55:38"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.682 ms","timestamp":"2026-01-19 09:55:39"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 6.991 ms","timestamp":"2026-01-19 09:55:43"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 10.954 ms","timestamp":"2026-01-19 09:55:44"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.069 ms","timestamp":"2026-01-19 10:02:40"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 17.834 ms","timestamp":"2026-01-19 10:02:40"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 153.107 ms","timestamp":"2026-01-19 10:20:53"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 13.441 ms","timestamp":"2026-01-19 10:20:53"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 200 33.243 ms","timestamp":"2026-01-19 10:20:58"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ab 200 10.428 ms","timestamp":"2026-01-19 10:21:02"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 9.739 ms","timestamp":"2026-01-19 10:21:09"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 6.917 ms","timestamp":"2026-01-19 10:21:10"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 12.858 ms","timestamp":"2026-01-19 10:21:12"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ab 304 8.959 ms","timestamp":"2026-01-19 10:21:13"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=abh 200 11.234 ms","timestamp":"2026-01-19 10:21:13"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ab 304 10.112 ms","timestamp":"2026-01-19 10:21:15"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 11.836 ms","timestamp":"2026-01-19 10:21:15"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 8.768 ms","timestamp":"2026-01-19 10:21:15"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 19.112 ms","timestamp":"2026-01-19 10:21:25"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 19.934 ms","timestamp":"2026-01-19 10:21:25"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10&search=kamal 200 18.483 ms","timestamp":"2026-01-19 10:21:30"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 14.794 ms","timestamp":"2026-01-19 10:21:34"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10&search=ka 200 15.473 ms","timestamp":"2026-01-19 10:21:39"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 10.123 ms","timestamp":"2026-01-19 10:21:43"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 48.618 ms","timestamp":"2026-01-19 10:36:59"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 39.794 ms","timestamp":"2026-01-19 10:36:59"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 9.320 ms","timestamp":"2026-01-19 10:37:01"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 16.808 ms","timestamp":"2026-01-19 10:37:02"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=abhi 200 12.872 ms","timestamp":"2026-01-19 10:37:08"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 10.236 ms","timestamp":"2026-01-19 10:37:32"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 10.530 ms","timestamp":"2026-01-19 10:37:35"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 12.892 ms","timestamp":"2026-01-19 10:38:26"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 14.243 ms","timestamp":"2026-01-19 10:38:30"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 9.954 ms","timestamp":"2026-01-19 10:38:32"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 15.834 ms","timestamp":"2026-01-19 10:38:33"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 200 30.289 ms","timestamp":"2026-01-19 10:38:34"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 11.000 ms","timestamp":"2026-01-19 10:38:36"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.330 ms","timestamp":"2026-01-19 10:38:38"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 10.640 ms","timestamp":"2026-01-19 10:38:44"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ab 304 11.421 ms","timestamp":"2026-01-19 10:38:47"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 8.703 ms","timestamp":"2026-01-19 10:38:55"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 13.309 ms","timestamp":"2026-01-19 10:39:04"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 15.507 ms","timestamp":"2026-01-19 10:39:04"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.947 ms","timestamp":"2026-01-19 10:39:17"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=aj 200 11.387 ms","timestamp":"2026-01-19 10:39:21"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 10.129 ms","timestamp":"2026-01-19 10:39:23"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=s 200 10.650 ms","timestamp":"2026-01-19 10:39:24"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 11.394 ms","timestamp":"2026-01-19 10:39:26"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=a 304 8.639 ms","timestamp":"2026-01-19 10:39:28"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 25.576 ms","timestamp":"2026-01-19 10:39:44"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10&search=ab 304 13.128 ms","timestamp":"2026-01-19 10:39:48"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 304 9.399 ms","timestamp":"2026-01-19 10:39:52"}
+{"level":"http","message":"GET /api/admin/stats 304 33.428 ms","timestamp":"2026-01-19 10:44:08"}
+{"level":"http","message":"GET /api/admin/stats 304 22.957 ms","timestamp":"2026-01-19 10:44:08"}
+{"level":"http","message":"GET /api/admin/stats 304 24.504 ms","timestamp":"2026-01-19 10:51:50"}
+{"level":"http","message":"GET /api/admin/stats 304 23.896 ms","timestamp":"2026-01-19 10:51:50"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 5.655 ms","timestamp":"2026-01-19 10:54:06"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 14.569 ms","timestamp":"2026-01-19 10:54:13"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 13.341 ms","timestamp":"2026-01-19 10:54:13"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 5.753 ms","timestamp":"2026-01-19 10:57:11"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 10.945 ms","timestamp":"2026-01-19 10:57:11"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 33.081 ms","timestamp":"2026-01-19 10:57:21"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 27.459 ms","timestamp":"2026-01-19 10:57:21"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:14:05"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:14:05"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:14:20"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:14:20"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 50.779 ms","timestamp":"2026-01-19 11:14:26"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 24.241 ms","timestamp":"2026-01-19 11:14:26"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 30.893 ms","timestamp":"2026-01-19 11:14:28"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 26.062 ms","timestamp":"2026-01-19 11:14:28"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 404 7.954 ms","timestamp":"2026-01-19 11:14:29"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 404 8.503 ms","timestamp":"2026-01-19 11:14:29"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 404 5.957 ms","timestamp":"2026-01-19 11:14:42"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 404 8.124 ms","timestamp":"2026-01-19 11:14:42"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 12.409 ms","timestamp":"2026-01-19 11:14:43"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 21.669 ms","timestamp":"2026-01-19 11:14:43"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 404 4.457 ms","timestamp":"2026-01-19 11:14:45"}
+{"level":"http","message":"GET /api/admin/users?page=1&limit=10 404 3.439 ms","timestamp":"2026-01-19 11:14:45"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.803 ms","timestamp":"2026-01-19 11:15:51"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 15.974 ms","timestamp":"2026-01-19 11:15:58"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 13.147 ms","timestamp":"2026-01-19 11:15:58"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:18:23"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:18:23"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:19:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:19:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:19:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:19:59"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:20:41"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:20:41"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:21:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:21:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:26:30"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:26:30"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:26:34"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:26:34"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 121.776 ms","timestamp":"2026-01-19 11:26:39"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 11.988 ms","timestamp":"2026-01-19 11:26:39"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 23.262 ms","timestamp":"2026-01-19 11:26:41"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 21.877 ms","timestamp":"2026-01-19 11:26:41"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 19.417 ms","timestamp":"2026-01-19 11:26:43"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 15.580 ms","timestamp":"2026-01-19 11:26:43"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 9.421 ms","timestamp":"2026-01-19 11:26:45"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 9.629 ms","timestamp":"2026-01-19 11:26:45"}
+{"level":"info","message":"User status updated: abhi@gmail.com - Active: false","timestamp":"2026-01-19 11:29:04"}
+{"level":"http","message":"PUT /api/admin/users/696a0fa4378c1460572e74b1/status 200 30.941 ms","timestamp":"2026-01-19 11:29:04"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 11.535 ms","timestamp":"2026-01-19 11:29:04"}
+{"level":"info","message":"User status updated: abhi@gmail.com - Active: true","timestamp":"2026-01-19 11:29:07"}
+{"level":"http","message":"PUT /api/admin/users/696a0fa4378c1460572e74b1/status 200 7.867 ms","timestamp":"2026-01-19 11:29:07"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 10.010 ms","timestamp":"2026-01-19 11:29:07"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.664 ms","timestamp":"2026-01-19 11:29:14"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.504 ms","timestamp":"2026-01-19 11:29:14"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.972 ms","timestamp":"2026-01-19 11:29:16"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.689 ms","timestamp":"2026-01-19 11:29:16"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:35:25"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:35:25"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:35:33"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:35:33"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:36:50"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:36:50"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:37:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:37:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:38:55"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:38:55"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:39:09"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:39:09"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:42:17"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:42:17"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:42:43"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:42:43"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 53.869 ms","timestamp":"2026-01-19 11:42:52"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 42.348 ms","timestamp":"2026-01-19 11:42:52"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 17.521 ms","timestamp":"2026-01-19 11:42:53"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 15.238 ms","timestamp":"2026-01-19 11:42:53"}
+{"level":"http","message":"GET /api/admin/stats 304 38.581 ms","timestamp":"2026-01-19 11:42:55"}
+{"level":"http","message":"GET /api/admin/stats 304 7.432 ms","timestamp":"2026-01-19 11:42:55"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 8.145 ms","timestamp":"2026-01-19 11:42:56"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 7.974 ms","timestamp":"2026-01-19 11:42:56"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:44:24"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:44:24"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 42.674 ms","timestamp":"2026-01-19 11:44:34"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 10.428 ms","timestamp":"2026-01-19 11:44:34"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 13.913 ms","timestamp":"2026-01-19 11:44:36"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 11.705 ms","timestamp":"2026-01-19 11:44:36"}
+{"level":"http","message":"GET /api/admin/stats 304 18.848 ms","timestamp":"2026-01-19 11:44:37"}
+{"level":"http","message":"GET /api/admin/stats 304 16.887 ms","timestamp":"2026-01-19 11:44:37"}
+{"level":"http","message":"GET /api/admin/stats 304 16.871 ms","timestamp":"2026-01-19 11:44:41"}
+{"level":"http","message":"GET /api/admin/stats 304 21.435 ms","timestamp":"2026-01-19 11:44:41"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 7.450 ms","timestamp":"2026-01-19 11:44:42"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 7.489 ms","timestamp":"2026-01-19 11:44:42"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:45:07"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:45:07"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 11:45:37"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 11:45:37"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 12:12:36"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 12:12:36"}

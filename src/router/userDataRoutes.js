@@ -6,7 +6,7 @@ const {
   getAllUserData,
   updateUserData,
   deleteUserData,
-} = require("../controllers/userController/userDataController");
+} = require("../controllers/UserController/userDataController");
 const { API_ROUTES_FOR_ROUTER, } = require("../utils/routePath");
 
 
