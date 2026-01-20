@@ -9,7 +9,9 @@ const API_ROUTES_APP = {
   ASSISTANT: "/api/assistant",
 
   // User Data Routes
-  USER_DATA: '/api'
+  USER_DATA: '/api',
+
+  UPLOAD_CUTOFF : "/cutoff"
 };
 
 const API_ROUTES_FOR_ROUTER = {
@@ -29,6 +31,17 @@ const API_ROUTES_FOR_ROUTER = {
   },
   ADMIN_ROUTER_PATH:{
     ALL_ADMIN:"/AllAdmin"
+  },
+
+  ASSISTANCE_ROUTER_PATH : {
+    PERMISSION_OF_ASSISTANCE:"/my-permissions",
+    CREATE_ASSISTANCE : "/create",
+    GET_ALL_ASSISTANCE: '/allAssistance',
+    GET_ASSISTANCE_DETAILS : "/:id",
+    UPDATE_PERMISSION: "/:id/permissions",
+    UPDATE_ASSISTANCE_STATUS:"/:id/status",
+    DELETE_ASSISTANCE : "/:id"
+    
   }
 };
 

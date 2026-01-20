@@ -57,4 +57,23 @@ const adminLoginValidator = (data)=>{
 
 }
 
-module.exports = { adminSignupValidator  , adminLoginValidator};
+const assistanceLogin =(data)=>{
+   const errors = {}
+
+  const emailId = data.emailId?.trim() || "";
+  const password = data.password || "";
+
+  if (!validator.isEmail(emailId)) {
+    errors.emailId = "Valid email is required";
+  }
+
+  if (!validator.isLength(password, { min: 6 })) {
+    errors.password = "Password must be at least 6 characters long";
+  }
+
+   return {
+    errors,
+    isValid: Object.keys(errors).length === 0,
+  };
+}
+module.exports = { adminSignupValidator  , adminLoginValidator ,assistanceLogin };

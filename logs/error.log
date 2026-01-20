@@ -1,6 +1,2 @@
-{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:48:45"}
-{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:48:45"}
-{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:49:45"}
-{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:49:45"}
-{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:50:00"}
-{"level":"error","message":"Get users error Invalid select: select only takes 1 argument","timestamp":"2026-01-17 14:50:00"}
+{"level":"error","message":"Unhandled Error ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849348273-812285285.csv'","path":"/api/cutoff/upload","stack":"Error: ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849348273-812285285.csv'","timestamp":"2026-01-20 00:32:28"}
+{"level":"error","message":"Unhandled Error ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849410514-263792447.csv'","path":"/api/cutoff/upload","stack":"Error: ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849410514-263792447.csv'","timestamp":"2026-01-20 00:33:30"}

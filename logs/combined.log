@@ -636,3 +636,305 @@
 {"level":"http","message":"POST /api/auth/assistant/login 200 452.217 ms","timestamp":"2026-01-19 12:24:09"}
 {"level":"http","message":"GET /api/assistant/my-permissions 200 9.481 ms","timestamp":"2026-01-19 12:24:09"}
 {"level":"http","message":"GET /api/assistant/my-permissions 304 9.892 ms","timestamp":"2026-01-19 12:24:09"}
+{"level":"http","message":"GET /api/admin/stats 304 203.858 ms","timestamp":"2026-01-19 12:39:39"}
+{"level":"http","message":"GET /api/admin/stats 304 29.231 ms","timestamp":"2026-01-19 12:39:39"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 50.810 ms","timestamp":"2026-01-19 12:41:11"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 19.957 ms","timestamp":"2026-01-19 12:41:11"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 17.671 ms","timestamp":"2026-01-19 12:43:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.690 ms","timestamp":"2026-01-19 12:43:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 33.022 ms","timestamp":"2026-01-19 12:43:10"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 70.814 ms","timestamp":"2026-01-19 12:43:10"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 133.723 ms","timestamp":"2026-01-19 12:43:10"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 11.988 ms","timestamp":"2026-01-19 12:43:10"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 12:43:45"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 12:43:45"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 22.927 ms","timestamp":"2026-01-19 12:44:09"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 52.700 ms","timestamp":"2026-01-19 12:44:09"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 17.871 ms","timestamp":"2026-01-19 12:44:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 11.060 ms","timestamp":"2026-01-19 12:44:18"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 5.522 ms","timestamp":"2026-01-19 12:44:18"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.480 ms","timestamp":"2026-01-19 12:44:25"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.970 ms","timestamp":"2026-01-19 12:44:25"}
+{"level":"info","message":"New user created: rohit@gmail.com for NEET","timestamp":"2026-01-19 12:47:02"}
+{"level":"http","message":"POST /api/create 201 55.639 ms","timestamp":"2026-01-19 12:47:02"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.126 ms","timestamp":"2026-01-19 12:47:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.394 ms","timestamp":"2026-01-19 12:47:09"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 21.495 ms","timestamp":"2026-01-19 12:47:09"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 22.330 ms","timestamp":"2026-01-19 12:50:24"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 21.991 ms","timestamp":"2026-01-19 12:50:24"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.163 ms","timestamp":"2026-01-19 12:50:30"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.754 ms","timestamp":"2026-01-19 12:50:30"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 6.005 ms","timestamp":"2026-01-19 12:50:37"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 10.620 ms","timestamp":"2026-01-19 12:53:02"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 21.227 ms","timestamp":"2026-01-19 12:53:02"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 15.211 ms","timestamp":"2026-01-19 12:53:02"}
+{"level":"http","message":"GET /api/admin/stats 200 38.280 ms","timestamp":"2026-01-19 12:53:48"}
+{"level":"http","message":"GET /api/admin/stats 304 18.596 ms","timestamp":"2026-01-19 12:53:48"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 33.817 ms","timestamp":"2026-01-19 12:54:20"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 12.074 ms","timestamp":"2026-01-19 12:54:20"}
+{"level":"http","message":"GET /api/admin/stats 304 17.814 ms","timestamp":"2026-01-19 12:59:03"}
+{"level":"http","message":"GET /api/admin/stats 304 13.261 ms","timestamp":"2026-01-19 12:59:03"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 21.338 ms","timestamp":"2026-01-19 12:59:04"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 14.066 ms","timestamp":"2026-01-19 12:59:04"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 22.079 ms","timestamp":"2026-01-19 13:03:32"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 15.463 ms","timestamp":"2026-01-19 13:03:32"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10&minChecks=1 200 23.399 ms","timestamp":"2026-01-19 13:04:19"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10&examType=JEE_MAIN&minChecks=1 200 20.702 ms","timestamp":"2026-01-19 13:04:34"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 12.633 ms","timestamp":"2026-01-19 13:04:41"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 22.001 ms","timestamp":"2026-01-19 13:04:42"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 16.022 ms","timestamp":"2026-01-19 13:04:47"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 21.191 ms","timestamp":"2026-01-19 13:04:47"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10&examType=JEE_ADVANCED 200 22.225 ms","timestamp":"2026-01-19 13:04:59"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10&examType=JEE_ADVANCED 200 12.552 ms","timestamp":"2026-01-19 13:05:05"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10&maxChecks=3 200 25.704 ms","timestamp":"2026-01-19 13:05:20"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 13:07:16"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 13:07:16"}
+{"level":"http","message":"GET /api/admin/stats 304 160.508 ms","timestamp":"2026-01-19 13:09:26"}
+{"level":"http","message":"GET /api/admin/stats 304 20.874 ms","timestamp":"2026-01-19 13:09:26"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 13:14:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 13:14:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 13:14:56"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 13:14:56"}
+{"level":"http","message":"GET /api/admin/stats 200 133.591 ms","timestamp":"2026-01-19 13:15:12"}
+{"level":"http","message":"GET /api/admin/stats 304 29.584 ms","timestamp":"2026-01-19 13:15:12"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 13:16:40"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 13:16:40"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 35.360 ms","timestamp":"2026-01-19 13:16:59"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 13.322 ms","timestamp":"2026-01-19 13:17:04"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 65.170 ms","timestamp":"2026-01-19 13:17:04"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 16.757 ms","timestamp":"2026-01-19 13:17:04"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 13:26:20"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 13:26:20"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 13:27:31"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 13:27:31"}
+{"level":"http","message":"GET /api/admin/stats 200 134.716 ms","timestamp":"2026-01-19 13:28:08"}
+{"level":"http","message":"GET /api/admin/stats 304 29.774 ms","timestamp":"2026-01-19 13:28:08"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 152.846 ms","timestamp":"2026-01-19 14:37:05"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 11.346 ms","timestamp":"2026-01-19 14:37:05"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 90.919 ms","timestamp":"2026-01-19 14:41:01"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 20.993 ms","timestamp":"2026-01-19 14:41:01"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 10.949 ms","timestamp":"2026-01-19 14:41:08"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 12.730 ms","timestamp":"2026-01-19 14:41:08"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 70.176 ms","timestamp":"2026-01-19 14:41:10"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 19.304 ms","timestamp":"2026-01-19 14:41:10"}
+{"level":"info","message":"New user created: naman@gmail.com for WBJEE","timestamp":"2026-01-19 14:45:01"}
+{"level":"http","message":"POST /api/create 201 82.950 ms","timestamp":"2026-01-19 14:45:01"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 25.867 ms","timestamp":"2026-01-19 14:45:05"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 20.637 ms","timestamp":"2026-01-19 14:45:05"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.266 ms","timestamp":"2026-01-19 14:46:45"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 11.242 ms","timestamp":"2026-01-19 14:46:45"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 16.024 ms","timestamp":"2026-01-19 14:48:06"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 19.571 ms","timestamp":"2026-01-19 14:48:06"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 9.543 ms","timestamp":"2026-01-19 14:48:09"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 11.770 ms","timestamp":"2026-01-19 14:48:09"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 32.605 ms","timestamp":"2026-01-19 14:49:01"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 17.048 ms","timestamp":"2026-01-19 14:49:01"}
+{"level":"http","message":"GET /api/admin/stats 200 33.238 ms","timestamp":"2026-01-19 14:49:02"}
+{"level":"http","message":"GET /api/admin/stats 304 24.507 ms","timestamp":"2026-01-19 14:49:02"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 19.051 ms","timestamp":"2026-01-19 14:49:11"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 25.471 ms","timestamp":"2026-01-19 14:49:11"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 11.964 ms","timestamp":"2026-01-19 14:49:24"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 14.322 ms","timestamp":"2026-01-19 14:49:24"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 24.172 ms","timestamp":"2026-01-19 14:51:59"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 304 23.441 ms","timestamp":"2026-01-19 14:51:59"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 14:56:04"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 14:56:04"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 14:57:52"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 14:57:52"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 14:59:10"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 14:59:10"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:00:13"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:00:13"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:03:10"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:03:10"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:03:51"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:03:51"}
+{"level":"http","message":"POST /api/assistant 404 74.358 ms","timestamp":"2026-01-19 15:05:16"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 30.147 ms","timestamp":"2026-01-19 15:06:45"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 13.115 ms","timestamp":"2026-01-19 15:06:45"}
+{"level":"info","message":"Assistant created: jatin@gmail.com by admin: abh2i@gmail.com","timestamp":"2026-01-19 15:06:51"}
+{"level":"http","message":"POST /api/assistant/create 201 470.430 ms","timestamp":"2026-01-19 15:06:51"}
+{"level":"http","message":"GET /api/assistant?page=1&limit=10 200 78.777 ms","timestamp":"2026-01-19 15:06:51"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:07:51"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:07:51"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 24.150 ms","timestamp":"2026-01-19 15:08:24"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.523 ms","timestamp":"2026-01-19 15:08:24"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 34.898 ms","timestamp":"2026-01-19 15:08:27"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 29.420 ms","timestamp":"2026-01-19 15:08:27"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:11:24"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:11:24"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:11:57"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:11:57"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:13:20"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:13:20"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:13:46"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:13:46"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:14:58"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:14:58"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:15:58"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:15:58"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 15:16:17"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 15:16:17"}
+{"level":"info","message":"Assistant deleted: jatin@gmail.com by admin: abh2i@gmail.com","timestamp":"2026-01-19 15:20:49"}
+{"level":"http","message":"DELETE /api/assistant/696dfb336378daa2c5eff2b0 200 116.402 ms","timestamp":"2026-01-19 15:20:49"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 79.985 ms","timestamp":"2026-01-19 15:20:49"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 16:01:45"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 16:01:45"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 16:04:19"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 16:04:19"}
+{"level":"info","message":"Assistant status updated: lalu@gmail.com - Active: false","timestamp":"2026-01-19 16:04:49"}
+{"level":"http","message":"PUT /api/assistant/696b47bca006504794b6c4ff/status 200 82.973 ms","timestamp":"2026-01-19 16:04:49"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 74.047 ms","timestamp":"2026-01-19 16:04:49"}
+{"level":"http","message":"GET /api/assistant/my-permissions 401 6.698 ms","timestamp":"2026-01-19 16:04:58"}
+{"level":"http","message":"GET /api/assistant/my-permissions 401 5.976 ms","timestamp":"2026-01-19 16:04:58"}
+{"level":"http","message":"GET /api/admin/stats 200 107.623 ms","timestamp":"2026-01-19 16:05:28"}
+{"level":"http","message":"GET /api/admin/stats 304 61.125 ms","timestamp":"2026-01-19 16:05:28"}
+{"level":"http","message":"GET /api/admin/stats 304 42.036 ms","timestamp":"2026-01-19 16:05:31"}
+{"level":"http","message":"GET /api/admin/stats 304 65.292 ms","timestamp":"2026-01-19 16:05:31"}
+{"level":"warn","message":"Assistant login blocked: Account deactivated - lalu@gmail.com","timestamp":"2026-01-19 16:05:48"}
+{"level":"http","message":"POST /api/auth/assistant/login 401 12.893 ms","timestamp":"2026-01-19 16:05:48"}
+{"level":"warn","message":"Assistant login blocked: Account deactivated - lalu@gmail.com","timestamp":"2026-01-19 16:07:48"}
+{"level":"http","message":"POST /api/auth/assistant/login 401 34.535 ms","timestamp":"2026-01-19 16:07:48"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 161.592 ms","timestamp":"2026-01-19 16:26:49"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 13.925 ms","timestamp":"2026-01-19 16:26:49"}
+{"level":"info","message":"Assistant status updated: lalu@gmail.com - Active: true","timestamp":"2026-01-19 16:27:09"}
+{"level":"http","message":"PUT /api/assistant/696b47bca006504794b6c4ff/status 200 57.381 ms","timestamp":"2026-01-19 16:27:09"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 19.326 ms","timestamp":"2026-01-19 16:27:09"}
+{"level":"info","message":"Permissions updated for assistant: aman@gmail.com by admin: abh2i@gmail.com","timestamp":"2026-01-19 16:27:20"}
+{"level":"http","message":"PUT /api/assistant/696dd4fe6fe77d27ef0381f3/permissions 200 75.474 ms","timestamp":"2026-01-19 16:27:20"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 10.718 ms","timestamp":"2026-01-19 16:27:20"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 155.824 ms","timestamp":"2026-01-19 17:01:10"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 10.327 ms","timestamp":"2026-01-19 17:01:10"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 28.584 ms","timestamp":"2026-01-19 17:02:03"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 13.625 ms","timestamp":"2026-01-19 17:02:03"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 18.224 ms","timestamp":"2026-01-19 17:06:46"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 19.531 ms","timestamp":"2026-01-19 17:06:46"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 17:34:04"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 17:34:04"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 17:41:39"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 17:41:39"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 143.545 ms","timestamp":"2026-01-19 17:52:07"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 12.744 ms","timestamp":"2026-01-19 17:52:07"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 91.641 ms","timestamp":"2026-01-19 17:53:02"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 16.274 ms","timestamp":"2026-01-19 17:53:02"}
+{"level":"http","message":"GET /api/admin/stats 200 274.455 ms","timestamp":"2026-01-19 17:54:22"}
+{"level":"http","message":"GET /api/admin/stats 304 33.287 ms","timestamp":"2026-01-19 17:54:22"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 42.020 ms","timestamp":"2026-01-19 17:54:23"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 29.166 ms","timestamp":"2026-01-19 17:54:23"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 262.157 ms","timestamp":"2026-01-19 17:54:54"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 38.682 ms","timestamp":"2026-01-19 17:54:54"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 40.547 ms","timestamp":"2026-01-19 17:54:57"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 16.280 ms","timestamp":"2026-01-19 17:54:57"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 68.313 ms","timestamp":"2026-01-19 17:55:17"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 24.182 ms","timestamp":"2026-01-19 17:55:17"}
+{"level":"info","message":"Permissions updated for assistant: aman@gmail.com by admin: abh2i@gmail.com","timestamp":"2026-01-19 17:55:27"}
+{"level":"http","message":"PUT /api/assistant/696dd4fe6fe77d27ef0381f3/permissions 200 140.508 ms","timestamp":"2026-01-19 17:55:27"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 20.176 ms","timestamp":"2026-01-19 17:55:27"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 10.700 ms","timestamp":"2026-01-19 17:55:31"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.936 ms","timestamp":"2026-01-19 17:55:31"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 17.761 ms","timestamp":"2026-01-19 17:55:33"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 44.599 ms","timestamp":"2026-01-19 17:55:33"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 24.321 ms","timestamp":"2026-01-19 17:55:33"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 21:24:31"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 21:24:31"}
+{"level":"http","message":"GET /api/admin/stats 304 443.812 ms","timestamp":"2026-01-19 21:24:56"}
+{"level":"http","message":"GET /api/admin/stats 304 51.420 ms","timestamp":"2026-01-19 21:24:56"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 58.796 ms","timestamp":"2026-01-19 21:25:00"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 21.522 ms","timestamp":"2026-01-19 21:25:00"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 294.859 ms","timestamp":"2026-01-19 21:34:20"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 23.751 ms","timestamp":"2026-01-19 21:34:20"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 42.283 ms","timestamp":"2026-01-19 21:34:24"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 23.541 ms","timestamp":"2026-01-19 21:34:24"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 21.262 ms","timestamp":"2026-01-19 21:34:29"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 23.921 ms","timestamp":"2026-01-19 21:34:29"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 26.342 ms","timestamp":"2026-01-19 21:34:59"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 27.464 ms","timestamp":"2026-01-19 21:34:59"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 181.863 ms","timestamp":"2026-01-19 21:45:08"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 24.481 ms","timestamp":"2026-01-19 21:45:08"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 87.816 ms","timestamp":"2026-01-19 21:47:15"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 10.014 ms","timestamp":"2026-01-19 21:47:15"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 33.983 ms","timestamp":"2026-01-19 21:47:31"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 19.671 ms","timestamp":"2026-01-19 21:47:31"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 18.592 ms","timestamp":"2026-01-19 21:47:33"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 20.632 ms","timestamp":"2026-01-19 21:47:33"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 18.765 ms","timestamp":"2026-01-19 21:47:36"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 22.367 ms","timestamp":"2026-01-19 21:47:36"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 17.673 ms","timestamp":"2026-01-19 21:47:38"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 12.174 ms","timestamp":"2026-01-19 21:47:38"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 15.433 ms","timestamp":"2026-01-19 21:47:41"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 21.846 ms","timestamp":"2026-01-19 21:47:41"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 25.713 ms","timestamp":"2026-01-19 21:51:32"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 12.635 ms","timestamp":"2026-01-19 21:51:32"}
+{"level":"http","message":"GET /api/assistant/696dd4fe6fe77d27ef0381f3 200 37.984 ms","timestamp":"2026-01-19 21:52:26"}
+{"level":"http","message":"GET /api/admin/stats 304 120.876 ms","timestamp":"2026-01-19 22:13:40"}
+{"level":"http","message":"GET /api/admin/stats 304 12.671 ms","timestamp":"2026-01-19 22:13:40"}
+{"level":"http","message":"GET /api/admin/stats 304 28.776 ms","timestamp":"2026-01-19 22:14:42"}
+{"level":"http","message":"GET /api/admin/stats 304 35.381 ms","timestamp":"2026-01-19 22:14:42"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 33.464 ms","timestamp":"2026-01-19 22:14:44"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 12.417 ms","timestamp":"2026-01-19 22:14:44"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 24.619 ms","timestamp":"2026-01-19 22:14:51"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 17.637 ms","timestamp":"2026-01-19 22:14:51"}
+{"level":"http","message":"GET /api/assistant/696dd4fe6fe77d27ef0381f3 304 14.269 ms","timestamp":"2026-01-19 22:17:54"}
+{"level":"http","message":"GET /api/assistant/696dd4fe6fe77d27ef0381f3 304 14.198 ms","timestamp":"2026-01-19 22:17:54"}
+{"level":"http","message":"GET /api/assistant/696dd4fe6fe77d27ef0381f3 304 10.816 ms","timestamp":"2026-01-19 22:18:26"}
+{"level":"http","message":"GET /api/assistant/696dd4fe6fe77d27ef0381f3 304 9.508 ms","timestamp":"2026-01-19 22:18:44"}
+{"level":"http","message":"GET /api/assistant/696dd4fe6fe77d27ef0381f3 304 11.432 ms","timestamp":"2026-01-19 22:18:44"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 14.915 ms","timestamp":"2026-01-19 22:18:49"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 19.590 ms","timestamp":"2026-01-19 22:18:49"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 22:50:54"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 22:50:54"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:18:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:18:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:18:35"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:18:35"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:19:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:19:08"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:19:14"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:19:14"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:20:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:20:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:20:41"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:20:41"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:21:22"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:21:22"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:21:40"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:21:40"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:21:47"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:21:47"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:22:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:22:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:27:47"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:27:47"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 195.869 ms","timestamp":"2026-01-19 23:30:42"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 16.698 ms","timestamp":"2026-01-19 23:30:42"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:38:42"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:38:42"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-19 23:39:21"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-19 23:39:21"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:21:43"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:21:43"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:24:02"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:24:02"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:25:04"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:25:04"}
+{"level":"error","message":"Unhandled Error ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849348273-812285285.csv'","path":"/api/cutoff/upload","stack":"Error: ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849348273-812285285.csv'","timestamp":"2026-01-20 00:32:28"}
+{"level":"http","message":"POST /api/cutoff/upload 500 83.587 ms","timestamp":"2026-01-20 00:32:28"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 108.689 ms","timestamp":"2026-01-20 00:33:07"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 57.952 ms","timestamp":"2026-01-20 00:33:07"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 14.050 ms","timestamp":"2026-01-20 00:33:10"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 13.037 ms","timestamp":"2026-01-20 00:33:10"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 14.560 ms","timestamp":"2026-01-20 00:33:11"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 9.182 ms","timestamp":"2026-01-20 00:33:11"}
+{"level":"error","message":"Unhandled Error ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849410514-263792447.csv'","path":"/api/cutoff/upload","stack":"Error: ENOENT: no such file or directory, open 'A:\\College Predictor\\backend\\uploads\\cutoff-1768849410514-263792447.csv'","timestamp":"2026-01-20 00:33:30"}
+{"level":"http","message":"POST /api/cutoff/upload 500 11.229 ms","timestamp":"2026-01-20 00:33:30"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:35:15"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:35:15"}
+{"level":"http","message":"POST /api/cutoff/upload 200 60887.369 ms","timestamp":"2026-01-20 00:37:24"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:40:13"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:40:13"}
+{"level":"http","message":"POST /api/cutoff/upload 200 49061.523 ms","timestamp":"2026-01-20 00:41:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:44:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:44:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:45:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:45:38"}
+{"level":"http","message":"POST /api/cutoff/upload 200 100453.645 ms","timestamp":"2026-01-20 00:48:05"}

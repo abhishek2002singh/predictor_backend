@@ -131,6 +131,8 @@ router.get("/stats", async (req, res) => {
     const totalUsers = await UserData.countDocuments();
     const activeUsers = await User.countDocuments({ role: "USER", isActive: true });
     const totalAdmins = await User.countDocuments({ role: "ADMIN" });
+    const totalAssistance = await User.countDocuments({role: "ASSISTANCE" ,isActive: true})
+    const activeAssistance = await User.countDocuments({role: "ASSISTANCE" })
 
     // Users registered in last 7 day
     const lastWeek = new Date();
@@ -155,6 +157,9 @@ router.get("/stats", async (req, res) => {
         totalAdmins,
         newUsersThisWeek,
         usersByCategory,
+        totalAssistance,
+        activeAssistance,
+        inactiveAssistance:totalAssistance-activeAssistance,
       },
     });
   } catch (error) {

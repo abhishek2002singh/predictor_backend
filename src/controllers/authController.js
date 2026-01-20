@@ -1,6 +1,6 @@
 const User = require("../model/auth/auth");
 const logger = require("../config/logger");
-const { adminSignupValidator, adminLoginValidator } = require("../validators/adminvalidator");
+const { adminSignupValidator, adminLoginValidator, assistanceLogin } = require("../validators/adminvalidator");
 
 const adminSignup = async (req, res) => {
   try {
@@ -177,7 +177,7 @@ const assistantLogin = async (req, res) => {
     const { emailId, password } = req.body;
 
     // Validate input
-    const { errors, isValid } = adminLoginValidator(req.body);
+    const { errors, isValid } = assistanceLogin(req.body);
 
     if (!isValid) {
       return res.status(400).json({
