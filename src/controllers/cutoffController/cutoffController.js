@@ -451,54 +451,204 @@ exports.uploadCutoffCSVDirect = async (req, res) => {
 
 // Rest of your controller functions (getCutoffs, getFilterOptions, etc.) remain the same
 // Get cutoff predictions (public endpoint)
+// exports.getCutoffs = async (req, res) => {
+//   try {
+//     const {
+//       rank,
+//       category,
+//       gender,
+//       // year = new Date().getFullYear(),
+//       // round = 6,
+//       // institute,
+//       // branch,
+//       typeOfExam,
+//       page = 1,
+//       limit = 20
+//     } = req.query;
+
+//     const filter = {};
+    
+//     if (year) filter.year = parseInt(year);
+//     if (round) filter.round = parseInt(round);
+    
+//     if (category) {
+//       const categoryMap = {
+//         'GENERAL': ['OPEN'],
+//         'EWS': ['EWS'],
+//         'OBC-NCL': ['OBC-NCL'],
+//         'SC': ['SC'],
+//         'ST': ['ST'],
+//         'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD'],
+//         'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
+//         'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+//         'SC-PwD': ['SC-PwD', 'SC (PwD)'],
+//         'ST-PwD': ['ST-PwD', 'ST (PwD)']
+//       };
+      
+//       filter.seatType = { $in: categoryMap[category] || [category] };
+//     }
+    
+//     if (gender) filter.gender = gender;
+//     if (institute) filter.institute = { $regex: institute, $options: 'i' };
+//     if (branch) filter.academicProgramName = { $regex: branch, $options: 'i' };
+    
+//     if (rank) {
+//       const userRank = parseInt(rank);
+//       filter.openingRank = { $lte: userRank };
+//       filter.closingRank = { $gte: userRank };
+//     }
+
+//     const skip = (parseInt(page) - 1) * parseInt(limit);
+    
+//     const cutoffs = await Cutoff.find(filter)
+//       .sort({ closingRank: 1 })
+//       .skip(skip)
+//       .limit(parseInt(limit));
+    
+//     const total = await Cutoff.countDocuments(filter);
+    
+//     const cutoffsWithProbability = cutoffs.map(cutoff => {
+//       const cutoffObj = cutoff.toObject();
+      
+//       if (rank) {
+//         const userRank = parseInt(rank);
+//         const totalSeats = cutoff.closingRank - cutoff.openingRank + 1;
+//         const position = userRank - cutoff.openingRank + 1;
+//         const probability = (position / totalSeats) * 100;
+        
+//         if (probability >= 70) {
+//           cutoffObj.probability = 'High Chance';
+//           cutoffObj.probabilityColor = 'green';
+//         } else if (probability >= 30) {
+//           cutoffObj.probability = 'Medium Chance';
+//           cutoffObj.probabilityColor = 'yellow';
+//         } else {
+//           cutoffObj.probability = 'Low Chance';
+//           cutoffObj.probabilityColor = 'red';
+//         }
+        
+//         cutoffObj.probabilityPercentage = Math.round(probability);
+//       }
+      
+//       return cutoffObj;
+//     });
+    
+//     res.status(200).json({
+//       success: true,
+//       data: cutoffsWithProbability,
+//       pagination: {
+//         page: parseInt(page),
+//         limit: parseInt(limit),
+//         total,
+//         pages: Math.ceil(total / parseInt(limit))
+//       }
+//     });
+    
+//   } catch (error) {
+//     console.error('Get cutoffs error:', error);
+//     res.status(500).json({
+//       success: false,
+//       message: 'Error fetching cutoff data',
+//       error: error.message
+//     });
+//   }
+// };
+
+// controllers/cutoffController.js
+
+
 exports.getCutoffs = async (req, res) => {
   try {
     const {
       rank,
       category,
       gender,
-      year = new Date().getFullYear(),
-      round = 6,
-      institute,
-      branch,
+      typeOfExam,
       page = 1,
       limit = 20
     } = req.query;
 
-    const filter = {};
-    
-    if (year) filter.year = parseInt(year);
-    if (round) filter.round = parseInt(round);
-    
-    if (category) {
-      const categoryMap = {
-        'GENERAL': ['OPEN'],
-        'EWS': ['EWS'],
-        'OBC-NCL': ['OBC-NCL'],
-        'SC': ['SC'],
-        'ST': ['ST'],
-        'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD'],
-        'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
-        'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-        'SC-PwD': ['SC-PwD', 'SC (PwD)'],
-        'ST-PwD': ['ST-PwD', 'ST (PwD)']
+    console.log('Received query params:', { rank, category, gender, typeOfExam }); // Debug
+
+    // Validate required fields
+    if (!rank) {
+      return res.status(400).json({
+        success: false,
+        message: "Rank is required",
+      });
+    }
+
+    if (!category) {
+      return res.status(400).json({
+        success: false,
+        message: "Category is required",
+      });
+    }
+
+    if (!typeOfExam) {
+      return res.status(400).json({
+        success: false,
+        message: "Exam type is required",
+      });
+    }
+
+    const userRank = parseInt(rank);
+    if (isNaN(userRank) || userRank <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid rank value",
+      });
+    }
+
+    // Build filter - using exact field names from your database
+    const filter = {
+      typeOfExam: typeOfExam // Use the exact field name from your database
+    };
+
+    // Category to seatType mapping based on your actual database data
+    // Based on your data, seatType values are: 'OBC-NCL', 'SC', 'ST', etc.
+    const categorySeatTypeMap = {
+      'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
+      'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
+      'OBC': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+      'OBC-NCL': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+      'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)'],
+      'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)'],
+      'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
+      'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
+      'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+      'SC-PwD': ['SC-PwD', 'SC (PwD)'],
+      'ST-PwD': ['ST-PwD', 'ST (PwD)']
+    };
+
+    filter.seatType = { $in: categorySeatTypeMap[category] || [category] };
+    console.log('Seat type filter:', filter.seatType); // Debug
+
+    // Gender filter based on your actual database values
+    if (gender && gender !== 'All') {
+      const genderFilterMap = {
+        'Male': ['Gender-Neutral', 'Male-only', 'M', 'BOYS', 'Male (including Supernumerary)'],
+        'Female': ['Gender-Neutral', 'Female-only', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
+        'Other': ['Gender-Neutral', 'Other', 'Transgender'],
+        // For general gender filter (if user doesn't specify or wants all)
+        'All': ['Gender-Neutral', 'Male-only', 'Female-only', 'Other', 
+                'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
       };
       
-      filter.seatType = { $in: categoryMap[category] || [category] };
+      filter.gender = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
+      console.log('Gender filter:', filter.gender); // Debug
     }
-    
-    if (gender) filter.gender = gender;
-    if (institute) filter.institute = { $regex: institute, $options: 'i' };
-    if (branch) filter.academicProgramName = { $regex: branch, $options: 'i' };
-    
-    if (rank) {
-      const userRank = parseInt(rank);
-      filter.openingRank = { $lte: userRank };
-      filter.closingRank = { $gte: userRank };
-    }
+
+    // Rank filter - find colleges where the rank falls within opening-closing range
+    filter.openingRank = { $lte: userRank };
+    filter.closingRank = { $gte: userRank };
+    console.log('Rank filter - opening:', filter.openingRank, 'closing:', filter.closingRank); // Debug
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
     
+    console.log('Final filter:', JSON.stringify(filter, null, 2)); // Debug
+    
+    // Fetch cutoffs with pagination
     const cutoffs = await Cutoff.find(filter)
       .sort({ closingRank: 1 })
       .skip(skip)
@@ -506,35 +656,59 @@ exports.getCutoffs = async (req, res) => {
     
     const total = await Cutoff.countDocuments(filter);
     
+    console.log('Found cutoffs:', cutoffs.length, 'Total:', total); // Debug
+    
+    // Calculate probability for each cutoff
     const cutoffsWithProbability = cutoffs.map(cutoff => {
       const cutoffObj = cutoff.toObject();
       
-      if (rank) {
-        const userRank = parseInt(rank);
-        const totalSeats = cutoff.closingRank - cutoff.openingRank + 1;
-        const position = userRank - cutoff.openingRank + 1;
-        const probability = (position / totalSeats) * 100;
-        
-        if (probability >= 70) {
-          cutoffObj.probability = 'High Chance';
-          cutoffObj.probabilityColor = 'green';
-        } else if (probability >= 30) {
-          cutoffObj.probability = 'Medium Chance';
-          cutoffObj.probabilityColor = 'yellow';
-        } else {
-          cutoffObj.probability = 'Low Chance';
-          cutoffObj.probabilityColor = 'red';
-        }
-        
-        cutoffObj.probabilityPercentage = Math.round(probability);
+      // Calculate probability based on rank position within range
+      const rankRange = cutoff.closingRank - cutoff.openingRank + 1;
+      const rankPosition = userRank - cutoff.openingRank + 1;
+      const probabilityPercentage = Math.round((rankPosition / rankRange) * 100);
+      
+      // Determine probability category
+      let probability, probabilityColor;
+      if (probabilityPercentage >= 70) {
+        probability = 'High Chance';
+        probabilityColor = 'green';
+      } else if (probabilityPercentage >= 40) {
+        probability = 'Medium Chance';
+        probabilityColor = 'yellow';
+      } else if (probabilityPercentage >= 20) {
+        probability = 'Low Chance';
+        probabilityColor = 'orange';
+      } else {
+        probability = 'Very Low Chance';
+        probabilityColor = 'red';
       }
+      
+      cutoffObj.probability = probability;
+      cutoffObj.probabilityColor = probabilityColor;
+      cutoffObj.probabilityPercentage = probabilityPercentage;
       
       return cutoffObj;
     });
     
+    // Get summary statistics
+    const summary = {
+      totalColleges: total,
+      collegesShown: cutoffs.length,
+      highestProbability: cutoffsWithProbability.length > 0 
+        ? Math.max(...cutoffsWithProbability.map(c => c.probabilityPercentage))
+        : 0,
+      lowestProbability: cutoffsWithProbability.length > 0 
+        ? Math.min(...cutoffsWithProbability.map(c => c.probabilityPercentage))
+        : 0,
+      averageProbability: cutoffsWithProbability.length > 0 
+        ? Math.round(cutoffsWithProbability.reduce((sum, c) => sum + c.probabilityPercentage, 0) / cutoffsWithProbability.length)
+        : 0
+    };
+    
     res.status(200).json({
       success: true,
       data: cutoffsWithProbability,
+      summary,
       pagination: {
         page: parseInt(page),
         limit: parseInt(limit),
@@ -548,11 +722,10 @@ exports.getCutoffs = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error fetching cutoff data',
-      error: error.message
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
 };
-
 // Get filter options
 exports.getFilterOptions = async (req, res) => {
   try {

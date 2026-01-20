@@ -991,3 +991,222 @@
 {"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 103.102 ms","timestamp":"2026-01-20 10:51:34"}
 {"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:59:19"}
 {"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:59:19"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 11:02:52"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 11:02:52"}
+{"level":"http","message":"GET /api/admin/stats 304 269.345 ms","timestamp":"2026-01-20 11:03:32"}
+{"level":"http","message":"GET /api/admin/stats 304 32.516 ms","timestamp":"2026-01-20 11:03:32"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 336.876 ms","timestamp":"2026-01-20 11:08:29"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 32.708 ms","timestamp":"2026-01-20 11:08:29"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 105.169 ms","timestamp":"2026-01-20 11:09:59"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 48.522 ms","timestamp":"2026-01-20 11:09:59"}
+{"level":"error","message":"Create user data error Cannot read properties of undefined (reading 'toLowerCase')","stack":"TypeError: Cannot read properties of undefined (reading 'toLowerCase')\n    at createUserData (A:\\College Predictor\\backend\\src\\controllers\\UserController\\userDataController.js:58:37)\n    at Layer.handleRequest (A:\\College Predictor\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (A:\\College Predictor\\backend\\node_modules\\router\\lib\\route.js:157:13)\n    at Route.dispatch (A:\\College Predictor\\backend\\node_modules\\router\\lib\\route.js:117:3)\n    at handle (A:\\College Predictor\\backend\\node_modules\\router\\index.js:435:11)\n    at Layer.handleRequest (A:\\College Predictor\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at A:\\College Predictor\\backend\\node_modules\\router\\index.js:295:15\n    at processParams (A:\\College Predictor\\backend\\node_modules\\router\\index.js:582:12)\n    at next (A:\\College Predictor\\backend\\node_modules\\router\\index.js:291:5)\n    at Function.handle (A:\\College Predictor\\backend\\node_modules\\router\\index.js:186:3)","timestamp":"2026-01-20 11:56:17"}
+{"level":"http","message":"POST /api/create 500 24.150 ms","timestamp":"2026-01-20 11:56:17"}
+{"level":"error","message":"Create user data error Cannot read properties of undefined (reading 'toLowerCase')","stack":"TypeError: Cannot read properties of undefined (reading 'toLowerCase')\n    at createUserData (A:\\College Predictor\\backend\\src\\controllers\\UserController\\userDataController.js:58:37)\n    at Layer.handleRequest (A:\\College Predictor\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (A:\\College Predictor\\backend\\node_modules\\router\\lib\\route.js:157:13)\n    at Route.dispatch (A:\\College Predictor\\backend\\node_modules\\router\\lib\\route.js:117:3)\n    at handle (A:\\College Predictor\\backend\\node_modules\\router\\index.js:435:11)\n    at Layer.handleRequest (A:\\College Predictor\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at A:\\College Predictor\\backend\\node_modules\\router\\index.js:295:15\n    at processParams (A:\\College Predictor\\backend\\node_modules\\router\\index.js:582:12)\n    at next (A:\\College Predictor\\backend\\node_modules\\router\\index.js:291:5)\n    at Function.handle (A:\\College Predictor\\backend\\node_modules\\router\\index.js:186:3)","timestamp":"2026-01-20 12:07:29"}
+{"level":"http","message":"POST /api/create 500 20.514 ms","timestamp":"2026-01-20 12:07:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:10:14"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:10:14"}
+{"level":"error","message":"Create user data error normalizedEmail is not defined","stack":"ReferenceError: normalizedEmail is not defined\n    at createUserData (A:\\College Predictor\\backend\\src\\controllers\\UserController\\userDataController.js:75:24)\n    at Layer.handleRequest (A:\\College Predictor\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at next (A:\\College Predictor\\backend\\node_modules\\router\\lib\\route.js:157:13)\n    at Route.dispatch (A:\\College Predictor\\backend\\node_modules\\router\\lib\\route.js:117:3)\n    at handle (A:\\College Predictor\\backend\\node_modules\\router\\index.js:435:11)\n    at Layer.handleRequest (A:\\College Predictor\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at A:\\College Predictor\\backend\\node_modules\\router\\index.js:295:15\n    at processParams (A:\\College Predictor\\backend\\node_modules\\router\\index.js:582:12)\n    at next (A:\\College Predictor\\backend\\node_modules\\router\\index.js:291:5)\n    at Function.handle (A:\\College Predictor\\backend\\node_modules\\router\\index.js:186:3)","timestamp":"2026-01-20 12:10:18"}
+{"level":"http","message":"POST /api/create 500 13.450 ms","timestamp":"2026-01-20 12:10:18"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:10:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:10:59"}
+{"level":"error","message":"Create user data error UserData validation failed: checkHistory.3.gender: Path `gender` is required.","stack":"ValidationError: UserData validation failed: checkHistory.3.gender: Path `gender` is required.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 0)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 3)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 5)","timestamp":"2026-01-20 12:11:05"}
+{"level":"http","message":"POST /api/create 500 110.040 ms","timestamp":"2026-01-20 12:11:05"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:11:38"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:11:38"}
+{"level":"info","message":"Check history added for user: kamal@gmail.com, exam: JEE_MAINS, total checks: 4","timestamp":"2026-01-20 12:11:42"}
+{"level":"http","message":"POST /api/create 201 163.633 ms","timestamp":"2026-01-20 12:11:42"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 14.760 ms","timestamp":"2026-01-20 12:11:52"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 142.221 ms","timestamp":"2026-01-20 12:11:52"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 30.538 ms","timestamp":"2026-01-20 12:11:52"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 9.642 ms","timestamp":"2026-01-20 12:11:57"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 12.279 ms","timestamp":"2026-01-20 12:11:57"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 27.175 ms","timestamp":"2026-01-20 12:11:57"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 14.668 ms","timestamp":"2026-01-20 12:12:27"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 8.851 ms","timestamp":"2026-01-20 12:12:27"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 20.851 ms","timestamp":"2026-01-20 12:12:27"}
+{"level":"error","message":"Create user data error UserData validation failed: emailId: Path `emailId` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.","stack":"ValidationError: UserData validation failed: emailId: Path `emailId` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 0)\n    at async model.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async model.validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:2672:5)\n    at async model.validateBeforeSave (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\plugins\\validateBeforeSave.js:34:7)\n    at async Kareem.execPre (A:\\College Predictor\\backend\\node_modules\\kareem\\index.js:65:24)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:369:5)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)","timestamp":"2026-01-20 12:14:08"}
+{"level":"http","message":"POST /api/create 500 12.328 ms","timestamp":"2026-01-20 12:14:08"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:17:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:17:32"}
+{"level":"info","message":"New user created: undefined for CUET","timestamp":"2026-01-20 12:17:37"}
+{"level":"http","message":"POST /api/create 201 87.058 ms","timestamp":"2026-01-20 12:17:37"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 25.743 ms","timestamp":"2026-01-20 12:17:44"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.051 ms","timestamp":"2026-01-20 12:17:44"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 39.844 ms","timestamp":"2026-01-20 12:17:44"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 10.356 ms","timestamp":"2026-01-20 12:22:40"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 20.084 ms","timestamp":"2026-01-20 12:22:40"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 6.003 ms","timestamp":"2026-01-20 12:22:52"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.372 ms","timestamp":"2026-01-20 12:22:52"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-20 12:23:47"}
+{"level":"http","message":"POST /api/auth/admin/login 200 442.233 ms","timestamp":"2026-01-20 12:23:47"}
+{"level":"http","message":"GET /api/admin/stats 200 51.651 ms","timestamp":"2026-01-20 12:23:47"}
+{"level":"http","message":"GET /api/admin/stats 304 17.254 ms","timestamp":"2026-01-20 12:23:47"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 200 27.278 ms","timestamp":"2026-01-20 12:23:52"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 22.265 ms","timestamp":"2026-01-20 12:23:52"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 200 13.205 ms","timestamp":"2026-01-20 12:23:53"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 9.733 ms","timestamp":"2026-01-20 12:23:53"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 11.877 ms","timestamp":"2026-01-20 12:23:55"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 13.699 ms","timestamp":"2026-01-20 12:23:55"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 18.269 ms","timestamp":"2026-01-20 12:24:03"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 17.643 ms","timestamp":"2026-01-20 12:24:03"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:26:42"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:26:42"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:27:12"}
+{"level":"http","message":"POST /api/create 400 108.586 ms","timestamp":"2026-01-20 12:27:12"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:27:29"}
+{"level":"http","message":"POST /api/create 400 10.857 ms","timestamp":"2026-01-20 12:27:29"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:27:58"}
+{"level":"http","message":"POST /api/create 400 12.376 ms","timestamp":"2026-01-20 12:27:58"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:28:19"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:28:19"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:28:35"}
+{"level":"http","message":"POST /api/create 400 56.636 ms","timestamp":"2026-01-20 12:28:35"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:28:42"}
+{"level":"http","message":"POST /api/create 400 14.498 ms","timestamp":"2026-01-20 12:28:42"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:28:45"}
+{"level":"http","message":"POST /api/create 400 11.130 ms","timestamp":"2026-01-20 12:28:45"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:28:54"}
+{"level":"http","message":"POST /api/create 400 7.122 ms","timestamp":"2026-01-20 12:28:54"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:29:29"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:29:29"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:29:32"}
+{"level":"http","message":"POST /api/create 400 60.200 ms","timestamp":"2026-01-20 12:29:32"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:32:11"}
+{"level":"http","message":"POST /api/create 400 20.840 ms","timestamp":"2026-01-20 12:32:11"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:34:05"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:34:05"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:36:15"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:36:15"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:36:18"}
+{"level":"http","message":"POST /api/create 400 78.129 ms","timestamp":"2026-01-20 12:36:18"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:36:50"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:36:50"}
+{"level":"error","message":"Create user data error E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }","stack":"MongoServerError: E11000 duplicate key error collection: college_predictor.userdatas index: emailId_1 dup key: { emailId: null }\n    at InsertOneOperation.handleOk (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at tryOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:216:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:80:16)\n    at async Collection.insertOne (A:\\College Predictor\\backend\\node_modules\\mongodb\\lib\\collection.js:154:16)\n    at async model.$__save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:398:16)\n    at async model.save (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:609:5)\n    at async A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2714:9\n    at async Promise.all (index 0)\n    at async Function.create (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\model.js:2699:11)","timestamp":"2026-01-20 12:36:54"}
+{"level":"http","message":"POST /api/create 400 114.736 ms","timestamp":"2026-01-20 12:36:54"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 32.459 ms","timestamp":"2026-01-20 12:37:15"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 12.469 ms","timestamp":"2026-01-20 12:37:15"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 104.354 ms","timestamp":"2026-01-20 12:37:15"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 12:37:23"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 12:37:23"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 12:40:40"}
+{"level":"http","message":"POST /api/create 201 81.382 ms","timestamp":"2026-01-20 12:40:40"}
+{"level":"info","message":"New user created: undefined for NEET","timestamp":"2026-01-20 12:41:04"}
+{"level":"http","message":"POST /api/create 201 11.857 ms","timestamp":"2026-01-20 12:41:04"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 52.799 ms","timestamp":"2026-01-20 12:41:12"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 22.195 ms","timestamp":"2026-01-20 12:41:12"}
+{"level":"info","message":"Check history added for user: undefined, exam: NEET, total checks: 2","timestamp":"2026-01-20 12:42:15"}
+{"level":"http","message":"POST /api/create 201 28.153 ms","timestamp":"2026-01-20 12:42:15"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 26.023 ms","timestamp":"2026-01-20 12:42:21"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 26.013 ms","timestamp":"2026-01-20 12:42:22"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 112.588 ms","timestamp":"2026-01-20 12:49:44"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 16.271 ms","timestamp":"2026-01-20 12:49:44"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 13:08:46"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 13:08:46"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 13:13:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 13:13:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 13:14:02"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 13:14:02"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 13:14:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 13:14:08"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 37.673 ms","timestamp":"2026-01-20 13:24:40"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 5.775 ms","timestamp":"2026-01-20 13:24:40"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 16.997 ms","timestamp":"2026-01-20 13:24:40"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 18.849 ms","timestamp":"2026-01-20 13:24:40"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 51.310 ms","timestamp":"2026-01-20 13:24:41"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 184.275 ms","timestamp":"2026-01-20 13:24:41"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 15.423 ms","timestamp":"2026-01-20 13:24:41"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 13.768 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 11.226 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 34.024 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 22.213 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 13.567 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 37.791 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 24.607 ms","timestamp":"2026-01-20 13:26:17"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 603.527 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 51.479 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 15.289 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 31.632 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 152.018 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 194.464 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 53.225 ms","timestamp":"2026-01-20 13:52:24"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 13:53:22"}
+{"level":"http","message":"POST /api/create 201 82.009 ms","timestamp":"2026-01-20 13:53:22"}
+{"level":"http","message":"GET /api/predictions 400 8.117 ms","timestamp":"2026-01-20 13:53:22"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 10.105 ms","timestamp":"2026-01-20 13:53:34"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 14.959 ms","timestamp":"2026-01-20 13:53:34"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 20.942 ms","timestamp":"2026-01-20 13:53:35"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 40.335 ms","timestamp":"2026-01-20 13:53:35"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 39.899 ms","timestamp":"2026-01-20 13:53:35"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 13:56:20"}
+{"level":"http","message":"POST /api/create 201 15.561 ms","timestamp":"2026-01-20 13:56:20"}
+{"level":"http","message":"GET /api/predictions 400 1.035 ms","timestamp":"2026-01-20 13:56:20"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 41.136 ms","timestamp":"2026-01-20 14:00:09"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 42.109 ms","timestamp":"2026-01-20 14:00:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 16.250 ms","timestamp":"2026-01-20 14:00:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 41.530 ms","timestamp":"2026-01-20 14:00:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 22.741 ms","timestamp":"2026-01-20 14:00:09"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 17.207 ms","timestamp":"2026-01-20 14:00:10"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 33.514 ms","timestamp":"2026-01-20 14:00:10"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 33.072 ms","timestamp":"2026-01-20 14:00:10"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:01:19"}
+{"level":"http","message":"POST /api/create 201 17.959 ms","timestamp":"2026-01-20 14:01:19"}
+{"level":"http","message":"GET /api/predictions?rank=4115&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 132.689 ms","timestamp":"2026-01-20 14:01:20"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 14:09:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 14:09:08"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:10:07"}
+{"level":"http","message":"POST /api/create 201 183.924 ms","timestamp":"2026-01-20 14:10:07"}
+{"level":"http","message":"GET /api/predictions?rank=1279&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 331.249 ms","timestamp":"2026-01-20 14:10:08"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:11:00"}
+{"level":"http","message":"POST /api/create 201 191.926 ms","timestamp":"2026-01-20 14:11:00"}
+{"level":"http","message":"GET /api/predictions?rank=30&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 147.633 ms","timestamp":"2026-01-20 14:11:01"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:12:52"}
+{"level":"http","message":"POST /api/create 201 123.691 ms","timestamp":"2026-01-20 14:12:52"}
+{"level":"http","message":"GET /api/predictions?rank=70&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 192.146 ms","timestamp":"2026-01-20 14:12:52"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 879.125 ms","timestamp":"2026-01-20 14:17:56"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 24.016 ms","timestamp":"2026-01-20 14:17:56"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 413.911 ms","timestamp":"2026-01-20 14:17:56"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 325.794 ms","timestamp":"2026-01-20 14:17:57"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 532.442 ms","timestamp":"2026-01-20 14:17:57"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:18:18"}
+{"level":"http","message":"POST /api/create 201 67.889 ms","timestamp":"2026-01-20 14:18:18"}
+{"level":"http","message":"GET /api/predictions?rank=80&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 223.052 ms","timestamp":"2026-01-20 14:18:18"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 164.879 ms","timestamp":"2026-01-20 14:38:15"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 30.041 ms","timestamp":"2026-01-20 14:38:15"}
+{"level":"http","message":"GET /api/getAllUser?page=2&limit=10 200 42.717 ms","timestamp":"2026-01-20 14:38:18"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 19.109 ms","timestamp":"2026-01-20 14:38:21"}
+{"level":"http","message":"GET /api/getAllUser?page=2&limit=10 200 20.913 ms","timestamp":"2026-01-20 14:39:05"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 25.325 ms","timestamp":"2026-01-20 14:39:09"}
+{"level":"http","message":"GET /api/getAllUser?page=2&limit=10 200 18.146 ms","timestamp":"2026-01-20 14:41:40"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 23.596 ms","timestamp":"2026-01-20 14:42:22"}
+{"level":"http","message":"GET /api/getAllUser?page=2&limit=10 200 29.328 ms","timestamp":"2026-01-20 14:45:18"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 17.200 ms","timestamp":"2026-01-20 14:45:21"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:46:28"}
+{"level":"http","message":"POST /api/create 201 54.302 ms","timestamp":"2026-01-20 14:46:28"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 88.433 ms","timestamp":"2026-01-20 14:46:28"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 14:59:47"}
+{"level":"http","message":"POST /api/create 201 119.032 ms","timestamp":"2026-01-20 14:59:47"}
+{"level":"http","message":"GET /api/predictions?rank=220&category=OBC-NCL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 200 182.929 ms","timestamp":"2026-01-20 14:59:47"}
+{"level":"http","message":"PUT /api/update/696f4b0b2c6efe9bf1ea93f5 404 4.989 ms","timestamp":"2026-01-20 15:00:53"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 15:04:30"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 15:04:30"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 15:09:25"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 15:09:25"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 15:09:41"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 15:09:41"}
+{"level":"http","message":"PUT /api/update/696f4b0b2c6efe9bf1ea93f5 404 8.987 ms","timestamp":"2026-01-20 15:09:49"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 15:11:51"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 15:11:51"}
+{"level":"http","message":"PUT /api/update/696f4b0b2c6efe9bf1ea93f5 404 2.826 ms","timestamp":"2026-01-20 15:11:53"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 15:15:58"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 15:15:58"}
+{"level":"http","message":"PUT /api/update/696f4b0b2c6efe9bf1ea93f5 404 2.608 ms","timestamp":"2026-01-20 15:16:07"}
+{"level":"http","message":"PUT /api/update/696f4b0b2c6efe9bf1ea93f5 404 0.869 ms","timestamp":"2026-01-20 15:21:20"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 15:23:09"}
+{"level":"http","message":"POST /api/create 201 116.458 ms","timestamp":"2026-01-20 15:23:09"}
+{"level":"http","message":"GET /api/predictions?rank=500&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 128.927 ms","timestamp":"2026-01-20 15:23:10"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 15:25:16"}
+{"level":"http","message":"POST /api/create 201 13.258 ms","timestamp":"2026-01-20 15:25:16"}
+{"level":"http","message":"GET /api/predictions?rank=57&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 44.840 ms","timestamp":"2026-01-20 15:25:16"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-20 15:28:01"}
+{"level":"http","message":"POST /api/create 201 19.933 ms","timestamp":"2026-01-20 15:28:01"}
+{"level":"http","message":"GET /api/predictions?rank=45&category=ST&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 57.515 ms","timestamp":"2026-01-20 15:28:01"}

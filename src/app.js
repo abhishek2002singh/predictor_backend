@@ -12,6 +12,7 @@ const adminRoutes = require("./router/adminRoutes");
 const assistantRoutes = require("./router/assistantRoutes");
 const userDataRoutes = require('./router/userDataRoutes');
 const cutoffRoutes = require('./router/cutoffRoutes');
+const  userCanShow = require('./router/userCanShow')
 
 const app = express();
 
@@ -63,7 +64,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/assistant", assistantRoutes);
 app.use("/api", userDataRoutes);
-app.use("/api/cutoff", cutoffRoutes); // Fixed route path
+app.use("/api/cutoff", cutoffRoutes); 
+app.use("/api" , userCanShow)
+
 
 // 404 Handler
 app.use((req, res) => {

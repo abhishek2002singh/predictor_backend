@@ -36,10 +36,8 @@ const genderMap = {
 const createUserData = async (req, res) => {
   try {
     const {
-      firstName,
-      lastName,
       mobileNumber,
-      emailId,
+     
       rank,
       category,
       gender,
@@ -55,7 +53,7 @@ const createUserData = async (req, res) => {
       });
     }
 
-    const normalizedEmail = emailId.toLowerCase();
+    // const normalizedEmail = emailId.toLowerCase();
     const normalizedExamType = examType.toUpperCase();
 
     // Normalize category and gender to valid enum values
@@ -67,14 +65,14 @@ const createUserData = async (req, res) => {
       examType: normalizedExamType,
       rank,
       category: normalizedCategory,
-      gender: normalizedGender,
+       gender: normalizedGender,
       homeState,
       checkedAt: new Date(),
     };
 
     // Try to find existing user by email or mobile
     let existingUser = await UserData.findOne({
-      $or: [{ emailId: normalizedEmail }, { mobileNumber }],
+      $or: [ { mobileNumber }],
     });
 
     let isNewUser = false;
@@ -91,8 +89,8 @@ const createUserData = async (req, res) => {
       }
 
       // Update name if different (user might have corrected it)
-      existingUser.firstName = firstName.trim();
-      existingUser.lastName = lastName.trim();
+      // existingUser.firstName = firstName.trim();
+      // existingUser.lastName = lastName.trim();
 
       userData = await existingUser.save();
 
@@ -101,10 +99,10 @@ const createUserData = async (req, res) => {
       // New user - create with first check
       isNewUser = true;
       userData = await UserData.create({
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
+        // firstName: firstName.trim(),
+        // lastName: lastName.trim(),
         mobileNumber,
-        emailId: normalizedEmail,
+        // emailId: normalizedEmail,
         checkHistory: [checkEntry],
         totalChecks: 1,
         examsChecked: [normalizedExamType],
@@ -254,11 +252,7 @@ const updateUserData = async (req, res) => {
     const {
       firstName,
       lastName,
-      mobileNumber,
-      rank,
-      category,
-      gender,
-      homeState,
+      emailId,
       isNegativeResponse,
       isPositiveResponse,
       isCheckData,
@@ -269,11 +263,7 @@ const updateUserData = async (req, res) => {
       {
         firstName,
         lastName,
-        mobileNumber,
-        rank,
-        category,
-        gender,
-        homeState,
+        emailId,
         isNegativeResponse,
         isPositiveResponse,
         isCheckData,

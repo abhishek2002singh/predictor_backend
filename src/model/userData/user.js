@@ -34,7 +34,7 @@ const checkHistorySchema = mongoose.Schema({
 const userDataSchema = mongoose.Schema({
     firstName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
       minlength: 2,
       maxlength: 50,
@@ -42,7 +42,7 @@ const userDataSchema = mongoose.Schema({
 
     lastName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
       minlength: 2,
       maxlength: 50,
@@ -58,11 +58,10 @@ const userDataSchema = mongoose.Schema({
 
     emailId: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+      // unique: true,
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Invalid email address"],
-      index: true,
     },
 
     
@@ -95,6 +94,19 @@ const userDataSchema = mongoose.Schema({
 },{
      timestamps: true,
 })
+
+userDataSchema.index(
+  { emailId: 1 },
+  {
+    unique: true,
+    partialFilterExpression: {
+      emailId: { $exists: true, $ne: null },
+    },
+  }
+);
+
+
+
 
 
 module.exports = mongoose.model("UserData", userDataSchema);
