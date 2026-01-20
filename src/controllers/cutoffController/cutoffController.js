@@ -122,7 +122,7 @@ exports.uploadCutoffCSV = async (req, res) => {
       });
     }
 
-    const { year, round } = req.body;
+    const { year, round, typeOfExam } = req.body;
     
     // Validate inputs
     const parsedYear = parseInt(year) || new Date().getFullYear();
@@ -172,6 +172,7 @@ exports.uploadCutoffCSV = async (req, res) => {
               closingRank: cleanRank(row['Closing Rank'] || row.closingRank),
               year: parsedYear,
               round: parsedRound,
+              typeOfExam: row['Exam Type'] || row['typeOfExam'] || typeOfExam || 'JEE_MAINS',
               category: category,
               isPwd: seatType.includes('PwD')
             };

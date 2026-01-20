@@ -177,7 +177,7 @@ const assistantLogin = async (req, res) => {
     const { emailId, password } = req.body;
 
     // Validate input
-    const { errors, isValid } = assistanceLogin(req.body);
+    const { errors, isValid } = adminLoginValidator(req.body);
 
     if (!isValid) {
       return res.status(400).json({

@@ -1,13 +1,18 @@
 // models/Cutoff.js
 const mongoose = require('mongoose');
 
-const cutoffSchema = new mongoose.Schema({
+const jeeCutoffSchema = new mongoose.Schema({
   institute: {
     type: String,
     required: true,
     trim: true
   },
   academicProgramName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  typeOfExam :{
     type: String,
     required: true,
     trim: true
@@ -96,7 +101,7 @@ const seatTypeToCategory = {
 };
 
 // Pre-save middleware - FIXED VERSION
-cutoffSchema.pre('save', function(next) {
+jeeCutoffSchema.pre('save', function(next) {
   // Set category from seatType if not already set
   if (!this.category && this.seatType) {
     this.category = seatTypeToCategory[this.seatType] || 'GENERAL';
@@ -116,7 +121,7 @@ cutoffSchema.pre('save', function(next) {
 });
 
 // ALTERNATIVE: Pre-validate middleware that works with bulk operations
-cutoffSchema.pre('validate', function(next) {
+jeeCutoffSchema.pre('validate', function(next) {
   // Set category from seatType if not already set
   if (!this.category && this.seatType) {
     this.category = seatTypeToCategory[this.seatType] || 'GENERAL';
@@ -133,12 +138,12 @@ cutoffSchema.pre('validate', function(next) {
 });
 
 // Static method to calculate category from seat type
-cutoffSchema.statics.getCategoryFromSeatType = function(seatType) {
+jeeCutoffSchema.statics.getCategoryFromSeatType = function(seatType) {
   return seatTypeToCategory[seatType] || 'GENERAL';
 };
 
 // Instance method to set derived fields
-cutoffSchema.methods.setDerivedFields = function() {
+jeeCutoffSchema.methods.setDerivedFields = function() {
   if (this.seatType) {
     if (!this.category) {
       this.category = seatTypeToCategory[this.seatType] || 'GENERAL';
@@ -148,4 +153,4 @@ cutoffSchema.methods.setDerivedFields = function() {
   return this;
 };
 
-module.exports = mongoose.model('Cutoff', cutoffSchema);
+module.exports = mongoose.model('Cutoff', jeeCutoffSchema);

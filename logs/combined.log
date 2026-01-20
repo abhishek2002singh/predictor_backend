@@ -938,3 +938,56 @@
 {"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 00:45:38"}
 {"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 00:45:38"}
 {"level":"http","message":"POST /api/cutoff/upload 200 100453.645 ms","timestamp":"2026-01-20 00:48:05"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 09:51:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 09:51:08"}
+{"level":"http","message":"GET /api/admin/stats 304 148.344 ms","timestamp":"2026-01-20 09:54:51"}
+{"level":"http","message":"GET /api/admin/stats 304 26.068 ms","timestamp":"2026-01-20 09:54:52"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 60.813 ms","timestamp":"2026-01-20 10:05:58"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 15.476 ms","timestamp":"2026-01-20 10:05:58"}
+{"level":"error","message":"Unhandled Error \"[object Object]\" is not valid JSON","path":"/api/auth/assistant/login","stack":"SyntaxError: \"[object Object]\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at parse (A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\types\\json.js:72:19)\n    at A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\read.js:162:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2026-01-20 10:06:57"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 404 1.550 ms","timestamp":"2026-01-20 10:08:02"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 404 0.314 ms","timestamp":"2026-01-20 10:08:02"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 404 2.846 ms","timestamp":"2026-01-20 10:17:51"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 404 2.133 ms","timestamp":"2026-01-20 10:17:51"}
+{"level":"http","message":"GET /api/admin/stats 304 74.395 ms","timestamp":"2026-01-20 10:17:53"}
+{"level":"http","message":"GET /api/admin/stats 304 31.281 ms","timestamp":"2026-01-20 10:17:53"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 41.730 ms","timestamp":"2026-01-20 10:17:58"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 20.159 ms","timestamp":"2026-01-20 10:17:58"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 13.268 ms","timestamp":"2026-01-20 10:18:01"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 8.264 ms","timestamp":"2026-01-20 10:18:01"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 404 1.108 ms","timestamp":"2026-01-20 10:18:25"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 404 0.455 ms","timestamp":"2026-01-20 10:18:25"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:20:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:20:00"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 148.922 ms","timestamp":"2026-01-20 10:20:04"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 147.477 ms","timestamp":"2026-01-20 10:20:04"}
+{"level":"error","message":"Unhandled Error \"[object Object]\" is not valid JSON","path":"/api/auth/assistant/login","stack":"SyntaxError: \"[object Object]\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at parse (A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\types\\json.js:72:19)\n    at A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\read.js:162:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2026-01-20 10:20:26"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:22:08"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:22:08"}
+{"level":"error","message":"Unhandled Error \"[object Object]\" is not valid JSON","path":"/api/auth/assistant/login","stack":"SyntaxError: \"[object Object]\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at parse (A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\types\\json.js:72:19)\n    at A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\read.js:162:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2026-01-20 10:22:10"}
+{"level":"error","message":"Unhandled Error \"[object Object]\" is not valid JSON","path":"/api/auth/admin/login","stack":"SyntaxError: \"[object Object]\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at parse (A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\types\\json.js:72:19)\n    at A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\read.js:162:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2026-01-20 10:22:50"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:23:12"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:23:12"}
+{"level":"error","message":"Unhandled Error \"[object Object]\" is not valid JSON","path":"/api/auth/admin/login","stack":"SyntaxError: \"[object Object]\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at parse (A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\types\\json.js:72:19)\n    at A:\\College Predictor\\backend\\node_modules\\body-parser\\lib\\read.js:162:18\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:238:16)\n    at done (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:227:7)\n    at IncomingMessage.onEnd (A:\\College Predictor\\backend\\node_modules\\raw-body\\index.js:287:7)\n    at IncomingMessage.emit (node:events:518:28)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2026-01-20 10:23:26"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-20 10:27:16"}
+{"level":"http","message":"POST /api/auth/admin/login 200 804.202 ms","timestamp":"2026-01-20 10:27:16"}
+{"level":"http","message":"GET /api/admin/stats 304 89.687 ms","timestamp":"2026-01-20 10:27:16"}
+{"level":"http","message":"GET /api/admin/stats 304 38.605 ms","timestamp":"2026-01-20 10:27:16"}
+{"level":"info","message":"Assistant logged in successfully: lalu@gmail.com","timestamp":"2026-01-20 10:27:22"}
+{"level":"http","message":"POST /api/auth/assistant/login 200 638.953 ms","timestamp":"2026-01-20 10:27:22"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 26.411 ms","timestamp":"2026-01-20 10:27:23"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 27.298 ms","timestamp":"2026-01-20 10:27:23"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:35:34"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:35:34"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:39:24"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:39:24"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:39:50"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:39:50"}
+{"level":"http","message":"POST /api/cutoff/upload 200 80127.530 ms","timestamp":"2026-01-20 10:45:32"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:48:55"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:48:55"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 49.210 ms","timestamp":"2026-01-20 10:51:34"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 203.791 ms","timestamp":"2026-01-20 10:51:34"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 103.102 ms","timestamp":"2026-01-20 10:51:34"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-20 10:59:19"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-20 10:59:19"}

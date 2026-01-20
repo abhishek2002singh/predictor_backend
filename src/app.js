@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/assistant", assistantRoutes);
-app.use("/api/user", userDataRoutes);
+app.use("/api", userDataRoutes);
 app.use("/api/cutoff", cutoffRoutes); // Fixed route path
 
 // 404 Handler
