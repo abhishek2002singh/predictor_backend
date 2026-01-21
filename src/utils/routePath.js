@@ -27,7 +27,7 @@ const API_ROUTES_FOR_ROUTER = {
     GET_ALL_USER_DATA:"/getAllUser",
     USER_DETAILS:"userDetails/:id",
     UPDATE_USER:"updateUser/:id",
-    UPDATE_USER_OWN: "update/:id"
+    UPDATE_USER_OWN: "/update/:id"
 
   },
   ADMIN_ROUTER_PATH:{

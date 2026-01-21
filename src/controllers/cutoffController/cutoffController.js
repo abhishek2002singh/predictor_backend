@@ -2,6 +2,8 @@ const Cutoff = require('../../model/uploadData/Cutoff');
 const csv = require('csv-parser');
 const fs = require('fs');
 const path = require('path');
+const UserData = require("../../model/userData/user");
+const logger = require("../../config/logger");
 
 
 // Seat type to category mapping (same as in model)
@@ -756,4 +758,59 @@ exports.healthCheck = (req, res) => {
     message: 'Cutoff controller is working',
     timestamp: new Date().toISOString()
   });
+};
+
+exports.updateUserForMoreResult = async (req, res) => {
+  try {
+    
+     const { id } = req.params;
+
+    const {
+      firstName,
+      lastName,
+      emailId,
+      isNegativeResponse,
+      isPositiveResponse,
+      isCheckData,
+    } = req.body;
+
+    const userData = await UserData.findByIdAndUpdate(
+      id,
+      {
+        firstName,
+        lastName,
+        emailId,
+        isNegativeResponse,
+        isPositiveResponse,
+        isCheckData,
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!userData) {
+      return res.status(404).json({
+        success: false,
+        message: "User data not found",
+      });
+    }
+
+    logger.info(`User data updated: ${userData.emailId}`);
+
+    res.status(200).json({
+      success: true,
+      message: "User data updated successfully",
+      data: userData,
+    });
+  } catch (error) {
+    logger.error("Update user data error", {
+      message: error.message,
+      userId: req.params?.id,
+    });
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to update user data",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
 };

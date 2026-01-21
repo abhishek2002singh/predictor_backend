@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const cutoffController = require('../controllers/cutoffController/cutoffController');
-const {
- 
-  updateUserData,
- 
-} = require("../controllers/UserController/userDataController");
+
 const { API_ROUTES_FOR_ROUTER } = require("../utils/routePath");
 
 
@@ -18,7 +14,7 @@ const { API_ROUTES_FOR_ROUTER } = require("../utils/routePath");
 router.get('/predictions', cutoffController.getCutoffs);
 
 
-router.put(API_ROUTES_FOR_ROUTER?.USER_ROUTER?.UPDATE_USER_OWN,updateUserData)
+router.put(API_ROUTES_FOR_ROUTER?.USER_ROUTER?.UPDATE_USER_OWN,cutoffController?.updateUserForMoreResult)
 // router.get('/filter-options', cutoffController.getFilterOptions);
 // // router.get('/stats', cutoffController.getCutoffStats);
 // router.get('/health', cutoffController.healthCheck);
