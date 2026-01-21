@@ -1323,3 +1323,88 @@
 {"level":"http","message":"GET /api/predictions?rank=16126&category=GENERAL&gender=GENERAL&typeOfExam=JEE_MAINS&page=2&limit=20 200 47.605 ms","timestamp":"2026-01-21 10:08:46"}
 {"level":"http","message":"GET /api/predictions?rank=16126&category=GENERAL&gender=GENERAL&typeOfExam=JEE_MAINS&page=3&limit=20 200 44.771 ms","timestamp":"2026-01-21 10:08:53"}
 {"level":"http","message":"GET /api/predictions?rank=16126&category=GENERAL&gender=GENERAL&typeOfExam=JEE_MAINS&page=4&limit=20 200 37.980 ms","timestamp":"2026-01-21 10:09:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-21 10:37:05"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-21 10:37:05"}
+{"level":"http","message":"POST /api/create 400 39.484 ms","timestamp":"2026-01-21 10:46:16"}
+{"level":"http","message":"POST /api/create 400 3.080 ms","timestamp":"2026-01-21 10:48:15"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 10:51:18"}
+{"level":"http","message":"POST /api/create 201 447.498 ms","timestamp":"2026-01-21 10:51:18"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 10:51:51"}
+{"level":"http","message":"POST /api/create 201 94.784 ms","timestamp":"2026-01-21 10:51:51"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 10:59:08"}
+{"level":"http","message":"POST /api/create 201 180.004 ms","timestamp":"2026-01-21 10:59:08"}
+{"level":"http","message":"GET /api/cutoffs?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 19.223 ms","timestamp":"2026-01-21 11:03:37"}
+{"level":"http","message":"GET /api/cutoffs?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 1.771 ms","timestamp":"2026-01-21 11:03:37"}
+{"level":"http","message":"GET /api/cutoffs?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 0.499 ms","timestamp":"2026-01-21 11:03:47"}
+{"level":"http","message":"GET /api/cutoffs?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 0.562 ms","timestamp":"2026-01-21 11:03:47"}
+{"level":"http","message":"GET /api/cutoff?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 3.700 ms","timestamp":"2026-01-21 11:04:17"}
+{"level":"http","message":"GET /api/cutoff?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 0.495 ms","timestamp":"2026-01-21 11:04:17"}
+{"level":"http","message":"GET /api/cutoff?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 0.962 ms","timestamp":"2026-01-21 11:04:22"}
+{"level":"http","message":"GET /api/cutoff?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 404 0.729 ms","timestamp":"2026-01-21 11:04:22"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 147.449 ms","timestamp":"2026-01-21 11:05:24"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 30.403 ms","timestamp":"2026-01-21 11:05:24"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 31.647 ms","timestamp":"2026-01-21 11:05:31"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 39.802 ms","timestamp":"2026-01-21 11:05:31"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 46.780 ms","timestamp":"2026-01-21 11:05:52"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 83.877 ms","timestamp":"2026-01-21 11:06:04"}
+{"level":"http","message":"GET /api/predictions?rank=140&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 65.704 ms","timestamp":"2026-01-21 11:06:05"}
+{"level":"http","message":"POST /api/users 404 0.339 ms","timestamp":"2026-01-21 11:06:59"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 11:07:57"}
+{"level":"http","message":"POST /api/create 201 44.209 ms","timestamp":"2026-01-21 11:07:57"}
+{"level":"info","message":"Check history added for user: undefined, exam: JEE_MAINS, total checks: 2","timestamp":"2026-01-21 11:08:08"}
+{"level":"http","message":"POST /api/create 201 101.238 ms","timestamp":"2026-01-21 11:08:08"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 11:10:14"}
+{"level":"http","message":"POST /api/create 201 10.391 ms","timestamp":"2026-01-21 11:10:14"}
+{"level":"http","message":"GET /api/predictions?rank=2000&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 33.254 ms","timestamp":"2026-01-21 11:10:14"}
+{"level":"http","message":"GET /api/predictions?rank=2000&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 19.281 ms","timestamp":"2026-01-21 11:10:14"}
+{"level":"http","message":"GET /api/predictions?rank=2000&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 36.810 ms","timestamp":"2026-01-21 11:10:21"}
+{"level":"http","message":"GET /api/predictions?rank=2000&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 34.546 ms","timestamp":"2026-01-21 11:10:57"}
+{"level":"http","message":"GET /api/predictions?rank=2000&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 44.606 ms","timestamp":"2026-01-21 11:10:57"}
+{"level":"http","message":"GET /api/predictions?rank=2000&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 304 38.431 ms","timestamp":"2026-01-21 11:11:16"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 61.666 ms","timestamp":"2026-01-21 11:13:28"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 7.844 ms","timestamp":"2026-01-21 11:13:28"}
+{"level":"http","message":"GET /api/admin/stats 200 59.700 ms","timestamp":"2026-01-21 11:13:41"}
+{"level":"http","message":"GET /api/admin/stats 304 22.863 ms","timestamp":"2026-01-21 11:13:41"}
+{"level":"http","message":"POST /api/cutoff/upload 200 157930.920 ms","timestamp":"2026-01-21 11:18:19"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 11:19:03"}
+{"level":"http","message":"POST /api/create 201 36.374 ms","timestamp":"2026-01-21 11:19:03"}
+{"level":"http","message":"GET /api/predictions?rank=150&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 102.649 ms","timestamp":"2026-01-21 11:19:03"}
+{"level":"http","message":"GET /api/predictions?rank=150&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 54.262 ms","timestamp":"2026-01-21 11:19:03"}
+{"level":"http","message":"GET /api/predictions?rank=150&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 40.029 ms","timestamp":"2026-01-21 11:19:12"}
+{"level":"http","message":"POST /api/cutoff/upload 200 240078.767 ms","timestamp":"2026-01-21 11:23:51"}
+{"level":"http","message":"POST /api/cutoff/upload 200 326614.640 ms","timestamp":"2026-01-21 11:29:42"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 11:32:04"}
+{"level":"http","message":"POST /api/create 201 114.001 ms","timestamp":"2026-01-21 11:32:04"}
+{"level":"http","message":"GET /api/predictions?rank=66&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 172.944 ms","timestamp":"2026-01-21 11:32:04"}
+{"level":"http","message":"GET /api/predictions?rank=66&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 87.953 ms","timestamp":"2026-01-21 11:32:04"}
+{"level":"http","message":"GET /api/predictions?rank=66&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 56.196 ms","timestamp":"2026-01-21 11:32:12"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-21 11:33:02"}
+{"level":"http","message":"POST /api/create 201 6.738 ms","timestamp":"2026-01-21 11:33:02"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 81.668 ms","timestamp":"2026-01-21 11:33:02"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 73.021 ms","timestamp":"2026-01-21 11:33:02"}
+{"level":"http","message":"PUT /api/users/69706c16c39b098ba8de91c4 404 0.217 ms","timestamp":"2026-01-21 11:33:31"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 145.536 ms","timestamp":"2026-01-21 11:34:56"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 22.216 ms","timestamp":"2026-01-21 11:34:56"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 448.248 ms","timestamp":"2026-01-21 11:34:56"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 108.199 ms","timestamp":"2026-01-21 11:34:56"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 187.600 ms","timestamp":"2026-01-21 11:35:08"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 11.612 ms","timestamp":"2026-01-21 11:41:26"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 64.245 ms","timestamp":"2026-01-21 11:41:27"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 17.993 ms","timestamp":"2026-01-21 11:41:27"}
+{"level":"http","message":"GET /api/getAllUser?page=2&limit=10 200 19.164 ms","timestamp":"2026-01-21 11:41:34"}
+{"level":"http","message":"GET /api/getAllUser?page=3&limit=10 200 17.391 ms","timestamp":"2026-01-21 11:41:38"}
+{"level":"http","message":"GET /api/getAllUser?page=4&limit=10 200 25.852 ms","timestamp":"2026-01-21 11:41:40"}
+{"level":"http","message":"GET /api/getAllUser?page=3&limit=10 200 14.058 ms","timestamp":"2026-01-21 11:41:46"}
+{"level":"http","message":"GET /api/getAllUser?page=2&limit=10 200 11.704 ms","timestamp":"2026-01-21 11:41:46"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 15.351 ms","timestamp":"2026-01-21 11:41:47"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 121.549 ms","timestamp":"2026-01-21 11:42:28"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 89.975 ms","timestamp":"2026-01-21 11:42:28"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 82.460 ms","timestamp":"2026-01-21 11:45:04"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 94.111 ms","timestamp":"2026-01-21 11:45:04"}
+{"level":"http","message":"POST /api/cutoff/upload 200 412180.667 ms","timestamp":"2026-01-21 11:47:48"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 115.778 ms","timestamp":"2026-01-21 11:49:59"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 102.876 ms","timestamp":"2026-01-21 11:50:00"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 137.487 ms","timestamp":"2026-01-21 11:50:11"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 85.242 ms","timestamp":"2026-01-21 11:50:47"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 106.114 ms","timestamp":"2026-01-21 11:55:18"}
+{"level":"http","message":"GET /api/predictions?rank=201&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 72.781 ms","timestamp":"2026-01-21 11:55:18"}
