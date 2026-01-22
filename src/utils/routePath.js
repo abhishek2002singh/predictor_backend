@@ -11,7 +11,9 @@ const API_ROUTES_APP = {
   // User Data Routes
   USER_DATA: '/api',
 
-  UPLOAD_CUTOFF : "/cutoff"
+  UPLOAD_CUTOFF : "/cutoff",
+
+  ANALYTICS : '/api'
 };
 
 const API_ROUTES_FOR_ROUTER = {
@@ -43,6 +45,12 @@ const API_ROUTES_FOR_ROUTER = {
     UPDATE_ASSISTANCE_STATUS:"/:id/status",
     DELETE_ASSISTANCE : "/:id"
     
+  }, 
+  ANALYTICS_ROUTER_PATH :{
+    GET_ALL_ANALYSIS_USER:"/userAnalytics",
+    UPLOAD_DATA_ANALYSIS : "/uploadData",
+    ASSISTANCE_ANALYSIS :"/assistance-analysis",
+    ADMIN_ANALYSIS : "/admin-analysis"
   }
 };
 

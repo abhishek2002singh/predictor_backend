@@ -6,6 +6,7 @@ const path = require("path");
 
 const morganMiddleware = require("./middleware/morgan.middleware");
 const errorHandler = require("./middleware/error.middleware");
+const {API_ROUTES_APP} = require('./utils/routePath')
 
 const authRoutes = require("./router/authRoutes");
 const adminRoutes = require("./router/adminRoutes");
@@ -13,6 +14,8 @@ const assistantRoutes = require("./router/assistantRoutes");
 const userDataRoutes = require('./router/userDataRoutes');
 const cutoffRoutes = require('./router/cutoffRoutes');
 const  userCanShow = require('./router/userCanShow')
+const  analyticsRouter = require('./router/analytics')
+
 
 const app = express();
 
@@ -66,6 +69,7 @@ app.use("/api/assistant", assistantRoutes);
 app.use("/api", userDataRoutes);
 app.use("/api/cutoff", cutoffRoutes); 
 app.use("/api" , userCanShow)
+app.use(API_ROUTES_APP?.ANALYTICS ,analyticsRouter)
 
 
 // 404 Handler

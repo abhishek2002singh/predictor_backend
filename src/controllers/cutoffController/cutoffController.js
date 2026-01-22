@@ -646,6 +646,18 @@ exports.getCutoffs = async (req, res) => {
     filter.closingRank = { $gte: userRank };
     console.log('Rank filter - opening:', filter.openingRank, 'closing:', filter.closingRank); // Debug
 
+    // Add IIT filtering based on exam type - CORRECTED FIELD NAME
+    if (typeOfExam === 'JEE_MAINS') {
+      // For JEE Mains: Exclude records containing "Indian Institute of Technology"
+      filter.institute = { $not: /Indian Institute of Technology/i };
+      console.log('Filtering: Excluding IITs for JEE Mains'); // Debug
+    } else if (typeOfExam === 'JEE_ADVANCED') {
+      // For JEE Advanced: Include only records containing "Indian Institute of Technology"
+      filter.institute = /Indian Institute of Technology/i;
+      console.log('Filtering: Including only IITs for JEE Advanced'); // Debug
+    }
+    // Note: If typeOfExam is neither of these, no institute filter is applied
+
     const skip = (parseInt(page) - 1) * parseInt(limit);
     
     console.log('Final filter:', JSON.stringify(filter, null, 2)); // Debug
@@ -661,36 +673,96 @@ exports.getCutoffs = async (req, res) => {
     console.log('Found cutoffs:', cutoffs.length, 'Total:', total); // Debug
     
     // Calculate probability for each cutoff
-    const cutoffsWithProbability = cutoffs.map(cutoff => {
-      const cutoffObj = cutoff.toObject();
+    // const cutoffsWithProbability = cutoffs.map(cutoff => {
+    //   const cutoffObj = cutoff.toObject();
       
-      // Calculate probability based on rank position within range
-      const rankRange = cutoff.closingRank - cutoff.openingRank + 1;
-      const rankPosition = userRank - cutoff.openingRank + 1;
-      const probabilityPercentage = Math.round((rankPosition / rankRange) * 100);
+    //   // Calculate probability based on rank position within range
+    //   const rankRange = cutoff.closingRank - cutoff.openingRank + 1;
+    //   const rankPosition = userRank - cutoff.openingRank + 1;
+    //   const probabilityPercentage = Math.round((rankPosition / rankRange) * 100);
       
-      // Determine probability category
-      let probability, probabilityColor;
-      if (probabilityPercentage >= 70) {
-        probability = 'High Chance';
-        probabilityColor = 'green';
-      } else if (probabilityPercentage >= 40) {
-        probability = 'Medium Chance';
-        probabilityColor = 'yellow';
-      } else if (probabilityPercentage >= 20) {
-        probability = 'Low Chance';
-        probabilityColor = 'orange';
-      } else {
-        probability = 'Very Low Chance';
-        probabilityColor = 'red';
-      }
+    //   // Determine probability category
+    //   let probability, probabilityColor;
+    //   if (probabilityPercentage >= 70) {
+    //     probability = 'High Chance';
+    //     probabilityColor = 'green';
+    //   } else if (probabilityPercentage >= 40) {
+    //     probability = 'Medium Chance';
+    //     probabilityColor = 'yellow';
+    //   } else if (probabilityPercentage >= 20) {
+    //     probability = 'Low Chance';
+    //     probabilityColor = 'orange';
+    //   } else {
+    //     probability = 'Very Low Chance';
+    //     probabilityColor = 'red';
+    //   }
       
-      cutoffObj.probability = probability;
-      cutoffObj.probabilityColor = probabilityColor;
-      cutoffObj.probabilityPercentage = probabilityPercentage;
+    //   cutoffObj.probability = probability;
+    //   cutoffObj.probabilityColor = probabilityColor;
+    //   cutoffObj.probabilityPercentage = probabilityPercentage;
       
-      return cutoffObj;
-    });
+    //   return cutoffObj;
+    // });
+    // Calculate probability for each cutoff
+const cutoffsWithProbability = cutoffs.map(cutoff => {
+  const cutoffObj = cutoff.toObject();
+
+  const openingRank = cutoff.openingRank;
+  const closingRank = cutoff.closingRank;
+
+  // Safety check
+  if (
+    !openingRank ||
+    !closingRank ||
+    userRank < openingRank ||
+    userRank > closingRank
+  ) {
+    cutoffObj.probability = "Very Low Chance";
+    cutoffObj.probabilityColor = "red";
+    cutoffObj.probabilityPercentage = 5;
+    return cutoffObj;
+  }
+
+  // Rank range
+  const range = closingRank - openingRank;
+
+  // Distance from closing rank (higher is better)
+  const distanceFromClosing = closingRank - userRank;
+
+  // Base probability (reverse linear)
+  let probabilityPercentage =
+    (distanceFromClosing / range) * 100;
+
+  // Smooth curve (realistic)
+  probabilityPercentage = Math.pow(probabilityPercentage / 100, 0.75) * 100;
+
+  // Clamp values (avoid extremes)
+  probabilityPercentage = Math.max(5, Math.min(Math.round(probabilityPercentage), 95));
+
+  // Probability label
+  let probability, probabilityColor;
+
+  if (probabilityPercentage >= 75) {
+    probability = "High Chance";
+    probabilityColor = "green";
+  } else if (probabilityPercentage >= 50) {
+    probability = "Medium Chance";
+    probabilityColor = "yellow";
+  } else if (probabilityPercentage >= 30) {
+    probability = "Low Chance";
+    probabilityColor = "orange";
+  } else {
+    probability = "Very Low Chance";
+    probabilityColor = "red";
+  }
+
+  cutoffObj.probability = probability;
+  cutoffObj.probabilityColor = probabilityColor;
+  cutoffObj.probabilityPercentage = probabilityPercentage;
+
+  return cutoffObj;
+});
+
     
     // Get summary statistics
     const summary = {
