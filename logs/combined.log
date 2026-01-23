@@ -61,3 +61,5 @@
 {"level":"http","message":"PUT /api/update/byAdminOrAssistance/6972f8eeeff4a3aba3d0fae6 200 6.842 ms","timestamp":"2026-01-23 16:21:49"}
 {"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 16.557 ms","timestamp":"2026-01-23 16:21:49"}
 {"level":"http","message":"GET /api/getAllUser?page=1&limit=10&isDataExport=false 200 13.054 ms","timestamp":"2026-01-23 16:22:04"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 16:32:11"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 16:32:11"}
