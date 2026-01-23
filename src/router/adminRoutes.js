@@ -129,10 +129,10 @@ router.delete("/users/:id", async (req, res) => {
 router.get("/stats", async (req, res) => {
   try {
     const totalUsers = await UserData.countDocuments();
-    const activeUsers = await User.countDocuments({ role: "USER", isActive: true });
+    // const activeUsers = await User.countDocuments({ role: "USER", isActive: true });
     const totalAdmins = await User.countDocuments({ role: "ADMIN" });
-    const totalAssistance = await User.countDocuments({role: "ASSISTANCE" ,isActive: true})
-    const activeAssistance = await User.countDocuments({role: "ASSISTANCE" })
+    const activeAssistance = await User.countDocuments({role: "ASSISTANCE" ,isActive: true})
+    const totalAssistance = await User.countDocuments({role: "ASSISTANCE" })
 
     // Users registered in last 7 day
     const lastWeek = new Date();
@@ -152,8 +152,8 @@ router.get("/stats", async (req, res) => {
       success: true,
       data: {
         totalUsers,
-        activeUsers,
-        inactiveUsers: totalUsers - activeUsers,
+        // activeUsers,
+        // inactiveUsers: totalUsers - activeUsers,
         totalAdmins,
         newUsersThisWeek,
         usersByCategory,

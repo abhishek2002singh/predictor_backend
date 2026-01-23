@@ -2050,3 +2050,33 @@
 {"level":"http","message":"GET /api/assistant/my-permissions 200 209.735 ms","timestamp":"2026-01-22 18:12:11"}
 {"level":"http","message":"GET /api/assistant/my-permissions 304 18.940 ms","timestamp":"2026-01-22 18:12:11"}
 {"level":"http","message":"GET /api/analytics/user-analytics 200 733.150 ms","timestamp":"2026-01-22 18:22:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 09:27:15"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 09:27:15"}
+{"level":"http","message":"GET /api/admin/stats 200 241.859 ms","timestamp":"2026-01-23 09:30:58"}
+{"level":"http","message":"GET /api/admin/stats 304 25.780 ms","timestamp":"2026-01-23 09:30:58"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 101.475 ms","timestamp":"2026-01-23 09:31:52"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 39.096 ms","timestamp":"2026-01-23 09:33:33"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 12.662 ms","timestamp":"2026-01-23 09:33:33"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 23.742 ms","timestamp":"2026-01-23 09:34:06"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 11.839 ms","timestamp":"2026-01-23 09:34:06"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 49.666 ms","timestamp":"2026-01-23 09:34:16"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 15.358 ms","timestamp":"2026-01-23 09:34:16"}
+{"level":"http","message":"GET /api/assistant/6970b3757c66381d87951198 200 25.982 ms","timestamp":"2026-01-23 09:34:26"}
+{"level":"http","message":"GET /api/assistant/6970b3757c66381d87951198 304 7.040 ms","timestamp":"2026-01-23 09:34:26"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 132.003 ms","timestamp":"2026-01-23 09:36:40"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 42.067 ms","timestamp":"2026-01-23 09:36:40"}
+{"level":"http","message":"GET /api/admin/stats 304 60.027 ms","timestamp":"2026-01-23 09:36:44"}
+{"level":"http","message":"GET /api/admin/stats 304 22.524 ms","timestamp":"2026-01-23 09:36:44"}
+{"level":"http","message":"GET /api/admin/stats 304 163.425 ms","timestamp":"2026-01-23 09:39:54"}
+{"level":"http","message":"GET /api/admin/stats 304 28.950 ms","timestamp":"2026-01-23 09:39:54"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 09:42:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 09:42:59"}
+{"level":"http","message":"GET /api/admin/stats 200 95.242 ms","timestamp":"2026-01-23 09:43:18"}
+{"level":"http","message":"GET /api/admin/stats 304 33.836 ms","timestamp":"2026-01-23 09:43:18"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 66.226 ms","timestamp":"2026-01-23 09:43:53"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 69.635 ms","timestamp":"2026-01-23 09:44:41"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 15.791 ms","timestamp":"2026-01-23 09:44:41"}
+{"level":"info","message":"New user created: undefined for JEE_ADVANCED","timestamp":"2026-01-23 09:48:13"}
+{"level":"http","message":"POST /api/create 201 102.446 ms","timestamp":"2026-01-23 09:48:13"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 240.937 ms","timestamp":"2026-01-23 09:48:14"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 88.679 ms","timestamp":"2026-01-23 09:48:14"}
