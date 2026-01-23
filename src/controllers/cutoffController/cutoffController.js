@@ -559,6 +559,251 @@ exports.uploadCutoffCSVDirect = async (req, res) => {
 // controllers/cutoffController.js
 
 
+// exports.getCutoffs = async (req, res) => {
+//   try {
+//     const {
+//       rank,
+//       category,
+//       gender,
+//       typeOfExam,
+//       page = 1,
+//       limit = 20
+//     } = req.query;
+
+//     console.log('Received query params:', { rank, category, gender, typeOfExam }); // Debug
+
+//     // Validate required fields
+//     if (!rank) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Rank is required",
+//       });
+//     }
+
+//     if (!category) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Category is required",
+//       });
+//     }
+
+//     if (!typeOfExam) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Exam type is required",
+//       });
+//     }
+
+//     const userRank = parseInt(rank);
+//     if (isNaN(userRank) || userRank <= 0) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid rank value",
+//       });
+//     }
+
+//     // Build filter - using exact field names from your database
+//     const filter = {
+//       typeOfExam: typeOfExam // Use the exact field name from your database
+//     };
+
+//     // Category to seatType mapping based on your actual database data
+//     // Based on your data, seatType values are: 'OBC-NCL', 'SC', 'ST', etc.
+//     const categorySeatTypeMap = {
+//       'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
+//       'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
+//       'OBC': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+//       'OBC-NCL': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+//       'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)'],
+//       'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)'],
+//       'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
+//       'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
+//       'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+//       'SC-PwD': ['SC-PwD', 'SC (PwD)'],
+//       'ST-PwD': ['ST-PwD', 'ST (PwD)']
+//     };
+
+//     filter.seatType = { $in: categorySeatTypeMap[category] || [category] };
+//     console.log('Seat type filter:', filter.seatType); // Debug
+
+//     // Gender filter based on your actual database values
+//     if (gender && gender !== 'All') {
+//       const genderFilterMap = {
+//         'Male': ['Gender-Neutral', 'Male-only', 'M', 'BOYS', 'Male (including Supernumerary)'],
+//         'Female': ['Gender-Neutral', 'Female-only', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
+//         'Other': ['Gender-Neutral', 'Other', 'Transgender'],
+//         // For general gender filter (if user doesn't specify or wants all)
+//         'All': ['Gender-Neutral', 'Male-only', 'Female-only', 'Other', 
+//                 'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
+//       };
+      
+//       filter.gender = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
+//       console.log('Gender filter:', filter.gender); // Debug
+//     }
+
+//     // Rank filter - find colleges where the rank falls within opening-closing range
+//     filter.openingRank = { $lte: userRank };
+//     filter.closingRank = { $gte: userRank };
+//     console.log('Rank filter - opening:', filter.openingRank, 'closing:', filter.closingRank); // Debug
+
+//     // Add IIT filtering based on exam type - CORRECTED FIELD NAME
+//     if (typeOfExam === 'JEE_MAINS') {
+//       // For JEE Mains: Exclude records containing "Indian Institute of Technology"
+//       filter.institute = { $not: /Indian Institute of Technology/i };
+//       console.log('Filtering: Excluding IITs for JEE Mains'); // Debug
+//     } else if (typeOfExam === 'JEE_ADVANCED') {
+//       // For JEE Advanced: Include only records containing "Indian Institute of Technology"
+//       filter.institute = /Indian Institute of Technology/i;
+//       console.log('Filtering: Including only IITs for JEE Advanced'); // Debug
+//     }
+//     // Note: If typeOfExam is neither of these, no institute filter is applied
+
+//     const skip = (parseInt(page) - 1) * parseInt(limit);
+    
+//     console.log('Final filter:', JSON.stringify(filter, null, 2)); // Debug
+    
+//     // Fetch cutoffs with pagination
+//     const cutoffs = await Cutoff.find(filter)
+//       .sort({ closingRank: 1 })
+//       .skip(skip)
+//       .limit(parseInt(limit));
+    
+//     const total = await Cutoff.countDocuments(filter);
+    
+//     console.log('Found cutoffs:', cutoffs.length, 'Total:', total); // Debug
+    
+//     // Calculate probability for each cutoff
+//     // const cutoffsWithProbability = cutoffs.map(cutoff => {
+//     //   const cutoffObj = cutoff.toObject();
+      
+//     //   // Calculate probability based on rank position within range
+//     //   const rankRange = cutoff.closingRank - cutoff.openingRank + 1;
+//     //   const rankPosition = userRank - cutoff.openingRank + 1;
+//     //   const probabilityPercentage = Math.round((rankPosition / rankRange) * 100);
+      
+//     //   // Determine probability category
+//     //   let probability, probabilityColor;
+//     //   if (probabilityPercentage >= 70) {
+//     //     probability = 'High Chance';
+//     //     probabilityColor = 'green';
+//     //   } else if (probabilityPercentage >= 40) {
+//     //     probability = 'Medium Chance';
+//     //     probabilityColor = 'yellow';
+//     //   } else if (probabilityPercentage >= 20) {
+//     //     probability = 'Low Chance';
+//     //     probabilityColor = 'orange';
+//     //   } else {
+//     //     probability = 'Very Low Chance';
+//     //     probabilityColor = 'red';
+//     //   }
+      
+//     //   cutoffObj.probability = probability;
+//     //   cutoffObj.probabilityColor = probabilityColor;
+//     //   cutoffObj.probabilityPercentage = probabilityPercentage;
+      
+//     //   return cutoffObj;
+//     // });
+//     // Calculate probability for each cutoff
+// const cutoffsWithProbability = cutoffs.map(cutoff => {
+//   const cutoffObj = cutoff.toObject();
+
+//   const openingRank = cutoff.openingRank;
+//   const closingRank = cutoff.closingRank;
+
+//   // Safety check
+//   if (
+//     !openingRank ||
+//     !closingRank ||
+//     userRank < openingRank ||
+//     userRank > closingRank
+//   ) {
+//     cutoffObj.probability = "Very Low Chance";
+//     cutoffObj.probabilityColor = "red";
+//     cutoffObj.probabilityPercentage = 5;
+//     return cutoffObj;
+//   }
+
+//   // Rank range
+//   const range = closingRank - openingRank;
+
+//   // Distance from closing rank (higher is better)
+//   const distanceFromClosing = closingRank - userRank;
+
+//   // Base probability (reverse linear)
+//   let probabilityPercentage =
+//     (distanceFromClosing / range) * 100;
+
+//   // Smooth curve (realistic)
+//   probabilityPercentage = Math.pow(probabilityPercentage / 100, 0.75) * 100;
+
+//   // Clamp values (avoid extremes)
+//   probabilityPercentage = Math.max(5, Math.min(Math.round(probabilityPercentage), 95));
+
+//   // Probability label
+//   let probability, probabilityColor;
+
+//   if (probabilityPercentage >= 75) {
+//     probability = "High Chance";
+//     probabilityColor = "green";
+//   } else if (probabilityPercentage >= 50) {
+//     probability = "Medium Chance";
+//     probabilityColor = "yellow";
+//   } else if (probabilityPercentage >= 30) {
+//     probability = "Low Chance";
+//     probabilityColor = "orange";
+//   } else {
+//     probability = "Very Low Chance";
+//     probabilityColor = "red";
+//   }
+
+//   cutoffObj.probability = probability;
+//   cutoffObj.probabilityColor = probabilityColor;
+//   cutoffObj.probabilityPercentage = probabilityPercentage;
+
+//   return cutoffObj;
+// });
+
+    
+//     // Get summary statistics
+//     const summary = {
+//       totalColleges: total,
+//       collegesShown: cutoffs.length,
+//       highestProbability: cutoffsWithProbability.length > 0 
+//         ? Math.max(...cutoffsWithProbability.map(c => c.probabilityPercentage))
+//         : 0,
+//       lowestProbability: cutoffsWithProbability.length > 0 
+//         ? Math.min(...cutoffsWithProbability.map(c => c.probabilityPercentage))
+//         : 0,
+//       averageProbability: cutoffsWithProbability.length > 0 
+//         ? Math.round(cutoffsWithProbability.reduce((sum, c) => sum + c.probabilityPercentage, 0) / cutoffsWithProbability.length)
+//         : 0
+//     };
+    
+//     res.status(200).json({
+//       success: true,
+//       data: cutoffsWithProbability,
+//       summary,
+//       pagination: {
+//         page: parseInt(page),
+//         limit: parseInt(limit),
+//         total,
+//         pages: Math.ceil(total / parseInt(limit))
+//       }
+//     });
+    
+//   } catch (error) {
+//     console.error('Get cutoffs error:', error);
+//     res.status(500).json({
+//       success: false,
+//       message: 'Error fetching cutoff data',
+//       error: process.env.NODE_ENV === "development" ? error.message : undefined,
+//     });
+//   }
+// };
+// Get filter options
+
+
+
 exports.getCutoffs = async (req, res) => {
   try {
     const {
@@ -570,7 +815,7 @@ exports.getCutoffs = async (req, res) => {
       limit = 20
     } = req.query;
 
-    console.log('Received query params:', { rank, category, gender, typeOfExam }); // Debug
+    console.log('Received query params:', { rank, category, gender, typeOfExam });
 
     // Validate required fields
     if (!rank) {
@@ -587,13 +832,6 @@ exports.getCutoffs = async (req, res) => {
       });
     }
 
-    if (!typeOfExam) {
-      return res.status(400).json({
-        success: false,
-        message: "Exam type is required",
-      });
-    }
-
     const userRank = parseInt(rank);
     if (isNaN(userRank) || userRank <= 0) {
       return res.status(400).json({
@@ -602,13 +840,13 @@ exports.getCutoffs = async (req, res) => {
       });
     }
 
-    // Build filter - using exact field names from your database
-    const filter = {
-      typeOfExam: typeOfExam // Use the exact field name from your database
-    };
-
-    // Category to seatType mapping based on your actual database data
-    // Based on your data, seatType values are: 'OBC-NCL', 'SC', 'ST', etc.
+    // Build filter
+    const filter = {};
+    
+    // IMPORTANT: Don't filter by typeOfExam from database field
+    // Instead, we'll use institute-based filtering for JEE Advanced vs Mains
+    
+    // Category to seatType mapping
     const categorySeatTypeMap = {
       'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
       'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
@@ -624,9 +862,9 @@ exports.getCutoffs = async (req, res) => {
     };
 
     filter.seatType = { $in: categorySeatTypeMap[category] || [category] };
-    console.log('Seat type filter:', filter.seatType); // Debug
+    console.log('Seat type filter:', filter.seatType);
 
-    // Gender filter based on your actual database values
+    // Gender filter
     if (gender && gender !== 'All') {
       const genderFilterMap = {
         'Male': ['Gender-Neutral', 'Male-only', 'M', 'BOYS', 'Male (including Supernumerary)'],
@@ -638,29 +876,38 @@ exports.getCutoffs = async (req, res) => {
       };
       
       filter.gender = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
-      console.log('Gender filter:', filter.gender); // Debug
+      console.log('Gender filter:', filter.gender);
     }
 
-    // Rank filter - find colleges where the rank falls within opening-closing range
+    // Rank filter
     filter.openingRank = { $lte: userRank };
     filter.closingRank = { $gte: userRank };
-    console.log('Rank filter - opening:', filter.openingRank, 'closing:', filter.closingRank); // Debug
+    console.log('Rank filter - opening <=', userRank, 'closing >=', userRank);
 
-    // Add IIT filtering based on exam type - CORRECTED FIELD NAME
-    if (typeOfExam === 'JEE_MAINS') {
-      // For JEE Mains: Exclude records containing "Indian Institute of Technology"
-      filter.institute = { $not: /Indian Institute of Technology/i };
-      console.log('Filtering: Excluding IITs for JEE Mains'); // Debug
-    } else if (typeOfExam === 'JEE_ADVANCED') {
-      // For JEE Advanced: Include only records containing "Indian Institute of Technology"
-      filter.institute = /Indian Institute of Technology/i;
-      console.log('Filtering: Including only IITs for JEE Advanced'); // Debug
+    // KEY FIX: Filter based on institute type, NOT the typeOfExam field
+    // JEE Advanced = Only IITs
+    // JEE Mains = All except IITs
+    // BOTH = Show all colleges (both IITs and non-IITs)
+    
+    if (typeOfExam === 'JEE_ADVANCED') {
+      // For JEE Advanced: Include ONLY IITs
+      filter.institute = /indian institute of technology|iit/i;
+      console.log('Filtering: Including only IITs for JEE Advanced');
+    } else if (typeOfExam === 'JEE_MAINS') {
+      // For JEE Mains: Exclude IITs
+      filter.institute = { $not: /indian institute of technology|iit/i };
+      console.log('Filtering: Excluding IITs for JEE Mains');
+    } else if (typeOfExam === 'BOTH') {
+      // For BOTH: Show all colleges (no institute filter)
+      console.log('Filtering: Showing all colleges (IITs and non-IITs)');
+    } else {
+      // Default: Show all colleges
+      console.log('No specific exam type filter applied, showing all colleges');
     }
-    // Note: If typeOfExam is neither of these, no institute filter is applied
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
     
-    console.log('Final filter:', JSON.stringify(filter, null, 2)); // Debug
+    console.log('Final filter:', JSON.stringify(filter, null, 2));
     
     // Fetch cutoffs with pagination
     const cutoffs = await Cutoff.find(filter)
@@ -670,99 +917,66 @@ exports.getCutoffs = async (req, res) => {
     
     const total = await Cutoff.countDocuments(filter);
     
-    console.log('Found cutoffs:', cutoffs.length, 'Total:', total); // Debug
+    console.log('Found cutoffs:', cutoffs.length, 'Total:', total);
     
     // Calculate probability for each cutoff
-    // const cutoffsWithProbability = cutoffs.map(cutoff => {
-    //   const cutoffObj = cutoff.toObject();
-      
-    //   // Calculate probability based on rank position within range
-    //   const rankRange = cutoff.closingRank - cutoff.openingRank + 1;
-    //   const rankPosition = userRank - cutoff.openingRank + 1;
-    //   const probabilityPercentage = Math.round((rankPosition / rankRange) * 100);
-      
-    //   // Determine probability category
-    //   let probability, probabilityColor;
-    //   if (probabilityPercentage >= 70) {
-    //     probability = 'High Chance';
-    //     probabilityColor = 'green';
-    //   } else if (probabilityPercentage >= 40) {
-    //     probability = 'Medium Chance';
-    //     probabilityColor = 'yellow';
-    //   } else if (probabilityPercentage >= 20) {
-    //     probability = 'Low Chance';
-    //     probabilityColor = 'orange';
-    //   } else {
-    //     probability = 'Very Low Chance';
-    //     probabilityColor = 'red';
-    //   }
-      
-    //   cutoffObj.probability = probability;
-    //   cutoffObj.probabilityColor = probabilityColor;
-    //   cutoffObj.probabilityPercentage = probabilityPercentage;
-      
-    //   return cutoffObj;
-    // });
-    // Calculate probability for each cutoff
-const cutoffsWithProbability = cutoffs.map(cutoff => {
-  const cutoffObj = cutoff.toObject();
+    const cutoffsWithProbability = cutoffs.map(cutoff => {
+      const cutoffObj = cutoff.toObject();
 
-  const openingRank = cutoff.openingRank;
-  const closingRank = cutoff.closingRank;
+      const openingRank = cutoff.openingRank;
+      const closingRank = cutoff.closingRank;
 
-  // Safety check
-  if (
-    !openingRank ||
-    !closingRank ||
-    userRank < openingRank ||
-    userRank > closingRank
-  ) {
-    cutoffObj.probability = "Very Low Chance";
-    cutoffObj.probabilityColor = "red";
-    cutoffObj.probabilityPercentage = 5;
-    return cutoffObj;
-  }
+      // Safety check
+      if (
+        !openingRank ||
+        !closingRank ||
+        userRank < openingRank ||
+        userRank > closingRank
+      ) {
+        cutoffObj.probability = "Very Low Chance";
+        cutoffObj.probabilityColor = "red";
+        cutoffObj.probabilityPercentage = 5;
+        return cutoffObj;
+      }
 
-  // Rank range
-  const range = closingRank - openingRank;
+      // Rank range
+      const range = closingRank - openingRank;
 
-  // Distance from closing rank (higher is better)
-  const distanceFromClosing = closingRank - userRank;
+      // Distance from closing rank (higher is better)
+      const distanceFromClosing = closingRank - userRank;
 
-  // Base probability (reverse linear)
-  let probabilityPercentage =
-    (distanceFromClosing / range) * 100;
+      // Base probability (reverse linear)
+      let probabilityPercentage = (distanceFromClosing / range) * 100;
 
-  // Smooth curve (realistic)
-  probabilityPercentage = Math.pow(probabilityPercentage / 100, 0.75) * 100;
+      // Smooth curve
+      probabilityPercentage = Math.pow(probabilityPercentage / 100, 0.75) * 100;
 
-  // Clamp values (avoid extremes)
-  probabilityPercentage = Math.max(5, Math.min(Math.round(probabilityPercentage), 95));
+      // Clamp values
+      probabilityPercentage = Math.max(5, Math.min(Math.round(probabilityPercentage), 95));
 
-  // Probability label
-  let probability, probabilityColor;
+      // Probability label
+      let probability, probabilityColor;
 
-  if (probabilityPercentage >= 75) {
-    probability = "High Chance";
-    probabilityColor = "green";
-  } else if (probabilityPercentage >= 50) {
-    probability = "Medium Chance";
-    probabilityColor = "yellow";
-  } else if (probabilityPercentage >= 30) {
-    probability = "Low Chance";
-    probabilityColor = "orange";
-  } else {
-    probability = "Very Low Chance";
-    probabilityColor = "red";
-  }
+      if (probabilityPercentage >= 75) {
+        probability = "High Chance";
+        probabilityColor = "green";
+      } else if (probabilityPercentage >= 50) {
+        probability = "Medium Chance";
+        probabilityColor = "yellow";
+      } else if (probabilityPercentage >= 30) {
+        probability = "Low Chance";
+        probabilityColor = "orange";
+      } else {
+        probability = "Very Low Chance";
+        probabilityColor = "red";
+      }
 
-  cutoffObj.probability = probability;
-  cutoffObj.probabilityColor = probabilityColor;
-  cutoffObj.probabilityPercentage = probabilityPercentage;
+      cutoffObj.probability = probability;
+      cutoffObj.probabilityColor = probabilityColor;
+      cutoffObj.probabilityPercentage = probabilityPercentage;
 
-  return cutoffObj;
-});
-
+      return cutoffObj;
+    });
     
     // Get summary statistics
     const summary = {
@@ -800,7 +1014,6 @@ const cutoffsWithProbability = cutoffs.map(cutoff => {
     });
   }
 };
-// Get filter options
 exports.getFilterOptions = async (req, res) => {
   try {
     const institutes = await Cutoff.distinct('institute');

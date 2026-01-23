@@ -2080,3 +2080,49 @@
 {"level":"http","message":"POST /api/create 201 102.446 ms","timestamp":"2026-01-23 09:48:13"}
 {"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 240.937 ms","timestamp":"2026-01-23 09:48:14"}
 {"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 88.679 ms","timestamp":"2026-01-23 09:48:14"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 09:56:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 09:56:32"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-23 09:58:30"}
+{"level":"http","message":"POST /api/create 201 119.719 ms","timestamp":"2026-01-23 09:58:30"}
+{"level":"http","message":"GET /api/predictions?rank=116&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 321.750 ms","timestamp":"2026-01-23 09:58:30"}
+{"level":"http","message":"GET /api/predictions?rank=116&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 108.614 ms","timestamp":"2026-01-23 09:58:31"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-23 09:59:55"}
+{"level":"http","message":"POST /api/create 201 39.381 ms","timestamp":"2026-01-23 09:59:55"}
+{"level":"http","message":"GET /api/predictions?rank=116&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 97.157 ms","timestamp":"2026-01-23 09:59:55"}
+{"level":"http","message":"GET /api/predictions?rank=116&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 105.435 ms","timestamp":"2026-01-23 09:59:55"}
+{"level":"info","message":"Check history added for user: undefined, exam: JEE_ADVANCED, total checks: 4","timestamp":"2026-01-23 10:00:21"}
+{"level":"http","message":"POST /api/create 201 53.892 ms","timestamp":"2026-01-23 10:00:21"}
+{"level":"http","message":"GET /api/predictions?rank=114&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 100.909 ms","timestamp":"2026-01-23 10:00:21"}
+{"level":"http","message":"GET /api/predictions?rank=114&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 90.479 ms","timestamp":"2026-01-23 10:00:21"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 10:07:03"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 10:07:03"}
+{"level":"info","message":"New user created: undefined for JEE_ADVANCED","timestamp":"2026-01-23 10:08:00"}
+{"level":"http","message":"POST /api/create 201 87.318 ms","timestamp":"2026-01-23 10:08:00"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 401.832 ms","timestamp":"2026-01-23 10:08:01"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 284.331 ms","timestamp":"2026-01-23 10:08:01"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 10:08:17"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 10:08:17"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 10:16:02"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 10:16:02"}
+{"level":"info","message":"New user created: undefined for JEE_ADVANCED","timestamp":"2026-01-23 10:16:35"}
+{"level":"http","message":"POST /api/create 201 147.483 ms","timestamp":"2026-01-23 10:16:35"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 311.996 ms","timestamp":"2026-01-23 10:16:36"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 117.423 ms","timestamp":"2026-01-23 10:16:36"}
+{"level":"info","message":"User data updated: sinhek23@gmail.com","timestamp":"2026-01-23 10:17:08"}
+{"level":"http","message":"PUT /api/update/6972fd2b118c5e69efb2b3c1 200 58.974 ms","timestamp":"2026-01-23 10:17:08"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=20 200 149.594 ms","timestamp":"2026-01-23 10:17:08"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=4&limit=20 200 87.465 ms","timestamp":"2026-01-23 10:17:34"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=3&limit=20 200 109.979 ms","timestamp":"2026-01-23 10:17:41"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=4&limit=20 304 89.985 ms","timestamp":"2026-01-23 10:19:19"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 10:24:34"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 10:24:34"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-23 10:25:10"}
+{"level":"http","message":"POST /api/create 201 198.543 ms","timestamp":"2026-01-23 10:25:10"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 284.730 ms","timestamp":"2026-01-23 10:25:10"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 106.888 ms","timestamp":"2026-01-23 10:25:10"}
+{"level":"info","message":"User data updated: singhsabhishek23@gmail.com","timestamp":"2026-01-23 10:25:27"}
+{"level":"http","message":"PUT /api/update/6972ff2d7c0fdd2511af78f0 200 42.676 ms","timestamp":"2026-01-23 10:25:27"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 140.954 ms","timestamp":"2026-01-23 10:25:27"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 60.826 ms","timestamp":"2026-01-23 10:25:41"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 19.527 ms","timestamp":"2026-01-23 10:25:41"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 62.143 ms","timestamp":"2026-01-23 10:26:02"}
