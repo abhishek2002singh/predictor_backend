@@ -1869,3 +1869,184 @@
 {"level":"http","message":"GET /api/assistant/my-permissions 304 15.023 ms","timestamp":"2026-01-22 14:01:07"}
 {"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 363.914 ms","timestamp":"2026-01-22 14:01:07"}
 {"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 46.083 ms","timestamp":"2026-01-22 14:01:07"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 14:52:45"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 14:52:45"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 270.082 ms","timestamp":"2026-01-22 14:57:07"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 16.617 ms","timestamp":"2026-01-22 14:57:07"}
+{"level":"http","message":"GET /api/assistant/my-permissions - - ms","timestamp":"2026-01-22 15:02:18"}
+{"level":"http","message":"GET /api/assistant/my-permissions - - ms","timestamp":"2026-01-22 15:02:18"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 254.215 ms","timestamp":"2026-01-22 15:03:05"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 26.245 ms","timestamp":"2026-01-22 15:03:05"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 38.326 ms","timestamp":"2026-01-22 15:03:32"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 26.558 ms","timestamp":"2026-01-22 15:03:32"}
+{"level":"http","message":"GET /api/admin/stats 200 166.642 ms","timestamp":"2026-01-22 15:03:39"}
+{"level":"http","message":"GET /api/admin/stats 304 48.156 ms","timestamp":"2026-01-22 15:03:39"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 106.919 ms","timestamp":"2026-01-22 15:03:49"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 40.328 ms","timestamp":"2026-01-22 15:03:49"}
+{"level":"http","message":"GET /api/analytics/admin-analytics 200 175.488 ms","timestamp":"2026-01-22 15:06:39"}
+{"level":"http","message":"GET /api/analytics/assistance-analytics 200 212.696 ms","timestamp":"2026-01-22 15:06:39"}
+{"level":"http","message":"GET /api/analytics/admin-analytics 304 35.755 ms","timestamp":"2026-01-22 15:06:40"}
+{"level":"http","message":"GET /api/analytics/assistance-analytics 304 39.433 ms","timestamp":"2026-01-22 15:06:40"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 425.854 ms","timestamp":"2026-01-22 15:06:40"}
+{"level":"http","message":"GET /api/analytics/upload-data-analytics 200 636.725 ms","timestamp":"2026-01-22 15:06:40"}
+{"level":"http","message":"GET /api/analytics/upload-data-analytics 200 136.009 ms","timestamp":"2026-01-22 15:06:40"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 35.583 ms","timestamp":"2026-01-22 15:07:49"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 19.614 ms","timestamp":"2026-01-22 15:07:49"}
+{"level":"http","message":"GET /api/analytics/assistance-analytics 304 61.866 ms","timestamp":"2026-01-22 15:07:54"}
+{"level":"http","message":"GET /api/analytics/admin-analytics 304 60.645 ms","timestamp":"2026-01-22 15:07:54"}
+{"level":"http","message":"GET /api/analytics/assistance-analytics 304 31.307 ms","timestamp":"2026-01-22 15:07:54"}
+{"level":"http","message":"GET /api/analytics/admin-analytics 304 36.402 ms","timestamp":"2026-01-22 15:07:54"}
+{"level":"http","message":"GET /api/analytics/upload-data-analytics 304 190.922 ms","timestamp":"2026-01-22 15:07:54"}
+{"level":"http","message":"GET /api/analytics/upload-data-analytics 200 109.819 ms","timestamp":"2026-01-22 15:07:54"}
+{"level":"http","message":"GET /api/analytics/assistance-analytics 304 25.650 ms","timestamp":"2026-01-22 15:08:26"}
+{"level":"http","message":"GET /api/analytics/admin-analytics 304 30.832 ms","timestamp":"2026-01-22 15:08:26"}
+{"level":"http","message":"GET /api/analytics/upload-data-analytics 200 127.859 ms","timestamp":"2026-01-22 15:08:26"}
+{"level":"http","message":"GET /api/analytics/assistance-analytics 304 28.278 ms","timestamp":"2026-01-22 15:08:28"}
+{"level":"http","message":"GET /api/analytics/admin-analytics 304 29.684 ms","timestamp":"2026-01-22 15:08:28"}
+{"level":"http","message":"GET /api/analytics/upload-data-analytics 200 188.590 ms","timestamp":"2026-01-22 15:08:28"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 31.263 ms","timestamp":"2026-01-22 15:11:23"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 27.054 ms","timestamp":"2026-01-22 15:11:23"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 11.165 ms","timestamp":"2026-01-22 15:11:24"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 13.649 ms","timestamp":"2026-01-22 15:11:24"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 15:15:50"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 15:15:50"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 15:20:23"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 15:20:23"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 15:20:32"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 15:20:32"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 221.440 ms","timestamp":"2026-01-22 15:21:15"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 23.884 ms","timestamp":"2026-01-22 15:21:15"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 314.272 ms","timestamp":"2026-01-22 15:26:14"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 27.754 ms","timestamp":"2026-01-22 15:26:14"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 466.640 ms","timestamp":"2026-01-22 15:31:55"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 23.936 ms","timestamp":"2026-01-22 15:31:55"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 159.990 ms","timestamp":"2026-01-22 15:36:38"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 28.883 ms","timestamp":"2026-01-22 15:37:33"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 24.377 ms","timestamp":"2026-01-22 15:37:33"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 18.702 ms","timestamp":"2026-01-22 15:37:38"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 19.407 ms","timestamp":"2026-01-22 15:37:38"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 20.341 ms","timestamp":"2026-01-22 15:37:43"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 15.485 ms","timestamp":"2026-01-22 15:37:43"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 14.625 ms","timestamp":"2026-01-22 15:37:55"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 14.331 ms","timestamp":"2026-01-22 15:37:55"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 14.452 ms","timestamp":"2026-01-22 15:40:06"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 28.203 ms","timestamp":"2026-01-22 15:40:38"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 10.488 ms","timestamp":"2026-01-22 15:41:02"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 10.266 ms","timestamp":"2026-01-22 15:41:25"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 13.950 ms","timestamp":"2026-01-22 15:41:54"}
+{"level":"http","message":"GET /api/admin/stats 304 88.823 ms","timestamp":"2026-01-22 15:45:58"}
+{"level":"http","message":"GET /api/admin/stats 304 20.031 ms","timestamp":"2026-01-22 15:45:58"}
+{"level":"http","message":"GET /api/admin/stats 304 147.498 ms","timestamp":"2026-01-22 15:50:47"}
+{"level":"http","message":"GET /api/admin/stats 304 16.137 ms","timestamp":"2026-01-22 15:50:47"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 70.189 ms","timestamp":"2026-01-22 15:50:50"}
+{"level":"http","message":"GET /api/assistant/allAssistance?page=1&limit=10 304 17.330 ms","timestamp":"2026-01-22 15:50:50"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 10.789 ms","timestamp":"2026-01-22 15:50:52"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 19.506 ms","timestamp":"2026-01-22 15:50:52"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 75.073 ms","timestamp":"2026-01-22 15:50:54"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 17.734 ms","timestamp":"2026-01-22 15:50:54"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 39.165 ms","timestamp":"2026-01-22 15:55:49"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 17.306 ms","timestamp":"2026-01-22 15:55:49"}
+{"level":"http","message":"GET /api/admin/stats 304 21.583 ms","timestamp":"2026-01-22 15:56:49"}
+{"level":"http","message":"GET /api/admin/stats 304 16.507 ms","timestamp":"2026-01-22 15:56:49"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 28.915 ms","timestamp":"2026-01-22 15:56:55"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 13.500 ms","timestamp":"2026-01-22 15:56:55"}
+{"level":"http","message":"GET /api/admin/stats 304 349.222 ms","timestamp":"2026-01-22 16:36:31"}
+{"level":"http","message":"GET /api/admin/stats 304 33.096 ms","timestamp":"2026-01-22 16:36:32"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 21.431 ms","timestamp":"2026-01-22 16:36:43"}
+{"level":"http","message":"GET /api/admin/AllAdmin?page=1&limit=10 304 25.811 ms","timestamp":"2026-01-22 16:36:43"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 16:49:39"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 16:49:39"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 16:51:51"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 16:51:51"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 199.765 ms","timestamp":"2026-01-22 16:54:06"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 179.580 ms","timestamp":"2026-01-22 16:59:08"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:02:39"}
+{"level":"http","message":"POST /api/create 201 192.040 ms","timestamp":"2026-01-22 17:02:39"}
+{"level":"http","message":"GET /api/predictions?rank=1230&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 200 475.094 ms","timestamp":"2026-01-22 17:02:39"}
+{"level":"http","message":"GET /api/predictions?rank=1230&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 304 115.800 ms","timestamp":"2026-01-22 17:02:39"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 17:18:14"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 17:18:14"}
+{"level":"error","message":"Create user data error UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 3)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 1)","timestamp":"2026-01-22 17:18:43"}
+{"level":"http","message":"POST /api/create 500 57.032 ms","timestamp":"2026-01-22 17:18:43"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 17:19:48"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 17:19:48"}
+{"level":"error","message":"Create user data error UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 3)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 1)","timestamp":"2026-01-22 17:19:52"}
+{"level":"http","message":"POST /api/create 500 37.044 ms","timestamp":"2026-01-22 17:19:52"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 17:21:01"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 17:21:01"}
+{"level":"error","message":"Create user data error UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 3)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 1)","timestamp":"2026-01-22 17:21:04"}
+{"level":"http","message":"POST /api/create 500 27.457 ms","timestamp":"2026-01-22 17:21:04"}
+{"level":"error","message":"Create user data error UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 3)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 1)","timestamp":"2026-01-22 17:21:41"}
+{"level":"http","message":"POST /api/create 500 11.609 ms","timestamp":"2026-01-22 17:21:41"}
+{"level":"error","message":"Create user data error UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.","stack":"ValidationError: UserData validation failed: checkHistory.0.gender: `Male` is not a valid enum value for path `gender`.\n    at Document.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3379:32)\n    at Subdocument.invalidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\types\\subdocument.js:252:12)\n    at validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3154:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 3)\n    at async EmbeddedDocument.$__validate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3095:3)\n    at async Promise.all (index 0)\n    at async SchemaDocumentArray.doValidate (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\schema\\documentArray.js:269:3)\n    at async validatePath (A:\\College Predictor\\backend\\node_modules\\mongoose\\lib\\document.js:3146:7)\n    at async Promise.all (index 1)","timestamp":"2026-01-22 17:21:43"}
+{"level":"http","message":"POST /api/create 500 5.629 ms","timestamp":"2026-01-22 17:21:43"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 17:23:56"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 17:23:56"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 17:24:59"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 17:24:59"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:25:04"}
+{"level":"http","message":"POST /api/create 201 49.361 ms","timestamp":"2026-01-22 17:25:04"}
+{"level":"http","message":"GET /api/predictions?rank=14756&category=EWS-PwD&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 298.830 ms","timestamp":"2026-01-22 17:25:04"}
+{"level":"http","message":"GET /api/predictions?rank=14756&category=EWS-PwD&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 103.780 ms","timestamp":"2026-01-22 17:25:04"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:25:50"}
+{"level":"http","message":"POST /api/create 201 8.862 ms","timestamp":"2026-01-22 17:25:50"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 200 142.141 ms","timestamp":"2026-01-22 17:25:51"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 304 121.745 ms","timestamp":"2026-01-22 17:25:51"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 78.758 ms","timestamp":"2026-01-22 17:26:25"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:27:47"}
+{"level":"http","message":"POST /api/create 201 81.961 ms","timestamp":"2026-01-22 17:27:47"}
+{"level":"http","message":"GET /api/predictions?rank=1&category=OBC-NCL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 158.193 ms","timestamp":"2026-01-22 17:27:48"}
+{"level":"http","message":"GET /api/predictions?rank=1&category=OBC-NCL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 140.954 ms","timestamp":"2026-01-22 17:27:48"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 304 106.191 ms","timestamp":"2026-01-22 17:28:06"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 304 103.454 ms","timestamp":"2026-01-22 17:28:06"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:28:36"}
+{"level":"http","message":"POST /api/create 201 13.339 ms","timestamp":"2026-01-22 17:28:36"}
+{"level":"http","message":"GET /api/predictions?rank=100&category=OBC-NCL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 105.037 ms","timestamp":"2026-01-22 17:28:36"}
+{"level":"http","message":"GET /api/predictions?rank=100&category=OBC-NCL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 90.063 ms","timestamp":"2026-01-22 17:28:37"}
+{"level":"info","message":"User data updated: fhfg@gmail.com","timestamp":"2026-01-22 17:28:58"}
+{"level":"http","message":"PUT /api/update/697210ec59dc7956acca91b4 200 36.929 ms","timestamp":"2026-01-22 17:28:58"}
+{"level":"http","message":"GET /api/predictions?rank=100&category=OBC-NCL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 84.223 ms","timestamp":"2026-01-22 17:28:58"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:30:31"}
+{"level":"http","message":"POST /api/create 201 10.143 ms","timestamp":"2026-01-22 17:30:31"}
+{"level":"http","message":"GET /api/predictions?rank=230&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 105.543 ms","timestamp":"2026-01-22 17:30:31"}
+{"level":"http","message":"GET /api/predictions?rank=230&category=SC&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 109.605 ms","timestamp":"2026-01-22 17:30:31"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:31:16"}
+{"level":"http","message":"POST /api/create 201 8.669 ms","timestamp":"2026-01-22 17:31:16"}
+{"level":"http","message":"GET /api/predictions?rank=7895&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 200 110.008 ms","timestamp":"2026-01-22 17:31:16"}
+{"level":"http","message":"GET /api/predictions?rank=7895&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 304 101.857 ms","timestamp":"2026-01-22 17:31:16"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 44.902 ms","timestamp":"2026-01-22 17:31:46"}
+{"level":"info","message":"Check history added for user: fhfg@gmail.com, exam: JEE_MAINS, total checks: 2","timestamp":"2026-01-22 17:32:48"}
+{"level":"http","message":"POST /api/create 201 63.097 ms","timestamp":"2026-01-22 17:32:48"}
+{"level":"http","message":"GET /api/predictions?rank=545646&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 200 96.571 ms","timestamp":"2026-01-22 17:32:48"}
+{"level":"http","message":"GET /api/predictions?rank=545646&category=GENERAL&gender=Female&typeOfExam=JEE_MAINS&page=1&limit=3 304 124.632 ms","timestamp":"2026-01-22 17:32:49"}
+{"level":"info","message":"Check history added for user: undefined, exam: JEE_ADVANCED, total checks: 2","timestamp":"2026-01-22 17:34:12"}
+{"level":"http","message":"POST /api/create 201 11.186 ms","timestamp":"2026-01-22 17:34:12"}
+{"level":"http","message":"GET /api/predictions?rank=22586&category=GENERAL-PwD&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 91.162 ms","timestamp":"2026-01-22 17:34:12"}
+{"level":"http","message":"GET /api/predictions?rank=22586&category=GENERAL-PwD&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 96.879 ms","timestamp":"2026-01-22 17:34:12"}
+{"level":"info","message":"Check history added for user: undefined, exam: JEE_ADVANCED, total checks: 3","timestamp":"2026-01-22 17:35:47"}
+{"level":"http","message":"POST /api/create 201 12.973 ms","timestamp":"2026-01-22 17:35:47"}
+{"level":"http","message":"GET /api/predictions?rank=197&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 93.647 ms","timestamp":"2026-01-22 17:35:47"}
+{"level":"http","message":"GET /api/predictions?rank=197&category=GENERAL&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 92.466 ms","timestamp":"2026-01-22 17:35:47"}
+{"level":"info","message":"New user created: undefined for JEE_MAINS","timestamp":"2026-01-22 17:36:46"}
+{"level":"http","message":"POST /api/create 201 7.929 ms","timestamp":"2026-01-22 17:36:46"}
+{"level":"http","message":"GET /api/predictions?rank=25&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 121.256 ms","timestamp":"2026-01-22 17:36:46"}
+{"level":"http","message":"GET /api/predictions?rank=25&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 90.688 ms","timestamp":"2026-01-22 17:36:46"}
+{"level":"info","message":"New user created: undefined for JEE_ADVANCED","timestamp":"2026-01-22 17:37:23"}
+{"level":"http","message":"POST /api/create 201 7.682 ms","timestamp":"2026-01-22 17:37:23"}
+{"level":"http","message":"GET /api/predictions?rank=200&category=GENERAL&gender=Female&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 55.693 ms","timestamp":"2026-01-22 17:37:23"}
+{"level":"http","message":"GET /api/predictions?rank=200&category=GENERAL&gender=Female&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 97.109 ms","timestamp":"2026-01-22 17:37:23"}
+{"level":"info","message":"New user created: undefined for JEE_ADVANCED","timestamp":"2026-01-22 17:38:08"}
+{"level":"http","message":"POST /api/create 201 6.628 ms","timestamp":"2026-01-22 17:38:08"}
+{"level":"http","message":"GET /api/predictions?rank=499&category=SC-PwD&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 200 73.546 ms","timestamp":"2026-01-22 17:38:08"}
+{"level":"http","message":"GET /api/predictions?rank=499&category=SC-PwD&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 92.127 ms","timestamp":"2026-01-22 17:38:08"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-22 17:41:35"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-22 17:41:35"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 177.998 ms","timestamp":"2026-01-22 17:41:39"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 202.851 ms","timestamp":"2026-01-22 17:46:58"}
+{"level":"http","message":"GET /api/predictions?rank=499&category=SC-PwD&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 272.000 ms","timestamp":"2026-01-22 17:48:14"}
+{"level":"http","message":"GET /api/predictions?rank=499&category=SC-PwD&gender=Male&typeOfExam=JEE_ADVANCED&page=1&limit=3 304 97.433 ms","timestamp":"2026-01-22 17:48:14"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 108.585 ms","timestamp":"2026-01-22 17:56:18"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 169.088 ms","timestamp":"2026-01-22 18:09:27"}
+{"level":"http","message":"GET /api/assistant/my-permissions 200 209.735 ms","timestamp":"2026-01-22 18:12:11"}
+{"level":"http","message":"GET /api/assistant/my-permissions 304 18.940 ms","timestamp":"2026-01-22 18:12:11"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 733.150 ms","timestamp":"2026-01-22 18:22:29"}

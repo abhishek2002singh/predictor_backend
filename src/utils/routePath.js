@@ -46,11 +46,11 @@ const API_ROUTES_FOR_ROUTER = {
     DELETE_ASSISTANCE : "/:id"
     
   }, 
-  ANALYTICS_ROUTER_PATH :{
-    GET_ALL_ANALYSIS_USER:"/userAnalytics",
-    UPLOAD_DATA_ANALYSIS : "/uploadData",
-    ASSISTANCE_ANALYSIS :"/assistance-analysis",
-    ADMIN_ANALYSIS : "/admin-analysis"
+   ANALYTICS_ROUTER_PATH: {
+    GET_ALL_ANALYSIS_USER: "/analytics/user-analytics",
+    UPLOAD_DATA_ANALYSIS: "/analytics/upload-data-analytics",
+    ASSISTANCE_ANALYSIS: "/analytics/assistance-analytics",
+    ADMIN_ANALYSIS: "/analytics/admin-analytics"
   }
 };
 

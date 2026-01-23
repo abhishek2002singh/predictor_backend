@@ -18,7 +18,11 @@ const checkHistorySchema = mongoose.Schema({
     },
     gender: {
       type: String,
-      enum: ["GENERAL","EWS","OBC-NCL","SC","ST","GENERAL-PwD","EWS-PwD","OBC-NCL-PwD","SC-PwD","ST-PwD"],
+      enum: ['Gender-Neutral',
+        'Female-only (including Supernumerary)',
+        'Male-only',
+        'Male',
+        'Female'],
       required: true,
     },
     homeState: {

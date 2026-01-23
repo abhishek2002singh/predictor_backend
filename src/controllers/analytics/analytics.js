@@ -7,6 +7,7 @@ const User = require("../../model/auth/auth");
 
 exports.analyticsUserData = async (req, res) => {
     try {
+        const startTime = Date.now();
 
         const [
             totalUsers,
@@ -14,13 +15,15 @@ exports.analyticsUserData = async (req, res) => {
             newUsersThisWeek,
             todayNewUsers,
             usersByGender,
-            usersByState
+            usersByState,
+            usersByExamType,
+            totalChecks
         ] = await Promise.all([
             // Total users
             UserData.countDocuments(),
 
-            // Active users
-            UserData.countDocuments({ role: "USER", isActive: true }),
+            // Active users (assuming all are active since no isActive field)
+            UserData.countDocuments(), // Or you can add isActive field if needed
 
             // Users registered in last 7 days
             (async () => {
@@ -40,23 +43,46 @@ exports.analyticsUserData = async (req, res) => {
                 });
             })(),
 
-            // Users by gender
+            // Users by gender (from checkHistory)
             UserData.aggregate([
-                { $match: { gender: { $exists: true, $ne: null } } },
-                { $group: { _id: "$gender", count: { $sum: 1 } } },
+                { $unwind: "$checkHistory" },
+                { $match: { "checkHistory.gender": { $exists: true, $ne: null } } },
+                { $group: { _id: "$checkHistory.gender", count: { $sum: 1 } } },
                 { $sort: { count: -1 } }
             ]),
 
-            // Top states by user count
+            // Top states by user count (from checkHistory)
             UserData.aggregate([
-                { $match: { state: { $exists: true, $ne: null } } },
-                { $group: { _id: "$state", count: { $sum: 1 } } },
+                { $unwind: "$checkHistory" },
+                { $match: { "checkHistory.homeState": { $exists: true, $ne: null } } },
+                { $group: { _id: "$checkHistory.homeState", count: { $sum: 1 } } },
                 { $sort: { count: -1 } },
-                { $limit: 10 } // Top 10 states only
+                { $limit: 10 }
+            ]),
+
+            // Users by exam type
+            UserData.aggregate([
+                { $unwind: "$checkHistory" },
+                { $match: { "checkHistory.examType": { $exists: true, $ne: null } } },
+                { $group: { _id: "$checkHistory.examType", count: { $sum: 1 } } },
+                { $sort: { count: -1 } }
+            ]),
+
+            // Total checks across all users
+            UserData.aggregate([
+                {
+                    $group: {
+                        _id: null,
+                        totalChecks: { $sum: "$totalChecks" },
+                        avgChecksPerUser: { $avg: "$totalChecks" },
+                        maxChecks: { $max: "$totalChecks" },
+                        minChecks: { $min: "$totalChecks" }
+                    }
+                }
             ])
         ]);
 
-        // Calculate inactive users (avoid negative values)
+        // Calculate inactive users (if you have isActive field, otherwise set to 0)
         const inactiveUsers = Math.max(0, totalUsers - activeUsers);
 
         // Daily user growth for last 30 days
@@ -113,32 +139,80 @@ exports.analyticsUserData = async (req, res) => {
             ? ((currentWeekUsers - previousWeekUsers) / previousWeekUsers * 100).toFixed(2)
             : currentWeekUsers > 0 ? 100 : 0;
 
-        // User distribution by age group (if age field exists)
-        const usersByAgeGroup = await UserData.aggregate([
-            { $match: { age: { $exists: true, $ne: null } } },
+        // Check frequency analysis
+        const checkFrequency = await UserData.aggregate([
             {
                 $bucket: {
-                    groupBy: "$age",
-                    boundaries: [0, 18, 25, 35, 45, 55, 100],
-                    default: "Other",
+                    groupBy: "$totalChecks",
+                    boundaries: [0, 1, 2, 5, 10, 20, 50],
+                    default: "50+",
                     output: {
                         count: { $sum: 1 },
-                        avgAge: { $avg: "$age" }
+                        users: { $push: "$mobileNumber" }
                     }
                 }
             },
             { $sort: { _id: 1 } }
         ]);
 
-        // Device/browser stats (if available)
-        const userDeviceStats = await UserData.aggregate([
-            { $match: { deviceType: { $exists: true, $ne: null } } },
-            { $group: { _id: "$deviceType", count: { $sum: 1 } } },
+        // Category distribution (from checkHistory)
+        const usersByCategory = await UserData.aggregate([
+            { $unwind: "$checkHistory" },
+            { $match: { "checkHistory.category": { $exists: true, $ne: null } } },
+            { $group: { _id: "$checkHistory.category", count: { $sum: 1 } } },
             { $sort: { count: -1 } }
         ]);
 
-        // Response time calculation
-        const startTime = Date.now();
+        // Response analysis
+        const responseAnalysis = await UserData.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalUsers: { $sum: 1 },
+                    positiveResponses: { $sum: { $cond: ["$isPositiveResponse", 1, 0] } },
+                    negativeResponses: { $sum: { $cond: ["$isNegativeResponse", 1, 0] } },
+                    hasCheckData: { $sum: { $cond: ["$isCheckData", 1, 0] } }
+                }
+            }
+        ]);
+
+        // Recent checks (last 7 days)
+        const recentChecks = await UserData.aggregate([
+            { $unwind: "$checkHistory" },
+            {
+                $match: {
+                    "checkHistory.checkedAt": {
+                        $gte: new Date(new Date().setDate(new Date().getDate() - 7))
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        year: { $year: "$checkHistory.checkedAt" },
+                        month: { $month: "$checkHistory.checkedAt" },
+                        day: { $dayOfMonth: "$checkHistory.checkedAt" }
+                    },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: {
+                        $dateFromParts: {
+                            year: "$_id.year",
+                            month: "$_id.month",
+                            day: "$_id.day"
+                        }
+                    },
+                    count: 1
+                }
+            },
+            { $sort: { date: 1 } }
+        ]);
+
+        const queryTime = Date.now() - startTime;
 
         // Prepare response data
         const analyticsData = {
@@ -149,10 +223,13 @@ exports.analyticsUserData = async (req, res) => {
                 todayNewUsers,
                 newUsersThisWeek,
                 growthRate: `${growthRate}%`,
+                totalChecks: totalChecks[0]?.totalChecks || 0,
+                avgChecksPerUser: (totalChecks[0]?.avgChecksPerUser || 0).toFixed(2),
                 lastUpdated: new Date().toISOString()
             },
             trends: {
                 dailyGrowth,
+                recentChecks,
                 weekOverWeekGrowth: {
                     previousWeek: previousWeekUsers,
                     currentWeek: currentWeekUsers,
@@ -162,17 +239,24 @@ exports.analyticsUserData = async (req, res) => {
             demographics: {
                 byGender: usersByGender,
                 byState: usersByState,
-                byAgeGroup: usersByAgeGroup
+                byCategory: usersByCategory,
+                byExamType: usersByExamType
             },
-            technical: {
-                deviceStats: userDeviceStats,
-                queryTime: `${Date.now() - startTime}ms`
+            usage: {
+                checkFrequency,
+                responseAnalysis: responseAnalysis[0] || {},
+                maxChecks: totalChecks[0]?.maxChecks || 0,
+                minChecks: totalChecks[0]?.minChecks || 0
+            },
+            performance: {
+                queryTime: `${queryTime}ms`,
+                dataPoints: totalUsers
             }
         };
 
-        // Set cache headers for better performance
-        res.setHeader('Cache-Control', 'public, max-age=300'); // 5 minutes cache
-        res.setHeader('X-Query-Time', `${Date.now() - startTime}ms`);
+        // Set cache headers
+        res.setHeader('Cache-Control', 'public, max-age=300');
+        res.setHeader('X-Query-Time', `${queryTime}ms`);
 
         res.status(200).json({
             success: true,
@@ -182,8 +266,8 @@ exports.analyticsUserData = async (req, res) => {
                 generatedAt: new Date().toISOString(),
                 dataPoints: totalUsers,
                 performance: {
-                    queryTime: `${Date.now() - startTime}ms`,
-                    queriesExecuted: 9
+                    queryTime: `${queryTime}ms`,
+                    queriesExecuted: 12
                 }
             }
         });
@@ -196,7 +280,6 @@ exports.analyticsUserData = async (req, res) => {
             timestamp: new Date().toISOString()
         });
 
-        // Different error types for different scenarios
         if (err.name === 'MongoError') {
             return res.status(503).json({
                 success: false,
@@ -380,3 +463,49 @@ exports.allAdminAnalysis = async (req, res) => {
         });
     }
 }
+
+exports.summaryData =  async (req, res) => {
+  try {
+    const totalUsers = await UserData.countDocuments();
+    const activeUsers = await User.countDocuments({ role: "USER", isActive: true });
+    const totalAdmins = await User.countDocuments({ role: "ADMIN" });
+    const totalAssistance = await User.countDocuments({role: "ASSISTANCE" ,isActive: true})
+    const activeAssistance = await User.countDocuments({role: "ASSISTANCE" })
+
+    // Users registered in last 7 day
+    const lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    const newUsersThisWeek = await UserData.countDocuments({
+      // role: "USER",
+      createdAt: { $gte: lastWeek },
+    });
+
+    // Users by category
+    const usersByCategory = await User.aggregate([
+      { $match: { role: "USER", category: { $exists: true, $ne: null } } },
+      { $group: { _id: "$category", count: { $sum: 1 } } },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        totalUsers,
+        activeUsers,
+        inactiveUsers: totalUsers - activeUsers,
+        totalAdmins,
+        newUsersThisWeek,
+        usersByCategory,
+        totalAssistance,
+        activeAssistance,
+        inactiveAssistance:totalAssistance-activeAssistance,
+      },
+    });
+  } catch (error) {
+    logger.error("Get stats error", { message: error.message });
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch stats",
+    });
+  }
+}
+

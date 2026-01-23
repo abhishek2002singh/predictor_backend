@@ -18,19 +18,19 @@ const categoryMap = {
 
 // Map incoming gender values to valid schema enum values
 const genderMap = {
-  "Male": "GENERAL",
-  "Female": "GENERAL",
+  "Male": "Male",
+  "Female": "Female",
   "Other": "GENERAL",
-  "GENERAL": "GENERAL",
-  "EWS": "EWS",
-  "OBC-NCL": "OBC-NCL",
-  "SC": "SC",
-  "ST": "ST",
-  "GENERAL-PwD": "GENERAL-PwD",
-  "EWS-PwD": "EWS-PwD",
-  "OBC-NCL-PwD": "OBC-NCL-PwD",
-  "SC-PwD": "SC-PwD",
-  "ST-PwD": "ST-PwD"
+  // "GENERAL": "GENERAL",
+  // "EWS": "EWS",
+  // "OBC-NCL": "OBC-NCL",
+  // "SC": "SC",
+  // "ST": "ST",
+  // "GENERAL-PwD": "GENERAL-PwD",
+  // "EWS-PwD": "EWS-PwD",
+  // "OBC-NCL-PwD": "OBC-NCL-PwD",
+  // "SC-PwD": "SC-PwD",
+  // "ST-PwD": "ST-PwD"
 };
 
 const createUserData = async (req, res) => {
