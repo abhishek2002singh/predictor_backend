@@ -2126,3 +2126,6 @@
 {"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 60.826 ms","timestamp":"2026-01-23 10:25:41"}
 {"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 19.527 ms","timestamp":"2026-01-23 10:25:41"}
 {"level":"http","message":"GET /api/analytics/user-analytics 200 62.143 ms","timestamp":"2026-01-23 10:26:02"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-23 10:27:55"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-23 10:27:55"}
+{"level":"http","message":"GET /api/predictions?rank=120&category=GENERAL&gender=Male&typeOfExam=JEE_MAINS&page=3&limit=20 200 190.535 ms","timestamp":"2026-01-23 10:28:33"}
