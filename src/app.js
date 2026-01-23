@@ -66,7 +66,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/assistant", assistantRoutes);
-app.use("/api", userDataRoutes);
+app.use(API_ROUTES_APP?.USER_DATA, userDataRoutes);
 app.use("/api/cutoff", cutoffRoutes); 
 app.use("/api" , userCanShow)
 app.use(API_ROUTES_APP?.ANALYTICS ,analyticsRouter)

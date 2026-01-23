@@ -6,6 +6,7 @@ const {
   getAllUserData,
   updateUserData,
   deleteUserData,
+  updateUserByAdminOrAssistance
 } = require("../controllers/UserController/userDataController");
 const { API_ROUTES_FOR_ROUTER } = require("../utils/routePath");
 const { protect, checkPermission } = require("../middleware/auth.middleware");
@@ -37,5 +38,8 @@ userDataRouter.put(
 );
 
 // userDataRouter.delete("/:id", protect, checkPermission("canDeleteUsers"), deleteUserData);
+userDataRouter.put(API_ROUTES_FOR_ROUTER?.USER_ROUTER?.UPDATE_USER_BY_ADMIN_ASSISTANCE, protect,
+  checkPermission("canEditUsers"),
+  updateUserByAdminOrAssistance)
 
 module.exports = userDataRouter;

@@ -85,16 +85,20 @@ const userDataSchema = mongoose.Schema({
 
     isNegativeResponse: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     isPositiveResponse:{
       type: Boolean,
-      default: true,
+      default: false,
     },
     isCheckData:{
       type: Boolean,
-      default: true,
+      default: false,
     },
+     isDataExport: {
+    type: Boolean,
+    default: false
+  },
 },{
      timestamps: true,
 })

@@ -67,6 +67,7 @@ const createUserData = async (req, res) => {
       category: normalizedCategory,
        gender: normalizedGender,
       homeState,
+      
       checkedAt: new Date(),
     };
 
@@ -176,7 +177,22 @@ const getUserData = async (req, res) => {
 
 const getAllUserData = async (req, res) => {
   try {
-    const { page = 1, limit = 10, examType, minChecks, maxChecks } = req.query;
+    const { 
+      page = 1, 
+      limit = 10, 
+      examType, 
+      minChecks, 
+      maxChecks,
+      fromDate,
+      toDate,
+      isNegativeResponse,
+      isPositiveResponse,
+      isDataExport,
+      search
+    } = req.query;
+
+
+    console.log(req.query)
 
     const filter = {};
 
@@ -186,16 +202,44 @@ const getAllUserData = async (req, res) => {
     }
 
     // Filter by total check count
-    if (minChecks) {
-      filter.totalChecks = { ...filter.totalChecks, $gte: parseInt(minChecks) };
+    if (minChecks || maxChecks) {
+      filter.totalChecks = {};
+      if (minChecks) filter.totalChecks.$gte = parseInt(minChecks);
+      if (maxChecks) filter.totalChecks.$lte = parseInt(maxChecks);
     }
-    if (maxChecks) {
-      filter.totalChecks = { ...filter.totalChecks, $lte: parseInt(maxChecks) };
+
+    // Filter by date range
+    if (fromDate || toDate) {
+      filter.createdAt = {};
+      if (fromDate) filter.createdAt.$gte = new Date(fromDate);
+      if (toDate) filter.createdAt.$lte = new Date(toDate + 'T23:59:59.999Z'); // End of day
+    }
+
+    // Filter by boolean fields
+    if (isNegativeResponse !== undefined) {
+      filter.isNegativeResponse = isNegativeResponse === 'true';
+    }
+    if (isPositiveResponse !== undefined) {
+      filter.isPositiveResponse = isPositiveResponse === 'true';
+    }
+    if (isDataExport !== undefined) {
+      filter.isDataExport = isDataExport === 'true';
+    }
+
+    // Search filter
+    if (search) {
+      const searchRegex = new RegExp(search, 'i');
+      filter.$or = [
+        { firstName: searchRegex },
+        { lastName: searchRegex },
+        { emailId: searchRegex },
+        { mobileNumber: searchRegex }
+      ];
     }
 
     const userData = await UserData.find(filter)
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
       .sort({ createdAt: -1 });
 
     const count = await UserData.countDocuments(filter);
@@ -227,7 +271,7 @@ const getAllUserData = async (req, res) => {
     res.status(200).json({
       success: true,
       data: userData,
-      totalPages: Math.ceil(count / limit),
+      totalPages: Math.ceil(count / parseInt(limit)),
       currentPage: parseInt(page),
       totalRecords: count,
       stats: stats[0] || { totalUsers: 0, totalChecks: 0, avgChecksPerUser: 0 },
@@ -299,6 +343,94 @@ const updateUserData = async (req, res) => {
   }
 };
 
+
+
+const updateUserByAdminOrAssistance = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let {
+      isNegativeResponse,
+      isPositiveResponse,
+      isCheckData,
+      isDataExport,
+    } = req.body;
+
+    // 🔐 ROLE CHECK
+    if (
+      req.user.role !== "ADMIN" &&
+      req.user.role !== "ASSISTANCE"
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Only Admin or Assistance can update user data",
+      });
+    }
+
+    // 🧠 FORCE BOOLEAN CONVERSION (KEY FIX 🔥)
+    const toBoolean = (val) =>
+      val === true || val === "true";
+
+    const updateFields = {};
+
+    if (isNegativeResponse !== undefined) {
+      updateFields.isNegativeResponse = toBoolean(isNegativeResponse);
+    }
+
+    if (isPositiveResponse !== undefined) {
+      updateFields.isPositiveResponse = toBoolean(isPositiveResponse);
+    }
+
+    if (isCheckData !== undefined) {
+      updateFields.isCheckData = toBoolean(isCheckData);
+    }
+
+    if (isDataExport !== undefined) {
+      updateFields.isDataExport = toBoolean(isDataExport); // ✅ WILL WORK NOW
+    }
+
+    // ❗ Business rule
+    if (updateFields.isPositiveResponse === true) {
+      updateFields.isNegativeResponse = false;
+    }
+    if (updateFields.isNegativeResponse === true) {
+      updateFields.isPositiveResponse = false;
+    }
+
+    if (Object.keys(updateFields).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No valid fields to update",
+      });
+    }
+
+    const updatedUser = await UserData.findByIdAndUpdate(
+      id,
+      { $set: updateFields },
+      { new: true, runValidators: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      data: updatedUser,
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
+
+
+
+
+
+
 const deleteUserData = async (req, res) => {
   try {
     const { id } = req.params;
@@ -338,4 +470,5 @@ module.exports = {
   getAllUserData,
   updateUserData,
   deleteUserData,
+  updateUserByAdminOrAssistance
 };
