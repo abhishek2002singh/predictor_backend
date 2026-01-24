@@ -30,7 +30,8 @@ const API_ROUTES_FOR_ROUTER = {
     USER_DETAILS:"userDetails/:id",
     UPDATE_USER:"updateUser/:id",
     UPDATE_USER_OWN: "/update/:id",
-    UPDATE_USER_BY_ADMIN_ASSISTANCE :"/update/byAdminOrAssistance/:id"
+    UPDATE_USER_BY_ADMIN_ASSISTANCE :"/update/byAdminOrAssistance/:id",
+    EXPORT_USER_DATA :"/export-user-data"
 
   },
   ADMIN_ROUTER_PATH:{

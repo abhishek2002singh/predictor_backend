@@ -6,7 +6,8 @@ const {
   getAllUserData,
   updateUserData,
   deleteUserData,
-  updateUserByAdminOrAssistance
+  updateUserByAdminOrAssistance,
+  exportUserData
 } = require("../controllers/UserController/userDataController");
 const { API_ROUTES_FOR_ROUTER } = require("../utils/routePath");
 const { protect, checkPermission } = require("../middleware/auth.middleware");
@@ -41,5 +42,11 @@ userDataRouter.put(
 userDataRouter.put(API_ROUTES_FOR_ROUTER?.USER_ROUTER?.UPDATE_USER_BY_ADMIN_ASSISTANCE, protect,
   checkPermission("canEditUsers"),
   updateUserByAdminOrAssistance)
+
+// Change from GET to POST
+// Keep this as GET in your router
+userDataRouter.post(API_ROUTES_FOR_ROUTER?.USER_ROUTER?.EXPORT_USER_DATA, protect,
+  checkPermission("canEditUsers"),
+  exportUserData)
 
 module.exports = userDataRouter;

@@ -37,7 +37,6 @@ const createUserData = async (req, res) => {
   try {
     const {
       mobileNumber,
-     
       rank,
       category,
       gender,
@@ -53,10 +52,7 @@ const createUserData = async (req, res) => {
       });
     }
 
-    // const normalizedEmail = emailId.toLowerCase();
     const normalizedExamType = examType.toUpperCase();
-
-    // Normalize category and gender to valid enum values
     const normalizedCategory = categoryMap[category] || "GENERAL";
     const normalizedGender = genderMap[gender] || "GENERAL";
 
@@ -65,16 +61,13 @@ const createUserData = async (req, res) => {
       examType: normalizedExamType,
       rank,
       category: normalizedCategory,
-       gender: normalizedGender,
+      gender: normalizedGender,
       homeState,
-      
       checkedAt: new Date(),
     };
 
-    // Try to find existing user by email or mobile
-    let existingUser = await UserData.findOne({
-      $or: [ { mobileNumber }],
-    });
+    // Try to find existing user by mobile
+    let existingUser = await UserData.findOne({ mobileNumber });
 
     let isNewUser = false;
     let userData;
@@ -89,27 +82,32 @@ const createUserData = async (req, res) => {
         existingUser.examsChecked.push(normalizedExamType);
       }
 
-      // Update name if different (user might have corrected it)
-      // existingUser.firstName = firstName.trim();
-      // existingUser.lastName = lastName.trim();
+      // ✅ CRITICAL: Reset isDataExport to false for new data
+      // This marks that there's new data to be exported
+      existingUser.isDataExport = false;
+
+      // ✅ Also reset other flags if needed (optional)
+      // existingUser.isNegativeResponse = false;
+      // existingUser.isPositiveResponse = false;
+      // existingUser.isCheckData = false;
 
       userData = await existingUser.save();
 
-      logger.info(`Check history added for user: ${userData.emailId}, exam: ${normalizedExamType}, total checks: ${userData.totalChecks}`);
+      logger.info(`Check history added for user: ${existingUser.mobileNumber}, exam: ${normalizedExamType}, total checks: ${userData.totalChecks}, isDataExport reset to: ${userData.isDataExport}`);
     } else {
       // New user - create with first check
       isNewUser = true;
       userData = await UserData.create({
-        // firstName: firstName.trim(),
-        // lastName: lastName.trim(),
         mobileNumber,
-        // emailId: normalizedEmail,
         checkHistory: [checkEntry],
         totalChecks: 1,
         examsChecked: [normalizedExamType],
+        // New users start with isDataExport = false (default)
+        // So their data will be available for export
+        isDataExport: false,
       });
 
-      logger.info(`New user created: ${userData.emailId} for ${normalizedExamType}`);
+      logger.info(`New user created: ${userData.mobileNumber} for ${normalizedExamType}`);
     }
 
     res.status(201).json({
@@ -120,16 +118,16 @@ const createUserData = async (req, res) => {
       data: userData,
       isNewUser,
       totalChecks: userData.totalChecks,
+      isDataExport: userData.isDataExport, // Include in response
     });
   } catch (error) {
     logger.error("Create user data error", {
       message: error.message,
       stack: error.stack,
-      email: req.body?.emailId,
+      mobileNumber: req.body?.mobileNumber,
     });
 
     if (error.code === 11000) {
-      // Handle race condition where user was created between findOne and create
       return res.status(400).json({
         success: false,
         message: "User data conflict. Please try again.",
@@ -345,6 +343,9 @@ const updateUserData = async (req, res) => {
 
 
 
+
+
+
 const updateUserByAdminOrAssistance = async (req, res) => {
   try {
     const { id } = req.params;
@@ -427,7 +428,193 @@ const updateUserByAdminOrAssistance = async (req, res) => {
 };
 
 
+// In your export function (backend):
+// Add this function BEFORE the exportUserData function
+// Add this function BEFORE the exportUserData function
+// Add this function BEFORE the exportUserData function
+// Add this function BEFORE the exportUserData function
+const generateCSVContent = (users, examType = null) => {
+  const headers = [
+    'Mobile Number', 'Exam Type', 'Rank', 'Category', 'Gender', 
+    'Home State', 'Checked At', 'Total Checks', 'Exams Checked',
+    'Negative Response', 'Positive Response', 'Data Export Status', 
+    'Created At', 'Updated At'
+  ];
 
+  const rows = users.flatMap(user => {
+    // Filter checkHistory: only include entries that match examType AND are NOT exported
+    const checksToInclude = user.checkHistory.filter(check => {
+      // Check exam type filter
+      const examMatches = !examType || check.examType === examType;
+      
+      // Check if data is NOT exported
+      // isDataExport can be: true, false, or undefined
+      const isExported = check.isDataExport === true;
+      const isNotExported = check.isDataExport !== true; // false or undefined
+      
+      return examMatches && isNotExported;
+    });
+    
+    // Only include users who have matching unexported data
+    if (checksToInclude.length === 0) {
+      return [];
+    }
+    
+    return checksToInclude.map(check => [
+      user.mobileNumber,
+      check.examType,
+      check.rank || '',
+      check.category || '',
+      check.gender || '',
+      check.homeState || '',
+      new Date(check.checkedAt).toISOString(),
+      user.totalChecks,
+      `"${user.examsChecked?.join(', ') || ''}"`,
+      user.isNegativeResponse ? 'Yes' : 'No',
+      user.isPositiveResponse ? 'Yes' : 'No',
+      'No', // This entry is being exported now
+      new Date(user.createdAt).toISOString(),
+      new Date(user.updatedAt).toISOString()
+    ].join(','));
+  });
+
+  // If no rows, return empty string
+  if (rows.length === 0) {
+    return '';
+  }
+
+  return [headers.join(','), ...rows].join('\n');
+};
+
+const exportUserData = async (req, res) => {
+  try {
+    // Get examType from request BODY (POST request)
+    const { examType } = req.body;
+    
+    console.log(`Export request for exam type: "${examType || 'ALL'}"`);
+    console.log('Full request body:', req.body);
+    
+    // If examType is "ALL" or empty string, treat as null (export all exams)
+    const effectiveExamType = (examType === "ALL" || examType === "") ? null : examType;
+    console.log(`Effective exam type: ${effectiveExamType || 'ALL'}`);
+    
+    // Get all users
+    const allUsers = await UserData.find({});
+    console.log(`Total users in database: ${allUsers.length}`);
+    
+    // Filter users to find those with unexported data
+    const usersToExport = [];
+    
+    for (const user of allUsers) {
+      // Check if user has any unexported data for the specified exam
+      const hasUnexportedData = user.checkHistory.some(check => {
+        // Check exam type filter
+        const examMatches = !effectiveExamType || check.examType === effectiveExamType;
+        
+        // Check if data is NOT exported
+        const isExported = check.isDataExport === true;
+        const isNotExported = check.isDataExport !== true; // false or undefined
+        
+        return examMatches && isNotExported;
+      });
+      
+      if (hasUnexportedData) {
+        usersToExport.push(user);
+      }
+    }
+    
+    console.log(`Found ${usersToExport.length} users with unexported data`);
+    
+    // Debug: Log sample data
+    if (usersToExport.length > 0) {
+      console.log('\n=== DEBUG: Sample user data ===');
+      const sampleUser = usersToExport[0];
+      console.log(`User: ${sampleUser.mobileNumber}`);
+      console.log(`Total checks: ${sampleUser.checkHistory.length}`);
+      sampleUser.checkHistory.forEach((check, idx) => {
+        console.log(`  [${idx}] ${check.examType} - isDataExport: ${check.isDataExport} (type: ${typeof check.isDataExport})`);
+      });
+      console.log('=== END DEBUG ===\n');
+    }
+    
+    if (usersToExport.length === 0) {
+      console.log('No unexported data found');
+      return res.status(200).json({
+        success: true,
+        message: "No new data to export",
+        exportedCount: 0
+      });
+    }
+
+    // Generate CSV content
+    const csvContent = generateCSVContent(usersToExport, effectiveExamType);
+    
+    if (!csvContent || csvContent.trim() === '') {
+      console.log('Generated CSV is empty');
+      return res.status(200).json({
+        success: true,
+        message: "No new data to export",
+        exportedCount: 0
+      });
+    }
+    
+    console.log(`Generated CSV with ${csvContent.split('\n').length - 1} data rows`);
+
+    // Update database: Mark exported entries
+    const updatePromises = usersToExport.map(async (user) => {
+      const updatedCheckHistory = user.checkHistory.map(check => {
+        // Mark as exported if:
+        // 1. No examType specified (export all unexported)
+        // 2. Exam type matches AND it's not already exported
+        const shouldExport = !effectiveExamType || check.examType === effectiveExamType;
+        const isNotExported = check.isDataExport !== true; // false or undefined
+        
+        if (shouldExport && isNotExported) {
+          return { ...check.toObject(), isDataExport: true };
+        }
+        return check;
+      });
+      
+      // Check if all checkHistory entries are now exported
+      const allExported = updatedCheckHistory.every(check => 
+        check.isDataExport === true
+      );
+      
+      return UserData.updateOne(
+        { _id: user._id },
+        { 
+          $set: { 
+            checkHistory: updatedCheckHistory,
+            isDataExport: allExported
+          } 
+        }
+      );
+    });
+
+    await Promise.all(updatePromises);
+
+    logger.info(`Exported ${usersToExport.length} users for exam: ${effectiveExamType || 'all'}`);
+
+    // Set headers for file download
+    res.setHeader('Content-Type', 'text/csv');
+    const filename = effectiveExamType 
+      ? `user-data-export-${effectiveExamType}-${new Date().toISOString().split('T')[0]}.csv`
+      : `user-data-export-all-${new Date().toISOString().split('T')[0]}.csv`;
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
+    
+    // Send CSV content
+    res.send(csvContent);
+
+  } catch (error) {
+    logger.error("Export user data error", error);
+    console.error('Export error details:', error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to export user data",
+      error: error.message
+    });
+  }
+};
 
 
 
@@ -470,5 +657,6 @@ module.exports = {
   getAllUserData,
   updateUserData,
   deleteUserData,
-  updateUserByAdminOrAssistance
+  updateUserByAdminOrAssistance,
+  exportUserData
 };
