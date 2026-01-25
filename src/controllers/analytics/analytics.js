@@ -390,16 +390,18 @@ exports.assistanceAnalysis = async (req, res) => {
             });
         }
 
+        console.log("check data")
+
         const [
             totalAssistants,
             activeAssistants,
             inactiveAssistants
         ] = await Promise.all([
-            User.countDocuments({ role: "ASSISTANT" }),
+            User.countDocuments({ role: "ASSISTANCE" }),
 
-            User.countDocuments({ role: "ASSISTANT", isActive: true }),
+            User.countDocuments({ role: "ASSISTANCE", isActive: true }),
 
-            User.countDocuments({ role: "ASSISTANT", isActive: false })
+            User.countDocuments({ role: "ASSISTANCE", isActive: false })
         ]);
 
         return res.status(200).json({

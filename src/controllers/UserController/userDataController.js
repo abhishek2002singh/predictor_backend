@@ -189,7 +189,6 @@ const getAllUserData = async (req, res) => {
       search
     } = req.query;
 
-
     console.log(req.query)
 
     const filter = {};
@@ -242,7 +241,7 @@ const getAllUserData = async (req, res) => {
 
     const count = await UserData.countDocuments(filter);
 
-    // Get stats for dashboard
+    // Get comprehensive stats for dashboard
     const stats = await UserData.aggregate([
       {
         $group: {
@@ -250,6 +249,34 @@ const getAllUserData = async (req, res) => {
           totalUsers: { $sum: 1 },
           totalChecks: { $sum: "$totalChecks" },
           avgChecksPerUser: { $avg: "$totalChecks" },
+          totalExportedData: { 
+            $sum: { 
+              $cond: [{ $eq: ["$isDataExport", true] }, 1, 0] 
+            } 
+          },
+          totalUnexportedData: { 
+            $sum: { 
+              $cond: [
+                { $or: [
+                  { $eq: ["$isDataExport", false] },
+                  { $eq: ["$isDataExport", null] },
+                  { $eq: ["$isDataExport", undefined] }
+                ]}, 
+                1, 
+                0 
+              ] 
+            } 
+          },
+          totalNegativeResponses: { 
+            $sum: { 
+              $cond: [{ $eq: ["$isNegativeResponse", true] }, 1, 0] 
+            } 
+          },
+          totalPositiveResponses: { 
+            $sum: { 
+              $cond: [{ $eq: ["$isPositiveResponse", true] }, 1, 0] 
+            } 
+          }
         }
       }
     ]);
@@ -260,11 +287,52 @@ const getAllUserData = async (req, res) => {
       {
         $group: {
           _id: "$examsChecked",
-          userCount: { $sum: 1 }
+          userCount: { $sum: 1 },
+          checksCount: { $sum: "$totalChecks" }
         }
       },
       { $sort: { userCount: -1 } }
     ]);
+
+    // Get export status breakdown
+    const exportStats = await UserData.aggregate([
+      {
+        $group: {
+          _id: {
+            $cond: {
+              if: { $eq: ["$isDataExport", true] },
+              then: "Exported",
+              else: "Not Exported"
+            }
+          },
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    const statsResult = stats[0] || { 
+      totalUsers: 0, 
+      totalChecks: 0, 
+      avgChecksPerUser: 0,
+      totalExportedData: 0,
+      totalUnexportedData: 0,
+      totalNegativeResponses: 0,
+      totalPositiveResponses: 0
+    };
+
+    // Calculate percentages for better insights
+    const enhancedStats = {
+      ...statsResult,
+      exportPercentage: statsResult.totalUsers > 0 
+        ? Math.round((statsResult.totalExportedData / statsResult.totalUsers) * 100) 
+        : 0,
+      negativeResponsePercentage: statsResult.totalUsers > 0 
+        ? Math.round((statsResult.totalNegativeResponses / statsResult.totalUsers) * 100) 
+        : 0,
+      positiveResponsePercentage: statsResult.totalUsers > 0 
+        ? Math.round((statsResult.totalPositiveResponses / statsResult.totalUsers) * 100) 
+        : 0,
+    };
 
     res.status(200).json({
       success: true,
@@ -272,8 +340,20 @@ const getAllUserData = async (req, res) => {
       totalPages: Math.ceil(count / parseInt(limit)),
       currentPage: parseInt(page),
       totalRecords: count,
-      stats: stats[0] || { totalUsers: 0, totalChecks: 0, avgChecksPerUser: 0 },
+      stats: enhancedStats,
       examStats,
+      exportStats,
+      filters: {
+        examType,
+        minChecks,
+        maxChecks,
+        fromDate,
+        toDate,
+        isNegativeResponse,
+        isPositiveResponse,
+        isDataExport,
+        search
+      }
     });
   } catch (error) {
     logger.error("Get all user data error", {
@@ -433,7 +513,7 @@ const updateUserByAdminOrAssistance = async (req, res) => {
 // Add this function BEFORE the exportUserData function
 // Add this function BEFORE the exportUserData function
 // Add this function BEFORE the exportUserData function
-const generateCSVContent = (users, examType = null) => {
+const generateCSVContentUpdated = (users, examType = null) => {
   const headers = [
     'Mobile Number', 'Exam Type', 'Rank', 'Category', 'Gender', 
     'Home State', 'Checked At', 'Total Checks', 'Exams Checked',
@@ -442,20 +522,16 @@ const generateCSVContent = (users, examType = null) => {
   ];
 
   const rows = users.flatMap(user => {
-    // Filter checkHistory: only include entries that match examType AND are NOT exported
-    const checksToInclude = user.checkHistory.filter(check => {
-      // Check exam type filter
-      const examMatches = !examType || check.examType === examType;
-      
-      // Check if data is NOT exported
-      // isDataExport can be: true, false, or undefined
-      const isExported = check.isDataExport === true;
-      const isNotExported = check.isDataExport !== true; // false or undefined
-      
-      return examMatches && isNotExported;
-    });
+    // If specific exam type is provided, filter checkHistory
+    let checksToInclude = user.checkHistory;
     
-    // Only include users who have matching unexported data
+    if (examType) {
+      checksToInclude = user.checkHistory.filter(check => 
+        check.examType === examType
+      );
+    }
+    
+    // If no matching checks, skip this user
     if (checksToInclude.length === 0) {
       return [];
     }
@@ -472,7 +548,7 @@ const generateCSVContent = (users, examType = null) => {
       `"${user.examsChecked?.join(', ') || ''}"`,
       user.isNegativeResponse ? 'Yes' : 'No',
       user.isPositiveResponse ? 'Yes' : 'No',
-      'No', // This entry is being exported now
+      user.isDataExport ? 'Yes' : 'No', // Use user-level isDataExport
       new Date(user.createdAt).toISOString(),
       new Date(user.updatedAt).toISOString()
     ].join(','));
@@ -498,44 +574,22 @@ const exportUserData = async (req, res) => {
     const effectiveExamType = (examType === "ALL" || examType === "") ? null : examType;
     console.log(`Effective exam type: ${effectiveExamType || 'ALL'}`);
     
-    // Get all users
-    const allUsers = await UserData.find({});
-    console.log(`Total users in database: ${allUsers.length}`);
+    // Build query based on isDataExport flag at user level
+    let query = { isDataExport: { $ne: true } }; // Users not yet exported
     
-    // Filter users to find those with unexported data
-    const usersToExport = [];
-    
-    for (const user of allUsers) {
-      // Check if user has any unexported data for the specified exam
-      const hasUnexportedData = user.checkHistory.some(check => {
-        // Check exam type filter
-        const examMatches = !effectiveExamType || check.examType === effectiveExamType;
-        
-        // Check if data is NOT exported
-        const isExported = check.isDataExport === true;
-        const isNotExported = check.isDataExport !== true; // false or undefined
-        
-        return examMatches && isNotExported;
-      });
-      
-      if (hasUnexportedData) {
-        usersToExport.push(user);
-      }
+    // If specific exam type, we need a more complex query
+    if (effectiveExamType) {
+      query = {
+        $and: [
+          { isDataExport: { $ne: true } }, // Not exported
+          { "examsChecked": effectiveExamType } // Has this exam type
+        ]
+      };
     }
     
+    // Get users with unexported data
+    const usersToExport = await UserData.find(query);
     console.log(`Found ${usersToExport.length} users with unexported data`);
-    
-    // Debug: Log sample data
-    if (usersToExport.length > 0) {
-      console.log('\n=== DEBUG: Sample user data ===');
-      const sampleUser = usersToExport[0];
-      console.log(`User: ${sampleUser.mobileNumber}`);
-      console.log(`Total checks: ${sampleUser.checkHistory.length}`);
-      sampleUser.checkHistory.forEach((check, idx) => {
-        console.log(`  [${idx}] ${check.examType} - isDataExport: ${check.isDataExport} (type: ${typeof check.isDataExport})`);
-      });
-      console.log('=== END DEBUG ===\n');
-    }
     
     if (usersToExport.length === 0) {
       console.log('No unexported data found');
@@ -547,7 +601,7 @@ const exportUserData = async (req, res) => {
     }
 
     // Generate CSV content
-    const csvContent = generateCSVContent(usersToExport, effectiveExamType);
+    const csvContent = generateCSVContentUpdated(usersToExport, effectiveExamType);
     
     if (!csvContent || csvContent.trim() === '') {
       console.log('Generated CSV is empty');
@@ -560,38 +614,12 @@ const exportUserData = async (req, res) => {
     
     console.log(`Generated CSV with ${csvContent.split('\n').length - 1} data rows`);
 
-    // Update database: Mark exported entries
-    const updatePromises = usersToExport.map(async (user) => {
-      const updatedCheckHistory = user.checkHistory.map(check => {
-        // Mark as exported if:
-        // 1. No examType specified (export all unexported)
-        // 2. Exam type matches AND it's not already exported
-        const shouldExport = !effectiveExamType || check.examType === effectiveExamType;
-        const isNotExported = check.isDataExport !== true; // false or undefined
-        
-        if (shouldExport && isNotExported) {
-          return { ...check.toObject(), isDataExport: true };
-        }
-        return check;
-      });
-      
-      // Check if all checkHistory entries are now exported
-      const allExported = updatedCheckHistory.every(check => 
-        check.isDataExport === true
-      );
-      
-      return UserData.updateOne(
-        { _id: user._id },
-        { 
-          $set: { 
-            checkHistory: updatedCheckHistory,
-            isDataExport: allExported
-          } 
-        }
-      );
-    });
-
-    await Promise.all(updatePromises);
+    // Update database: Mark user as exported
+    const userIds = usersToExport.map(user => user._id);
+    await UserData.updateMany(
+      { _id: { $in: userIds } },
+      { $set: { isDataExport: true } }
+    );
 
     logger.info(`Exported ${usersToExport.length} users for exam: ${effectiveExamType || 'all'}`);
 
