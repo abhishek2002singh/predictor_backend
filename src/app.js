@@ -15,6 +15,7 @@ const userDataRoutes = require('./router/userDataRoutes');
 const cutoffRoutes = require('./router/cutoffRoutes');
 const  userCanShow = require('./router/userCanShow')
 const  analyticsRouter = require('./router/analytics')
+const rankPredictionOfCollege = require('./router/rankPredictionOfCollege')
 
 
 const app = express();
@@ -70,6 +71,7 @@ app.use(API_ROUTES_APP?.USER_DATA, userDataRoutes);
 app.use("/api/cutoff", cutoffRoutes); 
 app.use("/api" , userCanShow)
 app.use(API_ROUTES_APP?.ANALYTICS ,analyticsRouter)
+app.use(API_ROUTES_APP?.COLLEGE_RANK_PREDICTION ,rankPredictionOfCollege )
 
 
 // 404 Handler

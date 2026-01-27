@@ -13,7 +13,8 @@ const API_ROUTES_APP = {
 
   UPLOAD_CUTOFF : "/cutoff",
 
-  ANALYTICS : '/api'
+  ANALYTICS : '/api',
+  COLLEGE_RANK_PREDICTION :"/college"
 };
 
 const API_ROUTES_FOR_ROUTER = {
@@ -53,6 +54,9 @@ const API_ROUTES_FOR_ROUTER = {
     UPLOAD_DATA_ANALYSIS: "/analytics/upload-data-analytics",
     ASSISTANCE_ANALYSIS: "/analytics/assistance-analytics",
     ADMIN_ANALYSIS: "/analytics/admin-analytics"
+  },
+  RANK_PREDICTION_OF_COLLEGE :{
+    GET_RANK_PREDICTION :"/rank-Prediction-College"
   }
 };
 
