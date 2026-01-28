@@ -64,6 +64,7 @@ const createUserData = async (req, res) => {
       gender: normalizedGender,
       homeState,
       checkedAt: new Date(),
+      gainLeedFrom: "FROM_STUDENT_RANK" // This is fine for individual check entry
     };
 
     // Try to find existing user by mobile
@@ -82,14 +83,11 @@ const createUserData = async (req, res) => {
         existingUser.examsChecked.push(normalizedExamType);
       }
 
+      
+
       // ✅ CRITICAL: Reset isDataExport to false for new data
       // This marks that there's new data to be exported
       existingUser.isDataExport = false;
-
-      // ✅ Also reset other flags if needed (optional)
-      // existingUser.isNegativeResponse = false;
-      // existingUser.isPositiveResponse = false;
-      // existingUser.isCheckData = false;
 
       userData = await existingUser.save();
 
@@ -102,8 +100,8 @@ const createUserData = async (req, res) => {
         checkHistory: [checkEntry],
         totalChecks: 1,
         examsChecked: [normalizedExamType],
+       
         // New users start with isDataExport = false (default)
-        // So their data will be available for export
         isDataExport: false,
       });
 
@@ -118,7 +116,7 @@ const createUserData = async (req, res) => {
       data: userData,
       isNewUser,
       totalChecks: userData.totalChecks,
-      isDataExport: userData.isDataExport, // Include in response
+      isDataExport: userData.isDataExport,
     });
   } catch (error) {
     logger.error("Create user data error", {

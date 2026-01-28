@@ -1,0 +1,103 @@
+{"level":"http","message":"POST /college/rank-Prediction-College 200 775.183 ms","timestamp":"2026-01-28 12:24:31"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 763.952 ms","timestamp":"2026-01-28 12:24:31"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 481.527 ms","timestamp":"2026-01-28 12:24:56"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 469.596 ms","timestamp":"2026-01-28 12:25:50"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 548.472 ms","timestamp":"2026-01-28 12:26:01"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 579.037 ms","timestamp":"2026-01-28 12:26:01"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 492.056 ms","timestamp":"2026-01-28 12:26:20"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 611.399 ms","timestamp":"2026-01-28 12:26:31"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 617.337 ms","timestamp":"2026-01-28 12:26:31"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 508.935 ms","timestamp":"2026-01-28 12:27:07"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 442.413 ms","timestamp":"2026-01-28 12:27:24"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 428.025 ms","timestamp":"2026-01-28 12:27:35"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 571.627 ms","timestamp":"2026-01-28 12:27:59"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 552.899 ms","timestamp":"2026-01-28 12:28:04"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 377.937 ms","timestamp":"2026-01-28 12:28:19"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 477.114 ms","timestamp":"2026-01-28 12:28:32"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 401.242 ms","timestamp":"2026-01-28 12:28:41"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 549.884 ms","timestamp":"2026-01-28 12:35:39"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 562.775 ms","timestamp":"2026-01-28 12:35:39"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 548.590 ms","timestamp":"2026-01-28 12:35:48"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 564.102 ms","timestamp":"2026-01-28 12:35:48"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 618.422 ms","timestamp":"2026-01-28 12:35:51"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 467.395 ms","timestamp":"2026-01-28 12:36:03"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 461.171 ms","timestamp":"2026-01-28 12:36:08"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 506.360 ms","timestamp":"2026-01-28 12:36:50"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 569.849 ms","timestamp":"2026-01-28 12:36:54"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 595.462 ms","timestamp":"2026-01-28 12:36:54"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 492.226 ms","timestamp":"2026-01-28 12:37:58"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 628.530 ms","timestamp":"2026-01-28 12:38:09"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 666.891 ms","timestamp":"2026-01-28 12:38:09"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 1386.767 ms","timestamp":"2026-01-28 12:42:19"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 722.616 ms","timestamp":"2026-01-28 12:42:23"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 726.692 ms","timestamp":"2026-01-28 12:42:23"}
+{"level":"http","message":"POST /college/rank-Prediction-College 404 166.820 ms","timestamp":"2026-01-28 12:42:27"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 687.136 ms","timestamp":"2026-01-28 12:42:30"}
+{"level":"http","message":"POST /college/rank-Prediction-College 404 175.294 ms","timestamp":"2026-01-28 12:42:32"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 871.426 ms","timestamp":"2026-01-28 12:43:21"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 687.745 ms","timestamp":"2026-01-28 12:43:25"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 892.173 ms","timestamp":"2026-01-28 12:47:47"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 1011.390 ms","timestamp":"2026-01-28 12:47:47"}
+{"level":"info","message":"Admin logged in successfully: abh2i@gmail.com","timestamp":"2026-01-28 13:02:36"}
+{"level":"http","message":"POST /api/auth/admin/login 200 888.864 ms","timestamp":"2026-01-28 13:02:36"}
+{"level":"http","message":"GET /api/admin/stats 200 90.906 ms","timestamp":"2026-01-28 13:02:36"}
+{"level":"http","message":"GET /api/admin/stats 304 19.953 ms","timestamp":"2026-01-28 13:02:36"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 60.154 ms","timestamp":"2026-01-28 13:02:39"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 15.796 ms","timestamp":"2026-01-28 13:02:39"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 47.657 ms","timestamp":"2026-01-28 13:02:44"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 23.091 ms","timestamp":"2026-01-28 13:02:58"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 19.039 ms","timestamp":"2026-01-28 13:02:58"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 37.777 ms","timestamp":"2026-01-28 13:13:26"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 47.249 ms","timestamp":"2026-01-28 13:13:26"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 1146.236 ms","timestamp":"2026-01-28 13:13:29"}
+{"level":"http","message":"POST /college/rank-Prediction-College 200 1150.700 ms","timestamp":"2026-01-28 13:13:29"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:20:23"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:20:23"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:30:27"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:30:27"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:35:03"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:35:03"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:35:14"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:35:14"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:35:33"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:35:33"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:42:34"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:42:34"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:43:00"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:43:00"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:44:58"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:44:58"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:48:20"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:48:20"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:49:53"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:49:53"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:51:21"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:51:21"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:54:12"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:54:12"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:55:18"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:55:18"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 14:56:35"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 14:56:35"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-01-28 15:07:07"}
+{"level":"info","message":"Server running on port 7777","timestamp":"2026-01-28 15:07:07"}
+{"level":"info","message":"New user created: 9997756423 for JEE_MAINS","timestamp":"2026-01-28 15:07:46"}
+{"level":"http","message":"POST /api/create 201 249.088 ms","timestamp":"2026-01-28 15:07:46"}
+{"level":"http","message":"GET /api/predictions?rank=146&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 382.933 ms","timestamp":"2026-01-28 15:07:46"}
+{"level":"http","message":"GET /api/predictions?rank=146&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 149.224 ms","timestamp":"2026-01-28 15:07:47"}
+{"level":"info","message":"User data updated: ujjwal23@gmail.com","timestamp":"2026-01-28 15:08:12"}
+{"level":"http","message":"PUT /api/update/6979d8ea2fb4ba0ea8327e11 200 38.666 ms","timestamp":"2026-01-28 15:08:12"}
+{"level":"http","message":"GET /api/predictions?rank=146&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=20 200 175.257 ms","timestamp":"2026-01-28 15:08:12"}
+{"level":"http","message":"GET /api/admin/stats 200 73.704 ms","timestamp":"2026-01-28 15:08:35"}
+{"level":"http","message":"GET /api/admin/stats 304 26.532 ms","timestamp":"2026-01-28 15:08:35"}
+{"level":"http","message":"GET /api/analytics/user-analytics 200 88.438 ms","timestamp":"2026-01-28 15:09:36"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 46.908 ms","timestamp":"2026-01-28 15:09:55"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 26.521 ms","timestamp":"2026-01-28 15:09:55"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 525.279 ms","timestamp":"2026-01-28 15:36:10"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 34.528 ms","timestamp":"2026-01-28 15:36:10"}
+{"level":"info","message":"Check history added for user: 9997756423, exam: JEE_MAINS, total checks: 2, isDataExport reset to: false","timestamp":"2026-01-28 15:37:17"}
+{"level":"http","message":"POST /api/create 201 314.723 ms","timestamp":"2026-01-28 15:37:17"}
+{"level":"http","message":"GET /api/predictions?rank=205&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 200 418.478 ms","timestamp":"2026-01-28 15:37:18"}
+{"level":"http","message":"GET /api/predictions?rank=205&category=EWS&gender=Male&typeOfExam=JEE_MAINS&page=1&limit=3 304 171.677 ms","timestamp":"2026-01-28 15:37:18"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 200 84.860 ms","timestamp":"2026-01-28 15:37:39"}
+{"level":"http","message":"GET /api/getAllUser?page=1&limit=10 304 29.636 ms","timestamp":"2026-01-28 15:37:39"}

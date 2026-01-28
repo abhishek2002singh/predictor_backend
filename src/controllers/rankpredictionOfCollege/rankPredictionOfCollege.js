@@ -2,6 +2,7 @@
 
 const logger = require("../../config/logger");
 const Cutoff = require('../../model/uploadData/Cutoff');
+const UserData = require("../../model/userData/user");
 
 exports.rankPredictionOfCollege = async (req, res) => {
   try {
@@ -322,3 +323,76 @@ exports.getFilterOptions = async (req, res) => {
     });
   }
 };
+
+exports.userDetailsFromRankPredictions = async (req, res) => {
+  try {
+    const { mobileNumber, firstName, emailId } = req.body;
+
+    // ✅ Validation
+    if (!mobileNumber || !firstName || !emailId) {
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all required fields correctly",
+      });
+    }
+
+      const checkEntry = {
+      mobileNumber,
+       firstName,
+        emailId,
+        gainLeedFrom :"FROM_COLLEGE_SEARCH"
+        
+    };
+
+    // ✅ Check if user already exists
+    const existingUser = await UserData.findOne({ mobileNumber });
+
+    if (existingUser) {
+
+       existingUser.checkHistory.push(checkEntry);
+      existingUser.totalChecks += 1;
+      // ❌ Do NOT create new entry
+      return res.status(200).json({
+        success: true,
+        message: "User already exists",
+        data: existingUser,
+        isNewUser: false,
+      });
+    }
+
+  
+
+    // ✅ Create NEW user if mobile not found
+    const userData = await UserData.create({
+      mobileNumber,
+      firstName,
+      emailId,
+      checkHistory: [checkEntry],
+      totalChecks: 1,
+      isDataExport: false,
+    });
+
+    logger.info(`New user created for mobile: ${mobileNumber}`);
+
+    return res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      data: userData,
+      isNewUser: true,
+      totalChecks: 1,
+      isDataExport: false,
+    });
+  } catch (error) {
+    logger.error("Create user data error", {
+      message: error.message,
+      stack: error.stack,
+      mobileNumber: req.body?.mobileNumber,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to create user data",
+    });
+  }
+};
+

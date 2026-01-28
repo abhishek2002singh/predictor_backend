@@ -29,6 +29,11 @@ const checkHistorySchema = mongoose.Schema({
       type: String,
       trim: true,
     },
+     gainLeedFrom: {
+  type: [String],
+  enum: ["FROM_STUDENT_RANK", "FROM_COLLEGE_SEARCH"],
+  default: [],
+},
     checkedAt: {
       type: Date,
       default: Date.now,
@@ -99,6 +104,7 @@ const userDataSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
+
 },{
      timestamps: true,
 })
