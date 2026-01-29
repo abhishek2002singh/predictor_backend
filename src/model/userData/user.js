@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const checkHistorySchema = mongoose.Schema({
     examType: {
       type: String,
-      required: true,
+      // required: true,
       enum: ["JEE_MAINS", "JEE_ADVANCED", "CUET", "NEET", "MHT_CET", "KCET", "WBJEE", "BITSAT"],
       uppercase: true,
     },
@@ -23,7 +23,7 @@ const checkHistorySchema = mongoose.Schema({
         'Male-only',
         'Male',
         'Female'],
-      required: true,
+      // required: true,
     },
     homeState: {
       type: String,

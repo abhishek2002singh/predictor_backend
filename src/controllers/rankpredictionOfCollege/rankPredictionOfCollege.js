@@ -326,10 +326,10 @@ exports.getFilterOptions = async (req, res) => {
 
 exports.userDetailsFromRankPredictions = async (req, res) => {
   try {
-    const { mobileNumber, firstName, emailId } = req.body;
+    const { mobileNumber, firstName,lastName, emailId } = req.body;
 
     // ✅ Validation
-    if (!mobileNumber || !firstName || !emailId) {
+    if (!mobileNumber || !firstName || !emailId || !lastName) {
       return res.status(400).json({
         success: false,
         message: "Please fill all required fields correctly",
@@ -339,6 +339,7 @@ exports.userDetailsFromRankPredictions = async (req, res) => {
       const checkEntry = {
       mobileNumber,
        firstName,
+       lastName,
         emailId,
         gainLeedFrom :"FROM_COLLEGE_SEARCH"
         
@@ -366,6 +367,7 @@ exports.userDetailsFromRankPredictions = async (req, res) => {
     const userData = await UserData.create({
       mobileNumber,
       firstName,
+      lastName,
       emailId,
       checkHistory: [checkEntry],
       totalChecks: 1,
