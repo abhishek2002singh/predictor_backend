@@ -812,10 +812,18 @@ exports.getCutoffs = async (req, res) => {
       gender,
       typeOfExam,
       page = 1,
-      limit = 20
+      limit = 20,
+      year,
+      round,
+      branch,
+      institute,
+      quota
     } = req.query;
 
-    console.log('Received query params:', { rank, category, gender, typeOfExam });
+    console.log('Received query params:', { 
+      rank, category, gender, typeOfExam, 
+      year, round, branch, institute, quota 
+    });
 
     // Validate required fields
     if (!rank) {
@@ -843,34 +851,33 @@ exports.getCutoffs = async (req, res) => {
     // Build filter
     const filter = {};
     
-    // IMPORTANT: Don't filter by typeOfExam from database field
-    // Instead, we'll use institute-based filtering for JEE Advanced vs Mains
-    
-    // Category to seatType mapping
+    // FIXED: Correct category to seatType mapping
     const categorySeatTypeMap = {
       'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
       'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
-      'OBC': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
       'OBC-NCL': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
       'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)'],
       'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)'],
-      'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
-      'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
-      'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-      'SC-PwD': ['SC-PwD', 'SC (PwD)'],
-      'ST-PwD': ['ST-PwD', 'ST (PwD)']
+      'GENERAL-PWD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
+      'EWS-PWD': ['EWS-PwD', 'EWS (PwD)'],
+      'OBC-NCL-PWD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+      'SC-PWD': ['SC-PwD', 'SC (PwD)'],
+      'ST-PWD': ['ST-PwD', 'ST (PwD)']
     };
 
-    filter.seatType = { $in: categorySeatTypeMap[category] || [category] };
-    console.log('Seat type filter:', filter.seatType);
+    // FIXED: Check if category exists in map, use direct value if not
+    const seatTypes = categorySeatTypeMap[category] || [category];
+    filter.seatType = { $in: seatTypes };
+    console.log('Category:', category, 'Seat type filter:', seatTypes);
 
     // Gender filter
     if (gender && gender !== 'All') {
       const genderFilterMap = {
         'Male': ['Gender-Neutral', 'Male-only', 'M', 'BOYS', 'Male (including Supernumerary)'],
         'Female': ['Gender-Neutral', 'Female-only', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
+        'Female-only': ['Gender-Neutral', 'Female-only', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
         'Other': ['Gender-Neutral', 'Other', 'Transgender'],
-        // For general gender filter (if user doesn't specify or wants all)
+        'Gender-neutral': ['Gender-Neutral', 'Gender-neutral'],
         'All': ['Gender-Neutral', 'Male-only', 'Female-only', 'Other', 
                 'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
       };
@@ -882,28 +889,49 @@ exports.getCutoffs = async (req, res) => {
     // Rank filter
     filter.openingRank = { $lte: userRank };
     filter.closingRank = { $gte: userRank };
-    console.log('Rank filter - opening <=', userRank, 'closing >=', userRank);
+
+    // Additional filters
+    if (year && year !== 'all') {
+      filter.year = parseInt(year);
+    }
+    
+    if (round && round !== 'all') {
+      filter.round = parseInt(round);
+    }
+    
+    if (branch && branch !== 'all') {
+      filter.academicProgramName = { $regex: branch, $options: 'i' };
+    }
+    
+    if (institute && institute !== 'all') {
+      filter.institute = { $regex: institute, $options: 'i' };
+    }
+    
+    if (quota && quota !== 'all') {
+      filter.quota = quota;
+    }
 
     // KEY FIX: Filter based on institute type, NOT the typeOfExam field
-    // JEE Advanced = Only IITs
-    // JEE Mains = All except IITs
-    // BOTH = Show all colleges (both IITs and non-IITs)
-    
     if (typeOfExam === 'JEE_ADVANCED') {
-      // For JEE Advanced: Include ONLY IITs
       filter.institute = /indian institute of technology|iit/i;
-      console.log('Filtering: Including only IITs for JEE Advanced');
     } else if (typeOfExam === 'JEE_MAINS') {
-      // For JEE Mains: Exclude IITs
-      filter.institute = { $not: /indian institute of technology|iit/i };
-      console.log('Filtering: Excluding IITs for JEE Mains');
-    } else if (typeOfExam === 'BOTH') {
-      // For BOTH: Show all colleges (no institute filter)
-      console.log('Filtering: Showing all colleges (IITs and non-IITs)');
-    } else {
-      // Default: Show all colleges
-      console.log('No specific exam type filter applied, showing all colleges');
+      // If institute filter already exists, combine with AND
+      if (filter.institute) {
+        if (filter.institute.$regex) {
+          filter.institute = { 
+            $and: [
+              { $not: /indian institute of technology|iit/i },
+              { $regex: filter.institute.$regex, $options: 'i' }
+            ]
+          };
+        } else {
+          filter.institute = { $not: /indian institute of technology|iit/i };
+        }
+      } else {
+        filter.institute = { $not: /indian institute of technology|iit/i };
+      }
     }
+    // For BOTH or unspecified, include all
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
     
