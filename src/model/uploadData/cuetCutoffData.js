@@ -153,4 +153,4 @@ cuetCutoffData.methods.setDerivedFields = function() {
   return this;
 };
 
-module.exports = mongoose.model('Cutoff', cuetCutoffData);
+module.exports = mongoose.model('CuetCutoff', cuetCutoffData);

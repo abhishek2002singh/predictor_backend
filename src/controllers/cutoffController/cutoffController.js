@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const UserData = require("../../model/userData/user");
 const logger = require("../../config/logger");
+const CuetCutoff = require('../../model/uploadData/CuetCutoffData');
+
+
 
 
 // Seat type to category mapping (same as in model)
@@ -125,6 +128,8 @@ exports.uploadCutoffCSV = async (req, res) => {
     }
 
     const { year, round, typeOfExam } = req.body;
+
+    
     
     // Validate inputs
     const parsedYear = parseInt(year) || new Date().getFullYear();
@@ -350,6 +355,281 @@ exports.uploadCutoffCSV = async (req, res) => {
   }
 };
 
+
+// exports.uploadCutoffCSV = async (req, res) => {
+//   let filePath = null;
+  
+//   try {
+//     console.log('Upload request received');
+    
+//     if (!req.file) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'No CSV file uploaded'
+//       });
+//     }
+
+//     filePath = req.file.path;
+    
+//     // Verify file exists
+//     if (!fs.existsSync(filePath)) {
+//       console.error('File does not exist at path:', filePath);
+//       return res.status(400).json({
+//         success: false,
+//         message: 'Uploaded file not found'
+//       });
+//     }
+
+//     const { year, round, typeOfExam } = req.body;
+    
+//     // Validate inputs
+//     const parsedYear = parseInt(year) || new Date().getFullYear();
+//     const parsedRound = parseInt(round) || 1;
+    
+//     if (parsedYear < 2015 || parsedYear > new Date().getFullYear() + 1) {
+//       return res.status(400).json({
+//         success: false,
+//         message: `Invalid year. Must be between 2015 and ${new Date().getFullYear() + 1}`
+//       });
+//     }
+    
+//     if (parsedRound < 1 || parsedRound > 7) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'Invalid round. Must be between 1 and 7'
+//       });
+//     }
+
+//     // Validate exam type
+//     const examType = (typeOfExam || '').toUpperCase();
+//     let Model;
+    
+//     switch(examType) {
+//       case 'JEE_MAINS':
+//       case 'JEE':
+//         Model = Cutoff; // JEE Main cutoff model
+//         break;
+//       case 'CUET':
+//         Model = CuetCutoff; // CUET cutoff model
+//         break;
+//       default:
+//         return res.status(400).json({
+//           success: false,
+//           message: 'Invalid exam type. Must be either "JEE_Mains" or "CUET"'
+//         });
+//     }
+
+//     console.log(`Starting CSV parsing for ${filePath}. Exam type: ${examType}, Model: ${Model.modelName}`);
+
+//     // Parse CSV
+//     const results = [];
+//     let rowCount = 0;
+//     let errorCount = 0;
+    
+//     const parsePromise = new Promise((resolve, reject) => {
+//       const stream = fs.createReadStream(filePath)
+//         .pipe(csv())
+//         .on('data', (row) => {
+//           rowCount++;
+          
+//           try {
+//             // Extract and clean data
+//             const seatType = cleanSeatType(row['Seat Type'] || row['Seat Type'] || 'OPEN');
+//             const category = getCategoryFromSeatType(seatType);
+            
+//             const cleanedRow = {
+//               institute: (row.Institute || row.institute || '').toString().trim().slice(0, 500),
+//               academicProgramName: (row['Academic Program Name'] || 
+//                                    row.academicProgramName ||
+//                                    row.Program || 
+//                                    '').toString().trim().slice(0, 500),
+//               typeOfExam: examType, // Use the validated exam type
+//               seatType: seatType,
+//               gender: cleanGender(row.Gender || row.gender || 'Gender-Neutral'),
+//               openingRank: cleanRank(row['Opening Rank'] || row.openingRank),
+//               closingRank: cleanRank(row['Closing Rank'] || row.closingRank),
+//               year: parsedYear,
+//               round: parsedRound,
+//               category: category,
+//               isPwd: seatType.includes('PwD')
+//             };
+            
+//             // Add uploadedBy if available
+//             if (req.user && req.user.id) {
+//               cleanedRow.uploadedBy = req.user.id;
+//             }
+            
+//             // Basic validation
+//             if (!cleanedRow.institute || !cleanedRow.academicProgramName) {
+//               console.warn(`Row ${rowCount} skipped - missing required fields`);
+//               errorCount++;
+//               return;
+//             }
+            
+//             // Validate ranks
+//             if (cleanedRow.openingRank === 999999 || cleanedRow.closingRank === 999999) {
+//               console.warn(`Row ${rowCount} skipped - invalid ranks:`, {
+//                 opening: row['Opening Rank'],
+//                 closing: row['Closing Rank']
+//               });
+//               errorCount++;
+//               return;
+//             }
+            
+//             // Ensure closing rank >= opening rank
+//             if (cleanedRow.closingRank < cleanedRow.openingRank) {
+//               // Swap if they're reversed
+//               [cleanedRow.openingRank, cleanedRow.closingRank] = 
+//               [cleanedRow.closingRank, cleanedRow.openingRank];
+//             }
+            
+//             results.push(cleanedRow);
+            
+//           } catch (rowError) {
+//             console.error(`Error processing row ${rowCount}:`, rowError);
+//             errorCount++;
+//           }
+//         })
+//         .on('end', () => {
+//           console.log(`CSV parsing completed. Total rows: ${rowCount}, Valid records: ${results.length}, Errors: ${errorCount}`);
+          
+//           // Clean up file
+//           try {
+//             if (fs.existsSync(filePath)) {
+//               fs.unlinkSync(filePath);
+//               console.log('Temporary file cleaned up');
+//             }
+//           } catch (cleanupError) {
+//             console.warn('Could not delete temp file:', cleanupError.message);
+//           }
+          
+//           resolve();
+//         })
+//         .on('error', (error) => {
+//           console.error('CSV parsing stream error:', error);
+//           reject(error);
+//         });
+//     });
+
+//     await parsePromise;
+    
+//     if (results.length === 0) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'No valid data found in CSV',
+//         stats: {
+//           totalRows: rowCount,
+//           validRows: results.length,
+//           errorRows: errorCount
+//         }
+//       });
+//     }
+
+//     console.log(`Processing ${results.length} records for ${Model.modelName}...`);
+    
+//     // Process in smaller batches to avoid memory issues
+//     const batchSize = 100;
+//     let insertedCount = 0;
+//     let modifiedCount = 0;
+//     let failedCount = 0;
+    
+//     for (let i = 0; i < results.length; i += batchSize) {
+//       const batch = results.slice(i, i + batchSize);
+//       console.log(`Processing batch ${Math.floor(i/batchSize) + 1} of ${Math.ceil(results.length/batchSize)}`);
+      
+//       for (const record of batch) {
+//         try {
+//           // Find existing record - search criteria includes exam type
+//           const existing = await Model.findOne({
+//             institute: record.institute,
+//             academicProgramName: record.academicProgramName,
+//             typeOfExam: record.typeOfExam, // Include exam type in search
+//             seatType: record.seatType,
+//             gender: record.gender,
+//             year: record.year,
+//             round: record.round
+//           });
+
+//           if (existing) {
+//             // Update existing record
+//             existing.openingRank = record.openingRank;
+//             existing.closingRank = record.closingRank;
+//             existing.category = record.category;
+//             existing.isPwd = record.isPwd;
+//             await existing.save();
+//             modifiedCount++;
+//           } else {
+//             // Create new record
+//             const cutoff = new Model(record);
+            
+//             // Manually set derived fields to ensure consistency
+//             cutoff.category = record.category;
+//             cutoff.isPwd = record.isPwd;
+            
+//             await cutoff.save();
+//             insertedCount++;
+//           }
+//         } catch (saveError) {
+//           console.error('Failed to save record:', {
+//             institute: record.institute,
+//             program: record.academicProgramName,
+//             examType: record.typeOfExam,
+//             error: saveError.message
+//           });
+//           failedCount++;
+//         }
+//       }
+      
+//       // Small delay between batches to prevent overwhelming the database
+//       if (i + batchSize < results.length) {
+//         await new Promise(resolve => setTimeout(resolve, 100));
+//       }
+//     }
+    
+//     console.log('Database operation completed:', {
+//       model: Model.modelName,
+//       inserted: insertedCount,
+//       modified: modifiedCount,
+//       failed: failedCount
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       message: `CSV data uploaded successfully to ${Model.modelName}`,
+//       data: {
+//         examType: examType,
+//         model: Model.modelName,
+//         inserted: insertedCount,
+//         modified: modifiedCount,
+//         failed: failedCount,
+//         total: insertedCount + modifiedCount,
+//         parsedRows: rowCount,
+//         validRows: results.length,
+//         errorRows: errorCount
+//       }
+//     });
+    
+//   } catch (error) {
+//     console.error('CSV upload error:', error);
+    
+//     // Clean up file on error
+//     if (filePath && fs.existsSync(filePath)) {
+//       try {
+//         fs.unlinkSync(filePath);
+//         console.log('Cleaned up temp file after error');
+//       } catch (cleanupError) {
+//         console.warn('Could not delete temp file after error:', cleanupError.message);
+//       }
+//     }
+    
+//     res.status(500).json({
+//       success: false,
+//       message: 'Error uploading CSV data',
+//       error: error.message
+//     });
+//   }
+// };
+
 // Alternative: Direct database insertion without middleware issues
 exports.uploadCutoffCSVDirect = async (req, res) => {
   try {
@@ -451,356 +731,6 @@ exports.uploadCutoffCSVDirect = async (req, res) => {
   }
 };
 
-// Rest of your controller functions (getCutoffs, getFilterOptions, etc.) remain the same
-// Get cutoff predictions (public endpoint)
-// exports.getCutoffs = async (req, res) => {
-//   try {
-//     const {
-//       rank,
-//       category,
-//       gender,
-//       // year = new Date().getFullYear(),
-//       // round = 6,
-//       // institute,
-//       // branch,
-//       typeOfExam,
-//       page = 1,
-//       limit = 20
-//     } = req.query;
-
-//     const filter = {};
-    
-//     if (year) filter.year = parseInt(year);
-//     if (round) filter.round = parseInt(round);
-    
-//     if (category) {
-//       const categoryMap = {
-//         'GENERAL': ['OPEN'],
-//         'EWS': ['EWS'],
-//         'OBC-NCL': ['OBC-NCL'],
-//         'SC': ['SC'],
-//         'ST': ['ST'],
-//         'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD'],
-//         'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
-//         'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-//         'SC-PwD': ['SC-PwD', 'SC (PwD)'],
-//         'ST-PwD': ['ST-PwD', 'ST (PwD)']
-//       };
-      
-//       filter.seatType = { $in: categoryMap[category] || [category] };
-//     }
-    
-//     if (gender) filter.gender = gender;
-//     if (institute) filter.institute = { $regex: institute, $options: 'i' };
-//     if (branch) filter.academicProgramName = { $regex: branch, $options: 'i' };
-    
-//     if (rank) {
-//       const userRank = parseInt(rank);
-//       filter.openingRank = { $lte: userRank };
-//       filter.closingRank = { $gte: userRank };
-//     }
-
-//     const skip = (parseInt(page) - 1) * parseInt(limit);
-    
-//     const cutoffs = await Cutoff.find(filter)
-//       .sort({ closingRank: 1 })
-//       .skip(skip)
-//       .limit(parseInt(limit));
-    
-//     const total = await Cutoff.countDocuments(filter);
-    
-//     const cutoffsWithProbability = cutoffs.map(cutoff => {
-//       const cutoffObj = cutoff.toObject();
-      
-//       if (rank) {
-//         const userRank = parseInt(rank);
-//         const totalSeats = cutoff.closingRank - cutoff.openingRank + 1;
-//         const position = userRank - cutoff.openingRank + 1;
-//         const probability = (position / totalSeats) * 100;
-        
-//         if (probability >= 70) {
-//           cutoffObj.probability = 'High Chance';
-//           cutoffObj.probabilityColor = 'green';
-//         } else if (probability >= 30) {
-//           cutoffObj.probability = 'Medium Chance';
-//           cutoffObj.probabilityColor = 'yellow';
-//         } else {
-//           cutoffObj.probability = 'Low Chance';
-//           cutoffObj.probabilityColor = 'red';
-//         }
-        
-//         cutoffObj.probabilityPercentage = Math.round(probability);
-//       }
-      
-//       return cutoffObj;
-//     });
-    
-//     res.status(200).json({
-//       success: true,
-//       data: cutoffsWithProbability,
-//       pagination: {
-//         page: parseInt(page),
-//         limit: parseInt(limit),
-//         total,
-//         pages: Math.ceil(total / parseInt(limit))
-//       }
-//     });
-    
-//   } catch (error) {
-//     console.error('Get cutoffs error:', error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Error fetching cutoff data',
-//       error: error.message
-//     });
-//   }
-// };
-
-// controllers/cutoffController.js
-
-
-// exports.getCutoffs = async (req, res) => {
-//   try {
-//     const {
-//       rank,
-//       category,
-//       gender,
-//       typeOfExam,
-//       page = 1,
-//       limit = 20
-//     } = req.query;
-
-//     console.log('Received query params:', { rank, category, gender, typeOfExam }); // Debug
-
-//     // Validate required fields
-//     if (!rank) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Rank is required",
-//       });
-//     }
-
-//     if (!category) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Category is required",
-//       });
-//     }
-
-//     if (!typeOfExam) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Exam type is required",
-//       });
-//     }
-
-//     const userRank = parseInt(rank);
-//     if (isNaN(userRank) || userRank <= 0) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Invalid rank value",
-//       });
-//     }
-
-//     // Build filter - using exact field names from your database
-//     const filter = {
-//       typeOfExam: typeOfExam // Use the exact field name from your database
-//     };
-
-//     // Category to seatType mapping based on your actual database data
-//     // Based on your data, seatType values are: 'OBC-NCL', 'SC', 'ST', etc.
-//     const categorySeatTypeMap = {
-//       'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
-//       'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
-//       'OBC': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-//       'OBC-NCL': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-//       'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)'],
-//       'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)'],
-//       'GENERAL-PwD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
-//       'EWS-PwD': ['EWS-PwD', 'EWS (PwD)'],
-//       'OBC-NCL-PwD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-//       'SC-PwD': ['SC-PwD', 'SC (PwD)'],
-//       'ST-PwD': ['ST-PwD', 'ST (PwD)']
-//     };
-
-//     filter.seatType = { $in: categorySeatTypeMap[category] || [category] };
-//     console.log('Seat type filter:', filter.seatType); // Debug
-
-//     // Gender filter based on your actual database values
-//     if (gender && gender !== 'All') {
-//       const genderFilterMap = {
-//         'Male': ['Gender-Neutral', 'Male-only', 'M', 'BOYS', 'Male (including Supernumerary)'],
-//         'Female': ['Gender-Neutral', 'Female-only', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
-//         'Other': ['Gender-Neutral', 'Other', 'Transgender'],
-//         // For general gender filter (if user doesn't specify or wants all)
-//         'All': ['Gender-Neutral', 'Male-only', 'Female-only', 'Other', 
-//                 'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
-//       };
-      
-//       filter.gender = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
-//       console.log('Gender filter:', filter.gender); // Debug
-//     }
-
-//     // Rank filter - find colleges where the rank falls within opening-closing range
-//     filter.openingRank = { $lte: userRank };
-//     filter.closingRank = { $gte: userRank };
-//     console.log('Rank filter - opening:', filter.openingRank, 'closing:', filter.closingRank); // Debug
-
-//     // Add IIT filtering based on exam type - CORRECTED FIELD NAME
-//     if (typeOfExam === 'JEE_MAINS') {
-//       // For JEE Mains: Exclude records containing "Indian Institute of Technology"
-//       filter.institute = { $not: /Indian Institute of Technology/i };
-//       console.log('Filtering: Excluding IITs for JEE Mains'); // Debug
-//     } else if (typeOfExam === 'JEE_ADVANCED') {
-//       // For JEE Advanced: Include only records containing "Indian Institute of Technology"
-//       filter.institute = /Indian Institute of Technology/i;
-//       console.log('Filtering: Including only IITs for JEE Advanced'); // Debug
-//     }
-//     // Note: If typeOfExam is neither of these, no institute filter is applied
-
-//     const skip = (parseInt(page) - 1) * parseInt(limit);
-    
-//     console.log('Final filter:', JSON.stringify(filter, null, 2)); // Debug
-    
-//     // Fetch cutoffs with pagination
-//     const cutoffs = await Cutoff.find(filter)
-//       .sort({ closingRank: 1 })
-//       .skip(skip)
-//       .limit(parseInt(limit));
-    
-//     const total = await Cutoff.countDocuments(filter);
-    
-//     console.log('Found cutoffs:', cutoffs.length, 'Total:', total); // Debug
-    
-//     // Calculate probability for each cutoff
-//     // const cutoffsWithProbability = cutoffs.map(cutoff => {
-//     //   const cutoffObj = cutoff.toObject();
-      
-//     //   // Calculate probability based on rank position within range
-//     //   const rankRange = cutoff.closingRank - cutoff.openingRank + 1;
-//     //   const rankPosition = userRank - cutoff.openingRank + 1;
-//     //   const probabilityPercentage = Math.round((rankPosition / rankRange) * 100);
-      
-//     //   // Determine probability category
-//     //   let probability, probabilityColor;
-//     //   if (probabilityPercentage >= 70) {
-//     //     probability = 'High Chance';
-//     //     probabilityColor = 'green';
-//     //   } else if (probabilityPercentage >= 40) {
-//     //     probability = 'Medium Chance';
-//     //     probabilityColor = 'yellow';
-//     //   } else if (probabilityPercentage >= 20) {
-//     //     probability = 'Low Chance';
-//     //     probabilityColor = 'orange';
-//     //   } else {
-//     //     probability = 'Very Low Chance';
-//     //     probabilityColor = 'red';
-//     //   }
-      
-//     //   cutoffObj.probability = probability;
-//     //   cutoffObj.probabilityColor = probabilityColor;
-//     //   cutoffObj.probabilityPercentage = probabilityPercentage;
-      
-//     //   return cutoffObj;
-//     // });
-//     // Calculate probability for each cutoff
-// const cutoffsWithProbability = cutoffs.map(cutoff => {
-//   const cutoffObj = cutoff.toObject();
-
-//   const openingRank = cutoff.openingRank;
-//   const closingRank = cutoff.closingRank;
-
-//   // Safety check
-//   if (
-//     !openingRank ||
-//     !closingRank ||
-//     userRank < openingRank ||
-//     userRank > closingRank
-//   ) {
-//     cutoffObj.probability = "Very Low Chance";
-//     cutoffObj.probabilityColor = "red";
-//     cutoffObj.probabilityPercentage = 5;
-//     return cutoffObj;
-//   }
-
-//   // Rank range
-//   const range = closingRank - openingRank;
-
-//   // Distance from closing rank (higher is better)
-//   const distanceFromClosing = closingRank - userRank;
-
-//   // Base probability (reverse linear)
-//   let probabilityPercentage =
-//     (distanceFromClosing / range) * 100;
-
-//   // Smooth curve (realistic)
-//   probabilityPercentage = Math.pow(probabilityPercentage / 100, 0.75) * 100;
-
-//   // Clamp values (avoid extremes)
-//   probabilityPercentage = Math.max(5, Math.min(Math.round(probabilityPercentage), 95));
-
-//   // Probability label
-//   let probability, probabilityColor;
-
-//   if (probabilityPercentage >= 75) {
-//     probability = "High Chance";
-//     probabilityColor = "green";
-//   } else if (probabilityPercentage >= 50) {
-//     probability = "Medium Chance";
-//     probabilityColor = "yellow";
-//   } else if (probabilityPercentage >= 30) {
-//     probability = "Low Chance";
-//     probabilityColor = "orange";
-//   } else {
-//     probability = "Very Low Chance";
-//     probabilityColor = "red";
-//   }
-
-//   cutoffObj.probability = probability;
-//   cutoffObj.probabilityColor = probabilityColor;
-//   cutoffObj.probabilityPercentage = probabilityPercentage;
-
-//   return cutoffObj;
-// });
-
-    
-//     // Get summary statistics
-//     const summary = {
-//       totalColleges: total,
-//       collegesShown: cutoffs.length,
-//       highestProbability: cutoffsWithProbability.length > 0 
-//         ? Math.max(...cutoffsWithProbability.map(c => c.probabilityPercentage))
-//         : 0,
-//       lowestProbability: cutoffsWithProbability.length > 0 
-//         ? Math.min(...cutoffsWithProbability.map(c => c.probabilityPercentage))
-//         : 0,
-//       averageProbability: cutoffsWithProbability.length > 0 
-//         ? Math.round(cutoffsWithProbability.reduce((sum, c) => sum + c.probabilityPercentage, 0) / cutoffsWithProbability.length)
-//         : 0
-//     };
-    
-//     res.status(200).json({
-//       success: true,
-//       data: cutoffsWithProbability,
-//       summary,
-//       pagination: {
-//         page: parseInt(page),
-//         limit: parseInt(limit),
-//         total,
-//         pages: Math.ceil(total / parseInt(limit))
-//       }
-//     });
-    
-//   } catch (error) {
-//     console.error('Get cutoffs error:', error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Error fetching cutoff data',
-//       error: process.env.NODE_ENV === "development" ? error.message : undefined,
-//     });
-//   }
-// };
-// Get filter options
 
 
 
