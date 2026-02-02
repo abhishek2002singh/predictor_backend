@@ -848,9 +848,41 @@ exports.getCutoffs = async (req, res) => {
       });
     }
 
-    // Build filter
-    const filter = {};
-    
+    // Function to perform search with given filters
+    const performSearch = async (filters, searchMode = 'STRICT') => {
+      console.log(`Search Mode: ${searchMode}`);
+      console.log('Filters:', JSON.stringify(filters, null, 2));
+      
+      const skip = (parseInt(page) - 1) * parseInt(limit);
+      
+      // Use aggregation for better performance and sorting
+      const aggregationPipeline = [
+        { $match: filters },
+        { 
+          $addFields: {
+            // Calculate rank difference for sorting
+            rankDifference: {
+              $abs: {
+                $subtract: [userRank, { $divide: [{ $add: ["$openingRank", "$closingRank"] }, 2] }]
+              }
+            }
+          }
+        },
+        { $sort: { rankDifference: 1 } }, // Sort by closest rank
+        { $skip: skip },
+        { $limit: parseInt(limit) }
+      ];
+
+      const [cutoffs, total] = await Promise.all([
+        Cutoff.aggregate(aggregationPipeline),
+        Cutoff.countDocuments(filters)
+      ]);
+
+      console.log(`Found ${cutoffs.length} cutoffs in ${searchMode} mode, Total: ${total}`);
+      
+      return { cutoffs, total };
+    };
+
     // FIXED: Correct category to seatType mapping
     const categorySeatTypeMap = {
       'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
@@ -865,12 +897,24 @@ exports.getCutoffs = async (req, res) => {
       'ST-PWD': ['ST-PwD', 'ST (PwD)']
     };
 
-    // FIXED: Check if category exists in map, use direct value if not
-    const seatTypes = categorySeatTypeMap[category] || [category];
-    filter.seatType = { $in: seatTypes };
-    console.log('Category:', category, 'Seat type filter:', seatTypes);
+    // Search with FALLBACK STRATEGY
+    let results = null;
+    let searchMode = 'STRICT';
+    let minResultsRequired = 5; // Minimum results we want to show
+    
+    // STRICT MODE: Exact rank match with all filters
+    let baseFilters = {
+      seatType: { $in: categorySeatTypeMap[category] || [category] }
+    };
 
-    // Gender filter
+    // Add rank filter with initial strict range
+    const rankBufferPercentage = 0.10; // 10% buffer initially
+    const rankBuffer = Math.max(100, Math.round(userRank * rankBufferPercentage));
+    
+    baseFilters.openingRank = { $lte: userRank + rankBuffer };
+    baseFilters.closingRank = { $gte: userRank - rankBuffer };
+
+    // Add gender filter
     if (gender && gender !== 'All') {
       const genderFilterMap = {
         'Male': ['Gender-Neutral', 'Male-only', 'M', 'BOYS', 'Male (including Supernumerary)'],
@@ -882,129 +926,183 @@ exports.getCutoffs = async (req, res) => {
                 'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
       };
       
-      filter.gender = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
-      console.log('Gender filter:', filter.gender);
+      baseFilters.gender = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
     }
 
-    // Rank filter
-    filter.openingRank = { $lte: userRank };
-    filter.closingRank = { $gte: userRank };
-
-    // Additional filters
+    // Add additional filters
     if (year && year !== 'all') {
-      filter.year = parseInt(year);
+      baseFilters.year = parseInt(year);
     }
     
     if (round && round !== 'all') {
-      filter.round = parseInt(round);
+      baseFilters.round = parseInt(round);
     }
     
     if (branch && branch !== 'all') {
-      filter.academicProgramName = { $regex: branch, $options: 'i' };
+      baseFilters.academicProgramName = { $regex: branch, $options: 'i' };
     }
     
     if (institute && institute !== 'all') {
-      filter.institute = { $regex: institute, $options: 'i' };
+      baseFilters.institute = { $regex: institute, $options: 'i' };
     }
     
     if (quota && quota !== 'all') {
-      filter.quota = quota;
+      baseFilters.quota = quota;
     }
 
-    // KEY FIX: Filter based on institute type, NOT the typeOfExam field
+    // Apply exam type filter
     if (typeOfExam === 'JEE_ADVANCED') {
-      filter.institute = /indian institute of technology|iit/i;
+      baseFilters.institute = /indian institute of technology|iit/i;
     } else if (typeOfExam === 'JEE_MAINS') {
-      // If institute filter already exists, combine with AND
-      if (filter.institute) {
-        if (filter.institute.$regex) {
-          filter.institute = { 
-            $and: [
-              { $not: /indian institute of technology|iit/i },
-              { $regex: filter.institute.$regex, $options: 'i' }
-            ]
-          };
-        } else {
-          filter.institute = { $not: /indian institute of technology|iit/i };
-        }
-      } else {
-        filter.institute = { $not: /indian institute of technology|iit/i };
-      }
+      baseFilters.institute = { $not: /indian institute of technology|iit/i };
     }
-    // For BOTH or unspecified, include all
 
-    const skip = (parseInt(page) - 1) * parseInt(limit);
+    // Try STRICT search first
+    results = await performSearch(baseFilters, 'STRICT');
     
-    console.log('Final filter:', JSON.stringify(filter, null, 2));
-    
-    // Fetch cutoffs with pagination
-    const cutoffs = await Cutoff.find(filter)
-      .sort({ closingRank: 1 })
-      .skip(skip)
-      .limit(parseInt(limit));
-    
-    const total = await Cutoff.countDocuments(filter);
-    
-    console.log('Found cutoffs:', cutoffs.length, 'Total:', total);
+    // FALLBACK 1: If too few results, expand rank range to 20%
+    if (results.total < minResultsRequired && searchMode === 'STRICT') {
+      searchMode = 'FALLBACK_1';
+      const expandedRankBuffer = Math.max(200, Math.round(userRank * 0.20));
+      baseFilters.openingRank = { $lte: userRank + expandedRankBuffer };
+      baseFilters.closingRank = { $gte: userRank - expandedRankBuffer };
+      
+      console.log(`Expanding rank range to ±${expandedRankBuffer} (20%)`);
+      results = await performSearch(baseFilters, 'FALLBACK_1');
+    }
+
+    // FALLBACK 2: If still too few, remove gender filter (if applied)
+    if (results.total < minResultsRequired && searchMode === 'FALLBACK_1' && baseFilters.gender) {
+      searchMode = 'FALLBACK_2';
+      delete baseFilters.gender;
+      console.log('Removing gender filter');
+      results = await performSearch(baseFilters, 'FALLBACK_2');
+    }
+
+    // FALLBACK 3: If still too few, remove institute type filter
+    if (results.total < minResultsRequired && searchMode === 'FALLBACK_2') {
+      searchMode = 'FALLBACK_3';
+      if (baseFilters.institute && (typeOfExam === 'JEE_ADVANCED' || typeOfExam === 'JEE_MAINS')) {
+        delete baseFilters.institute;
+        console.log('Removing institute type filter');
+      }
+      results = await performSearch(baseFilters, 'FALLBACK_3');
+    }
+
+    // FALLBACK 4: If still too few, use broader category mapping
+    if (results.total < minResultsRequired && searchMode === 'FALLBACK_3') {
+      searchMode = 'FALLBACK_4';
+      // Use broader category matching
+      const broaderCategoryMap = {
+        'GENERAL': ['OPEN', 'General', 'GEN', 'OPEN (PwD)', 'GEN-PwD', 'OPEN-PWD'],
+        'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)', 'EWS-PWD'],
+        'OBC-NCL': ['OBC-NCL', 'OBC', 'OBC (NCL)', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL-PWD'],
+        'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)', 'SC-PWD'],
+        'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)', 'ST-PWD']
+      };
+      
+      baseFilters.seatType = { $in: broaderCategoryMap[category] || [category] };
+      console.log('Using broader category mapping');
+      results = await performSearch(baseFilters, 'FALLBACK_4');
+    }
+
+    // FALLBACK 5: Last resort - show any colleges within rank range regardless of other filters
+    if (results.total < minResultsRequired && searchMode === 'FALLBACK_4') {
+      searchMode = 'FALLBACK_5';
+      const lastResortFilters = {
+        openingRank: { $lte: userRank + 500 },
+        closingRank: { $gte: userRank - 500 },
+        seatType: { $regex: category, $options: 'i' }
+      };
+      
+      // Keep only essential filters
+      if (year && year !== 'all') lastResortFilters.year = parseInt(year);
+      if (round && round !== 'all') lastResortFilters.round = parseInt(round);
+      
+      console.log('Using last resort fallback with wide rank range');
+      results = await performSearch(lastResortFilters, 'FALLBACK_5');
+    }
+
+    const { cutoffs, total } = results;
     
     // Calculate probability for each cutoff
-    const cutoffsWithProbability = cutoffs.map(cutoff => {
-      const cutoffObj = cutoff.toObject();
+const cutoffsWithProbability = cutoffs.map(cutoff => {
+  const cutoffObj = cutoff;
 
-      const openingRank = cutoff.openingRank;
-      const closingRank = cutoff.closingRank;
+  const openingRank = cutoff.openingRank;
+  const closingRank = cutoff.closingRank;
 
-      // Safety check
-      if (
-        !openingRank ||
-        !closingRank ||
-        userRank < openingRank ||
-        userRank > closingRank
-      ) {
-        cutoffObj.probability = "Very Low Chance";
-        cutoffObj.probabilityColor = "red";
-        cutoffObj.probabilityPercentage = 5;
-        return cutoffObj;
-      }
+  let probabilityPercentage = 0;
 
-      // Rank range
-      const range = closingRank - openingRank;
+  if (!openingRank || !closingRank) {
+    probabilityPercentage = 20;
+  } else {
+    const range = closingRank - openingRank;
 
-      // Distance from closing rank (higher is better)
-      const distanceFromClosing = closingRank - userRank;
+    // 🥇 1️⃣ DOMINANT ZONE (TOPPER LOGIC)
+    if (userRank <= openingRank) {
+      const dominance = Math.min(1, (openingRank - userRank) / Math.max(range, 1));
+      probabilityPercentage = 80 + dominance * 15; // 80–95
+    }
 
-      // Base probability (reverse linear)
-      let probabilityPercentage = (distanceFromClosing / range) * 100;
+    // ✅ 2️⃣ SAFE ZONE (INSIDE CUTOFF)
+    else if (userRank > openingRank && userRank <= closingRank) {
+      const closeness = 1 - (userRank - openingRank) / Math.max(range, 1);
+      probabilityPercentage = 60 + closeness * 30; // 60–90
+    }
 
-      // Smooth curve
-      probabilityPercentage = Math.pow(probabilityPercentage / 100, 0.75) * 100;
+    // ⚠️ 3️⃣ RISK ZONE (OUTSIDE CUTOFF)
+    else {
+      const distance = userRank - closingRank;
+      const tolerance = Math.max(range * 0.6, userRank * 0.08);
 
-      // Clamp values
-      probabilityPercentage = Math.max(5, Math.min(Math.round(probabilityPercentage), 95));
-
-      // Probability label
-      let probability, probabilityColor;
-
-      if (probabilityPercentage >= 75) {
-        probability = "High Chance";
-        probabilityColor = "green";
-      } else if (probabilityPercentage >= 50) {
-        probability = "Medium Chance";
-        probabilityColor = "yellow";
-      } else if (probabilityPercentage >= 30) {
-        probability = "Low Chance";
-        probabilityColor = "orange";
+      if (distance <= tolerance) {
+        probabilityPercentage = 35 + (1 - distance / tolerance) * 25; // 35–60
       } else {
-        probability = "Very Low Chance";
-        probabilityColor = "red";
+        probabilityPercentage = 15 + Math.max(0, 1 - distance / (tolerance * 2)) * 15; // 15–30
       }
+    }
+  }
 
-      cutoffObj.probability = probability;
-      cutoffObj.probabilityColor = probabilityColor;
-      cutoffObj.probabilityPercentage = probabilityPercentage;
+  // 🧠 Mild search-mode adjustment (NO harsh penalty)
+  const modeFactor = {
+    STRICT: 1.05,
+    FALLBACK_1: 1.0,
+    FALLBACK_2: 0.97,
+    FALLBACK_3: 0.94,
+    FALLBACK_4: 0.9,
+    FALLBACK_5: 0.85
+  };
 
-      return cutoffObj;
-    });
+  probabilityPercentage *= modeFactor[searchMode] || 0.95;
+
+  probabilityPercentage = Math.round(
+    Math.max(15, Math.min(probabilityPercentage, 95))
+  );
+
+  // Labels
+  let probability, probabilityColor;
+  if (probabilityPercentage >= 70) {
+    probability = "High Chance";
+    probabilityColor = "green";
+  } else if (probabilityPercentage >= 45) {
+    probability = "Moderate Chance";
+    probabilityColor = "yellow";
+  } else {
+    probability = "Low Chance";
+    probabilityColor = "orange";
+  }
+
+  cutoffObj.probabilityPercentage = probabilityPercentage;
+  cutoffObj.probability = probability;
+  cutoffObj.probabilityColor = probabilityColor;
+  cutoffObj.searchMode = searchMode;
+
+  return cutoffObj;
+});
+
+
+
     
     // Get summary statistics
     const summary = {
@@ -1018,7 +1116,8 @@ exports.getCutoffs = async (req, res) => {
         : 0,
       averageProbability: cutoffsWithProbability.length > 0 
         ? Math.round(cutoffsWithProbability.reduce((sum, c) => sum + c.probabilityPercentage, 0) / cutoffsWithProbability.length)
-        : 0
+        : 0,
+      searchModeUsed: searchMode
     };
     
     res.status(200).json({
