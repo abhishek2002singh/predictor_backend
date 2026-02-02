@@ -1125,6 +1125,7 @@ const cutoffsWithProbability = cutoffs.map(cutoff => {
     });
   }
 };
+
 exports.getFilterOptions = async (req, res) => {
   try {
     const institutes = await Cutoff.distinct('institute');
