@@ -4,7 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const UserData = require("../../model/userData/user");
 const logger = require("../../config/logger");
-const CuetCutoff = require('../../model/uploadData/CuetCutoffData');
+// const CuetCutoff = require('../../model/uploadData/CuetCutoffData');
+const CuetCutoffData = require('../../model/uploadData/CuetCutoffData');
 
 
 
@@ -103,259 +104,6 @@ const cleanRank = (rank) => {
 };
 
 // SIMPLIFIED UPLOAD FUNCTION - Focus on getting it working first
-exports.uploadCutoffCSV = async (req, res) => {
-  let filePath = null;
-  
-  try {
-    console.log('Upload request received');
-    
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: 'No CSV file uploaded'
-      });
-    }
-
-    filePath = req.file.path;
-    
-    // Verify file exists
-    if (!fs.existsSync(filePath)) {
-      console.error('File does not exist at path:', filePath);
-      return res.status(400).json({
-        success: false,
-        message: 'Uploaded file not found'
-      });
-    }
-
-    const { year, round, typeOfExam } = req.body;
-
-    
-    
-    // Validate inputs
-    const parsedYear = parseInt(year) || new Date().getFullYear();
-    const parsedRound = parseInt(round) || 1;
-    
-    if (parsedYear < 2015 || parsedYear > new Date().getFullYear() + 1) {
-      return res.status(400).json({
-        success: false,
-        message: `Invalid year. Must be between 2015 and ${new Date().getFullYear() + 1}`
-      });
-    }
-    
-    if (parsedRound < 1 || parsedRound > 7) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid round. Must be between 1 and 7'
-      });
-    }
-
-    console.log(`Starting CSV parsing for ${filePath}`);
-    
-    // Parse CSV
-    const results = [];
-    let rowCount = 0;
-    let errorCount = 0;
-    
-    const parsePromise = new Promise((resolve, reject) => {
-      const stream = fs.createReadStream(filePath)
-        .pipe(csv())
-        .on('data', (row) => {
-          rowCount++;
-          
-          try {
-            // Extract and clean data
-            const seatType = cleanSeatType(row['Seat Type'] || row['Seat Type'] || 'OPEN');
-            const category = getCategoryFromSeatType(seatType);
-            
-            const cleanedRow = {
-              institute: (row.Institute || row.institute || '').toString().trim().slice(0, 500),
-              academicProgramName: (row['Academic Program Name'] || 
-                                   row.academicProgramName ||
-                                   row.Program || 
-                                   '').toString().trim().slice(0, 500),
-              seatType: seatType,
-              gender: cleanGender(row.Gender || row.gender || 'Gender-Neutral'),
-              openingRank: cleanRank(row['Opening Rank'] || row.openingRank),
-              closingRank: cleanRank(row['Closing Rank'] || row.closingRank),
-              year: parsedYear,
-              round: parsedRound,
-              typeOfExam: row['Exam Type'] || row['typeOfExam'] || typeOfExam || 'JEE_MAINS',
-              category: category,
-              isPwd: seatType.includes('PwD')
-            };
-            
-            // Add uploadedBy if available
-            if (req.user && req.user.id) {
-              cleanedRow.uploadedBy = req.user.id;
-            }
-            
-            // Basic validation
-            if (!cleanedRow.institute || !cleanedRow.academicProgramName) {
-              console.warn(`Row ${rowCount} skipped - missing required fields`);
-              errorCount++;
-              return;
-            }
-            
-            // Validate ranks
-            if (cleanedRow.openingRank === 999999 || cleanedRow.closingRank === 999999) {
-              console.warn(`Row ${rowCount} skipped - invalid ranks:`, {
-                opening: row['Opening Rank'],
-                closing: row['Closing Rank']
-              });
-              errorCount++;
-              return;
-            }
-            
-            // Ensure closing rank >= opening rank
-            if (cleanedRow.closingRank < cleanedRow.openingRank) {
-              // Swap if they're reversed
-              [cleanedRow.openingRank, cleanedRow.closingRank] = 
-              [cleanedRow.closingRank, cleanedRow.openingRank];
-            }
-            
-            results.push(cleanedRow);
-            
-          } catch (rowError) {
-            console.error(`Error processing row ${rowCount}:`, rowError);
-            errorCount++;
-          }
-        })
-        .on('end', () => {
-          console.log(`CSV parsing completed. Total rows: ${rowCount}, Valid records: ${results.length}, Errors: ${errorCount}`);
-          
-          // Clean up file
-          try {
-            if (fs.existsSync(filePath)) {
-              fs.unlinkSync(filePath);
-              console.log('Temporary file cleaned up');
-            }
-          } catch (cleanupError) {
-            console.warn('Could not delete temp file:', cleanupError.message);
-          }
-          
-          resolve();
-        })
-        .on('error', (error) => {
-          console.error('CSV parsing stream error:', error);
-          reject(error);
-        });
-    });
-
-    await parsePromise;
-    
-    if (results.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'No valid data found in CSV',
-        stats: {
-          totalRows: rowCount,
-          validRows: results.length,
-          errorRows: errorCount
-        }
-      });
-    }
-
-    console.log(`Processing ${results.length} records...`);
-    
-    // Process in smaller batches to avoid memory issues
-    const batchSize = 100;
-    let insertedCount = 0;
-    let modifiedCount = 0;
-    let failedCount = 0;
-    
-    for (let i = 0; i < results.length; i += batchSize) {
-      const batch = results.slice(i, i + batchSize);
-      console.log(`Processing batch ${Math.floor(i/batchSize) + 1} of ${Math.ceil(results.length/batchSize)}`);
-      
-      for (const record of batch) {
-        try {
-          // Find existing record
-          const existing = await Cutoff.findOne({
-            institute: record.institute,
-            academicProgramName: record.academicProgramName,
-            seatType: record.seatType,
-            gender: record.gender,
-            year: record.year,
-            round: record.round
-          });
-
-          if (existing) {
-            // Update existing
-            existing.openingRank = record.openingRank;
-            existing.closingRank = record.closingRank;
-            existing.category = record.category;
-            existing.isPwd = record.isPwd;
-            await existing.save();
-            modifiedCount++;
-          } else {
-            // Create new - use the static method approach
-            const cutoff = new Cutoff(record);
-            
-            // Manually set derived fields to avoid middleware issues
-            cutoff.category = record.category;
-            cutoff.isPwd = record.isPwd;
-            
-            await cutoff.save();
-            insertedCount++;
-          }
-        } catch (saveError) {
-          console.error('Failed to save record:', {
-            institute: record.institute,
-            program: record.academicProgramName,
-            error: saveError.message
-          });
-          failedCount++;
-        }
-      }
-      
-      // Small delay between batches to prevent overwhelming the database
-      if (i + batchSize < results.length) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-    }
-    
-    console.log('Database operation completed:', {
-      inserted: insertedCount,
-      modified: modifiedCount,
-      failed: failedCount
-    });
-
-    res.status(200).json({
-      success: true,
-      message: 'CSV data uploaded successfully',
-      data: {
-        inserted: insertedCount,
-        modified: modifiedCount,
-        failed: failedCount,
-        total: insertedCount + modifiedCount,
-        parsedRows: rowCount,
-        validRows: results.length,
-        errorRows: errorCount
-      }
-    });
-    
-  } catch (error) {
-    console.error('CSV upload error:', error);
-    
-    // Clean up file on error
-    if (filePath && fs.existsSync(filePath)) {
-      try {
-        fs.unlinkSync(filePath);
-        console.log('Cleaned up temp file after error');
-      } catch (cleanupError) {
-        console.warn('Could not delete temp file after error:', cleanupError.message);
-      }
-    }
-    
-    res.status(500).json({
-      success: false,
-      message: 'Error uploading CSV data',
-      error: error.message
-    });
-  }
-};
-
-
 // exports.uploadCutoffCSV = async (req, res) => {
 //   let filePath = null;
   
@@ -381,7 +129,20 @@ exports.uploadCutoffCSV = async (req, res) => {
 //     }
 
 //     const { year, round, typeOfExam } = req.body;
-    
+
+//     const existingCutoff = await Cutoff.findOne({
+//       year: parseInt(year),
+//       round: parseInt(round),
+//       typeOfExam: typeOfExam || 'JEE_MAINS'
+//     });
+
+//     if (existingCutoff) {
+//       return res.status(400).json({
+//         success: false,
+//         message: `Jossa cutoff data already exists for year ${year}, round ${round}, and exam type ${typeOfExam || 'JEE_MAINS'}`
+//       });
+//     }
+
 //     // Validate inputs
 //     const parsedYear = parseInt(year) || new Date().getFullYear();
 //     const parsedRound = parseInt(round) || 1;
@@ -400,27 +161,8 @@ exports.uploadCutoffCSV = async (req, res) => {
 //       });
 //     }
 
-//     // Validate exam type
-//     const examType = (typeOfExam || '').toUpperCase();
-//     let Model;
+//     console.log(`Starting CSV parsing for ${filePath}`);
     
-//     switch(examType) {
-//       case 'JEE_MAINS':
-//       case 'JEE':
-//         Model = Cutoff; // JEE Main cutoff model
-//         break;
-//       case 'CUET':
-//         Model = CuetCutoff; // CUET cutoff model
-//         break;
-//       default:
-//         return res.status(400).json({
-//           success: false,
-//           message: 'Invalid exam type. Must be either "JEE_Mains" or "CUET"'
-//         });
-//     }
-
-//     console.log(`Starting CSV parsing for ${filePath}. Exam type: ${examType}, Model: ${Model.modelName}`);
-
 //     // Parse CSV
 //     const results = [];
 //     let rowCount = 0;
@@ -443,13 +185,13 @@ exports.uploadCutoffCSV = async (req, res) => {
 //                                    row.academicProgramName ||
 //                                    row.Program || 
 //                                    '').toString().trim().slice(0, 500),
-//               typeOfExam: examType, // Use the validated exam type
 //               seatType: seatType,
 //               gender: cleanGender(row.Gender || row.gender || 'Gender-Neutral'),
 //               openingRank: cleanRank(row['Opening Rank'] || row.openingRank),
 //               closingRank: cleanRank(row['Closing Rank'] || row.closingRank),
 //               year: parsedYear,
 //               round: parsedRound,
+//               typeOfExam: row['Exam Type'] || row['typeOfExam'] || typeOfExam || 'JEE_MAINS',
 //               category: category,
 //               isPwd: seatType.includes('PwD')
 //             };
@@ -525,7 +267,7 @@ exports.uploadCutoffCSV = async (req, res) => {
 //       });
 //     }
 
-//     console.log(`Processing ${results.length} records for ${Model.modelName}...`);
+//     console.log(`Processing ${results.length} records...`);
     
 //     // Process in smaller batches to avoid memory issues
 //     const batchSize = 100;
@@ -539,11 +281,10 @@ exports.uploadCutoffCSV = async (req, res) => {
       
 //       for (const record of batch) {
 //         try {
-//           // Find existing record - search criteria includes exam type
-//           const existing = await Model.findOne({
+//           // Find existing record
+//           const existing = await Cutoff.findOne({
 //             institute: record.institute,
 //             academicProgramName: record.academicProgramName,
-//             typeOfExam: record.typeOfExam, // Include exam type in search
 //             seatType: record.seatType,
 //             gender: record.gender,
 //             year: record.year,
@@ -551,7 +292,7 @@ exports.uploadCutoffCSV = async (req, res) => {
 //           });
 
 //           if (existing) {
-//             // Update existing record
+//             // Update existing
 //             existing.openingRank = record.openingRank;
 //             existing.closingRank = record.closingRank;
 //             existing.category = record.category;
@@ -559,10 +300,10 @@ exports.uploadCutoffCSV = async (req, res) => {
 //             await existing.save();
 //             modifiedCount++;
 //           } else {
-//             // Create new record
-//             const cutoff = new Model(record);
+//             // Create new - use the static method approach
+//             const cutoff = new Cutoff(record);
             
-//             // Manually set derived fields to ensure consistency
+//             // Manually set derived fields to avoid middleware issues
 //             cutoff.category = record.category;
 //             cutoff.isPwd = record.isPwd;
             
@@ -573,7 +314,6 @@ exports.uploadCutoffCSV = async (req, res) => {
 //           console.error('Failed to save record:', {
 //             institute: record.institute,
 //             program: record.academicProgramName,
-//             examType: record.typeOfExam,
 //             error: saveError.message
 //           });
 //           failedCount++;
@@ -587,7 +327,6 @@ exports.uploadCutoffCSV = async (req, res) => {
 //     }
     
 //     console.log('Database operation completed:', {
-//       model: Model.modelName,
 //       inserted: insertedCount,
 //       modified: modifiedCount,
 //       failed: failedCount
@@ -595,10 +334,8 @@ exports.uploadCutoffCSV = async (req, res) => {
 
 //     res.status(200).json({
 //       success: true,
-//       message: `CSV data uploaded successfully to ${Model.modelName}`,
+//       message: 'CSV data uploaded successfully',
 //       data: {
-//         examType: examType,
-//         model: Model.modelName,
 //         inserted: insertedCount,
 //         modified: modifiedCount,
 //         failed: failedCount,
@@ -629,6 +366,323 @@ exports.uploadCutoffCSV = async (req, res) => {
 //     });
 //   }
 // };
+
+
+exports.uploadCutoffCSV = async (req, res) => {
+  let filePath = null;
+  
+  try {
+    console.log('Upload request received');
+    
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: 'No CSV file uploaded'
+      });
+    }
+
+    filePath = req.file.path;
+    
+    // Verify file exists
+    if (!fs.existsSync(filePath)) {
+      console.error('File does not exist at path:', filePath);
+      return res.status(400).json({
+        success: false,
+        message: 'Uploaded file not found'
+      });
+    }
+
+    const { year, round, typeOfExam } = req.body;
+    console.log("haha for check only")
+    console.log(typeOfExam)
+
+    switch(typeOfExam){
+      case 'JEE_MAINS':
+        {
+          const existingCutoff = await Cutoff.findOne({
+            year: parseInt(year),
+            round: parseInt(round),
+            typeOfExam: typeOfExam
+          });
+          
+          if (existingCutoff) {
+            return res.status(400).json({
+              success: false,
+              message: `JoSSA cutoff data already exists for year ${year}, round ${round}, and exam type ${typeOfExam}`
+            });
+          }
+          break;
+
+        }
+      case 'CUET':
+        {
+          const exiestingCuetCutoff = await CuetCutoffData.findOne({
+            year: parseInt(year),
+            round: parseInt(round),
+            typeOfExam: typeOfExam
+          });
+          if(exiestingCuetCutoff){
+            return res.status(400).json({
+              success: false,
+              message: `CUET cutoff data already exists for year ${year}, round ${round}, and exam type ${typeOfExam}`
+            })
+          }
+        }
+        default:
+          return res.status(400).json({
+            success: false,
+            message: 'Invalid exam type. Must be either "JEE_Mains" or "CUET"'
+          });
+
+    }
+    
+    // Validate inputs
+    const parsedYear = parseInt(year) || new Date().getFullYear();
+    const parsedRound = parseInt(round) || 1;
+    
+    if (parsedYear < 2015 || parsedYear > new Date().getFullYear() + 1) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid year. Must be between 2015 and ${new Date().getFullYear() + 1}`
+      });
+    }
+    
+    if (parsedRound < 1 || parsedRound > 7) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid round. Must be between 1 and 7'
+      });
+    }
+
+    // Validate exam type
+    const examType = (typeOfExam || '').toUpperCase();
+    let Model;
+    
+    switch(examType) {
+      case 'JEE_MAINS':
+      case 'JEE':
+        Model = Cutoff; // JEE Main cutoff model
+        break;
+      case 'CUET':
+        Model = CuetCutoff; // CUET cutoff model
+        break;
+      default:
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid exam type. Must be either "JEE_Mains" or "CUET"'
+        });
+    }
+
+    console.log(`Starting CSV parsing for ${filePath}. Exam type: ${examType}, Model: ${Model.modelName}`);
+
+    // Parse CSV
+    const results = [];
+    let rowCount = 0;
+    let errorCount = 0;
+    
+    const parsePromise = new Promise((resolve, reject) => {
+      const stream = fs.createReadStream(filePath)
+        .pipe(csv())
+        .on('data', (row) => {
+          rowCount++;
+          
+          try {
+            // Extract and clean data
+            const seatType = cleanSeatType(row['Seat Type'] || row['Seat Type'] || 'OPEN');
+            const category = getCategoryFromSeatType(seatType);
+            
+            const cleanedRow = {
+              institute: (row.Institute || row.institute || '').toString().trim().slice(0, 500),
+              academicProgramName: (row['Academic Program Name'] || 
+                                   row.academicProgramName ||
+                                   row.Program || 
+                                   '').toString().trim().slice(0, 500),
+              typeOfExam: examType, // Use the validated exam type
+              seatType: seatType,
+              gender: cleanGender(row.Gender || row.gender || 'Gender-Neutral'),
+              openingRank: cleanRank(row['Opening Rank'] || row.openingRank),
+              closingRank: cleanRank(row['Closing Rank'] || row.closingRank),
+              year: parsedYear,
+              round: parsedRound,
+              category: category,
+              isPwd: seatType.includes('PwD')
+            };
+            
+            // Add uploadedBy if available
+            if (req.user && req.user.id) {
+              cleanedRow.uploadedBy = req.user.id;
+            }
+            
+            // Basic validation
+            if (!cleanedRow.institute || !cleanedRow.academicProgramName) {
+              console.warn(`Row ${rowCount} skipped - missing required fields`);
+              errorCount++;
+              return;
+            }
+            
+            // Validate ranks
+            if (cleanedRow.openingRank === 999999 || cleanedRow.closingRank === 999999) {
+              console.warn(`Row ${rowCount} skipped - invalid ranks:`, {
+                opening: row['Opening Rank'],
+                closing: row['Closing Rank']
+              });
+              errorCount++;
+              return;
+            }
+            
+            // Ensure closing rank >= opening rank
+            if (cleanedRow.closingRank < cleanedRow.openingRank) {
+              // Swap if they're reversed
+              [cleanedRow.openingRank, cleanedRow.closingRank] = 
+              [cleanedRow.closingRank, cleanedRow.openingRank];
+            }
+            
+            results.push(cleanedRow);
+            
+          } catch (rowError) {
+            console.error(`Error processing row ${rowCount}:`, rowError);
+            errorCount++;
+          }
+        })
+        .on('end', () => {
+          console.log(`CSV parsing completed. Total rows: ${rowCount}, Valid records: ${results.length}, Errors: ${errorCount}`);
+          
+          // Clean up file
+          try {
+            if (fs.existsSync(filePath)) {
+              fs.unlinkSync(filePath);
+              console.log('Temporary file cleaned up');
+            }
+          } catch (cleanupError) {
+            console.warn('Could not delete temp file:', cleanupError.message);
+          }
+          
+          resolve();
+        })
+        .on('error', (error) => {
+          console.error('CSV parsing stream error:', error);
+          reject(error);
+        });
+    });
+
+    await parsePromise;
+    
+    if (results.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No valid data found in CSV',
+        stats: {
+          totalRows: rowCount,
+          validRows: results.length,
+          errorRows: errorCount
+        }
+      });
+    }
+
+    console.log(`Processing ${results.length} records for ${Model.modelName}...`);
+    
+    // Process in smaller batches to avoid memory issues
+    const batchSize = 100;
+    let insertedCount = 0;
+    let modifiedCount = 0;
+    let failedCount = 0;
+    
+    for (let i = 0; i < results.length; i += batchSize) {
+      const batch = results.slice(i, i + batchSize);
+      console.log(`Processing batch ${Math.floor(i/batchSize) + 1} of ${Math.ceil(results.length/batchSize)}`);
+      
+      for (const record of batch) {
+        try {
+          // Find existing record - search criteria includes exam type
+          const existing = await Model.findOne({
+            institute: record.institute,
+            academicProgramName: record.academicProgramName,
+            typeOfExam: record.typeOfExam, // Include exam type in search
+            seatType: record.seatType,
+            gender: record.gender,
+            year: record.year,
+            round: record.round
+          });
+
+          if (existing) {
+            // Update existing record
+            existing.openingRank = record.openingRank;
+            existing.closingRank = record.closingRank;
+            existing.category = record.category;
+            existing.isPwd = record.isPwd;
+            await existing.save();
+            modifiedCount++;
+          } else {
+            // Create new record
+            const cutoff = new Model(record);
+            
+            // Manually set derived fields to ensure consistency
+            cutoff.category = record.category;
+            cutoff.isPwd = record.isPwd;
+            
+            await cutoff.save();
+            insertedCount++;
+          }
+        } catch (saveError) {
+          console.error('Failed to save record:', {
+            institute: record.institute,
+            program: record.academicProgramName,
+            examType: record.typeOfExam,
+            error: saveError.message
+          });
+          failedCount++;
+        }
+      }
+      
+      // Small delay between batches to prevent overwhelming the database
+      if (i + batchSize < results.length) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+    }
+    
+    console.log('Database operation completed:', {
+      model: Model.modelName,
+      inserted: insertedCount,
+      modified: modifiedCount,
+      failed: failedCount
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `CSV data uploaded successfully to ${Model.modelName}`,
+      data: {
+        examType: examType,
+        model: Model.modelName,
+        inserted: insertedCount,
+        modified: modifiedCount,
+        failed: failedCount,
+        total: insertedCount + modifiedCount,
+        parsedRows: rowCount,
+        validRows: results.length,
+        errorRows: errorCount
+      }
+    });
+    
+  } catch (error) {
+    console.error('CSV upload error:', error);
+    
+    // Clean up file on error
+    if (filePath && fs.existsSync(filePath)) {
+      try {
+        fs.unlinkSync(filePath);
+        console.log('Cleaned up temp file after error');
+      } catch (cleanupError) {
+        console.warn('Could not delete temp file after error:', cleanupError.message);
+      }
+    }
+    
+    res.status(500).json({
+      success: false,
+      message: 'Error uploading CSV data',
+      error: error.message
+    });
+  }
+};
 
 // Alternative: Direct database insertion without middleware issues
 exports.uploadCutoffCSVDirect = async (req, res) => {
