@@ -1,47 +1,18 @@
 const UserData = require("../../model/userData/user");
 const logger = require("../../config/logger");
 
-// Map incoming category values to valid schema enum values
-const categoryMap = {
-  "GENERAL": "GENERAL",
-  "OBC": "OBC",
-  "OBC-NCL": "OBC",
-  "SC": "SC",
-  "ST": "ST",
-  "EWS": "EWS",
-  "GENERAL-PwD": "GENERAL",
-  "EWS-PwD": "EWS",
-  "OBC-NCL-PwD": "OBC",
-  "SC-PwD": "SC",
-  "ST-PwD": "ST",
-};
 
-// Map incoming gender values to valid schema enum values
-const genderMap = {
-  "Male": "Male",
-  "Female": "Female",
-  "Other": "GENERAL",
-  // "GENERAL": "GENERAL",
-  // "EWS": "EWS",
-  // "OBC-NCL": "OBC-NCL",
-  // "SC": "SC",
-  // "ST": "ST",
-  // "GENERAL-PwD": "GENERAL-PwD",
-  // "EWS-PwD": "EWS-PwD",
-  // "OBC-NCL-PwD": "OBC-NCL-PwD",
-  // "SC-PwD": "SC-PwD",
-  // "ST-PwD": "ST-PwD"
-};
 
 const createUserData = async (req, res) => {
   try {
     const {
+      firstName,
+      emailId,
       mobileNumber,
       rank,
-      category,
-      gender,
       homeState,
-      examType
+      examType,
+      city
     } = req.body;
 
     // Validate examType is provided
@@ -53,18 +24,13 @@ const createUserData = async (req, res) => {
     }
 
     const normalizedExamType = examType.toUpperCase();
-    const normalizedCategory = categoryMap[category] || "GENERAL";
-    const normalizedGender = genderMap[gender] || "GENERAL";
 
     // Create the check history entry
     const checkEntry = {
       examType: normalizedExamType,
       rank,
-      category: normalizedCategory,
-      gender: normalizedGender,
-      homeState,
       checkedAt: new Date(),
-      gainLeedFrom: "FROM_STUDENT_RANK" // This is fine for individual check entry
+      gainLeedFrom: "FROM_STUDENT_RANK" 
     };
 
     // Try to find existing user by mobile
@@ -99,6 +65,10 @@ const createUserData = async (req, res) => {
         mobileNumber,
         checkHistory: [checkEntry],
         totalChecks: 1,
+        firstName,
+        emailId,
+         city,
+         homeState,
         examsChecked: [normalizedExamType],
        
         // New users start with isDataExport = false (default)
