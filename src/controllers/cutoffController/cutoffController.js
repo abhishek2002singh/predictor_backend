@@ -2170,187 +2170,157 @@ exports.getCutoffs = async (req, res) => {
       year, round, branch, institute, quota 
     });
 
-    // Validate required fields - REMOVED CATEGORY VALIDATION
     if (!rank) {
-      return res.status(400).json({
-        success: false,
-        message: "Rank is required",
-      });
+      return res.status(400).json({ success: false, message: "Rank is required" });
     }
-
-    // REMOVED THIS VALIDATION:
-    // if (!category) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Category is required",
-    //   });
-    // }
 
     const userRank = parseInt(rank);
-    if (isNaN(userRank) || userRank <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid rank value",
-      });
+    if (isNaN(userRank) || userRank < 0) {
+      return res.status(400).json({ success: false, message: "Invalid rank value" });
     }
 
-    // Determine which model to use based on exam type
-    let CutoffModel;
-    let examSpecificConfig = {};
-    
-    if (typeOfExam === 'CUET') {
+    // Determine model
+    let CutoffModel = Cutoff;
+    let examSpecificConfig = {
+      rankField: 'closingRank',
+      categoryField: 'seatType',
+      genderField: 'gender',
+      instituteField: 'institute',
+      programField: 'academicProgramName'
+    };
+
+    if (String(typeOfExam).toUpperCase() === 'CUET') {
       CutoffModel = CuetCutoffData;
-      
-      // CUET specific configuration
-      examSpecificConfig = {
-        rankField: 'closingRank',
-        categoryField: 'seatType',
-        genderField: 'gender',
-        instituteField: 'institute',
-        programField: 'academicProgramName'
+      // CUET-specific defaults kept in filters below
+    }
+
+    // Helper: build categorySeatTypeMap only once and keep keys consistent
+    let categorySeatTypeMap = {};
+    if (String(typeOfExam).toUpperCase() === 'CUET') {
+      categorySeatTypeMap = {
+        'GENERAL': ['GENERAL', 'UR', 'UNRESERVED', 'General', 'OPEN', 'GEN'],
+        'EWS': ['EWS(OPEN)', 'EWS(GL)', 'EWS(AF)', 'EWS'],
+        'OBC-NCL': ['BC', 'BC(Girl)', 'BC(AF)', 'OBC', 'OBC-NCL', 'Other Backward Classes'],
+        'SC': ['SC', 'SC(Girl)', 'SC(AF)', 'Scheduled Caste'],
+        'ST': ['ST', 'ST(Girl)', 'Scheduled Tribe'],
+        'OPEN': ['OPEN(AF)', 'OPEN(FF)', 'OPEN'],
+        'BC': ['BC', 'BC(Girl)', 'BC(AF)'],
+        'SC(Girl)': ['SC(Girl)'],
+        'BC(Girl)': ['BC(Girl)'],
+        'EWS(OPEN)': ['EWS(OPEN)'],
+        'EWS(GL)': ['EWS(GL)'],
+        'OPEN(AF)': ['OPEN(AF)']
       };
     } else {
-      // Default to JEE model
-      CutoffModel = Cutoff;
-      
-      // JEE specific configuration
-      examSpecificConfig = {
-        rankField: 'closingRank',
-        categoryField: 'seatType',
-        genderField: 'gender',
-        instituteField: 'institute',
-        programField: 'academicProgramName'
+      categorySeatTypeMap = {
+        'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD', 'UR'],
+        'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
+        'OBC-NCL': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)', 'BC'],
+        'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)'],
+        'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)'],
+        'GENERAL-PWD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
+        'EWS-PWD': ['EWS-PwD', 'EWS (PwD)'],
+        'OBC-NCL-PWD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
+        'SC-PWD': ['SC-PwD', 'SC (PwD)'],
+        'ST-PWD': ['ST-PwD', 'ST (PwD)']
       };
+    }
+
+    // Normalize category input to canonical key (case-insensitive + synonyms)
+    let normalizedCategory = null;
+    if (category) {
+      const c = String(category).trim();
+      const synonyms = {
+        'GEN': 'GENERAL', 'OPEN': 'GENERAL', 'UR': 'GENERAL', 'GENERAL': 'GENERAL',
+        'BC': 'OBC-NCL', 'OBC': 'OBC-NCL', 'OBC-NCL': 'OBC-NCL',
+        'SC': 'SC', 'ST': 'ST', 'EWS': 'EWS'
+      };
+      const key = c.toUpperCase();
+      if (synonyms[key]) normalizedCategory = synonyms[key];
+      else {
+        // Try direct key match in map
+        normalizedCategory = Object.keys(categorySeatTypeMap).find(k => k.toUpperCase() === key);
+        if (!normalizedCategory) {
+          // Try partial match
+          normalizedCategory = Object.keys(categorySeatTypeMap).find(k => k.toUpperCase().includes(key)) || null;
+        }
+      }
     }
 
     // Function to perform search with given filters
     const performSearch = async (filters, searchMode = 'STRICT') => {
       console.log(`Search Mode: ${searchMode} for ${typeOfExam}`);
       console.log('Filters:', JSON.stringify(filters, null, 2));
-      
+
       const skip = (parseInt(page) - 1) * parseInt(limit);
-      
-      // Build match stage
       const matchStage = { $match: filters };
-      
-      // Use aggregation for better performance and sorting
       const aggregationPipeline = [matchStage];
-      
-      // Add fields for sorting
+
       aggregationPipeline.push({
         $addFields: {
-          rankDifference: {
-            $abs: {
-              $subtract: [userRank, "$closingRank"]
-            }
-          },
+          rankDifference: { $abs: { $subtract: [userRank, "$closingRank"] } },
           rankScore: {
             $cond: {
               if: { $lte: [userRank, "$closingRank"] },
-              then: {
-                $subtract: ["$closingRank", userRank]
-              },
-              else: {
-                $subtract: [userRank, "$closingRank"]
-              }
+              then: { $subtract: ["$closingRank", userRank] },
+              else: { $subtract: [userRank, "$closingRank"] }
             }
           }
         }
       });
-      
-      // Sort by rankScore (closest matches first)
+
       aggregationPipeline.push({ $sort: { rankScore: 1, rankDifference: 1 } });
-      
-      // Skip and limit
       aggregationPipeline.push({ $skip: skip });
       aggregationPipeline.push({ $limit: parseInt(limit) });
-      
-      // Execute query
+
       const [cutoffs, total] = await Promise.all([
         CutoffModel.aggregate(aggregationPipeline),
         CutoffModel.countDocuments(filters)
       ]);
 
       console.log(`Found ${cutoffs.length} cutoffs in ${searchMode} mode, Total: ${total}`);
-      
       return { cutoffs, total };
     };
 
-    // Define category mapping based on exam type (optional)
-    let categorySeatTypeMap = {};
-    
-    if (category) {
-      // Only use category mapping if category is provided
-      if (typeOfExam === 'CUET') {
-        categorySeatTypeMap = {
-          'GENERAL': ['GENERAL', 'UR', 'UNRESERVED', 'General', 'OPEN', 'GEN'],
-          'EWS': ['EWS(OPEN)', 'EWS(GL)', 'EWS(AF)', 'EWS'],
-          'OBC-NCL': ['BC', 'BC(Girl)', 'BC(AF)', 'OBC', 'OBC-NCL', 'Other Backward Classes'],
-          'SC': ['SC', 'SC(Girl)', 'SC(AF)', 'Scheduled Caste'],
-          'ST': ['ST', 'ST(Girl)', 'Scheduled Tribe'],
-          'OPEN': ['OPEN(AF)', 'OPEN(FF)', 'OPEN'],
-          'BC': ['BC', 'BC(Girl)', 'BC(AF)'],
-          'SC(Girl)': ['SC(Girl)'],
-          'BC(Girl)': ['BC(Girl)'],
-          'EWS(OPEN)': ['EWS(OPEN)'],
-          'EWS(GL)': ['EWS(GL)'],
-          'OPEN(AF)': ['OPEN(AF)']
-        };
-      } else {
-        // JEE category mapping
-        categorySeatTypeMap = {
-          'GENERAL': ['OPEN', 'General', 'OPEN (PwD)', 'GEN-PwD'],
-          'EWS': ['EWS', 'Economically Weaker Section', 'EWS-PwD', 'EWS (PwD)'],
-          'OBC-NCL': ['OBC-NCL', 'OBC', 'Other Backward Classes', 'OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-          'SC': ['SC', 'Scheduled Caste', 'SC-PwD', 'SC (PwD)'],
-          'ST': ['ST', 'Scheduled Tribe', 'ST-PwD', 'ST (PwD)'],
-          'GENERAL-PWD': ['OPEN (PwD)', 'OPEN-PwD', 'GEN-PwD'],
-          'EWS-PWD': ['EWS-PwD', 'EWS (PwD)'],
-          'OBC-NCL-PWD': ['OBC-NCL-PwD', 'OBC-NCL (PwD)'],
-          'SC-PWD': ['SC-PwD', 'SC (PwD)'],
-          'ST-PWD': ['ST-PwD', 'ST (PwD)']
-        };
-      }
-    }
-
-    // Search with FALLBACK STRATEGY
-    let results = null;
-    let searchMode = 'STRICT';
-    let minResultsRequired = 5;
-
-    // Base filters based on exam type
+    // Base filters
     let baseFilters = {};
-    
-    // Add category filter only if category is provided
-    if (category && categorySeatTypeMap[category]) {
-      baseFilters[examSpecificConfig.categoryField] = { 
-        $in: categorySeatTypeMap[category] 
-      };
+
+    // Apply category filter (normalized) if we found a canonical mapping
+    if (normalizedCategory && categorySeatTypeMap[normalizedCategory]) {
+      baseFilters[examSpecificConfig.categoryField] = { $in: categorySeatTypeMap[normalizedCategory] };
+      console.log(`Using normalized category: ${normalizedCategory}`);
+    } else if (category) {
+      // If we couldn't normalize, try a fuzzy seatType match to avoid dropping results entirely
+      baseFilters.$or = baseFilters.$or || [];
+      baseFilters.$or.push({ [examSpecificConfig.categoryField]: { $regex: category, $options: 'i' } });
+      console.log(`Category '${category}' not normalized, using fuzzy seatType match`);
     }
 
-    // Add rank filter
-    const rankBufferPercentage = typeOfExam === 'CUET' ? 0.20 : 0.10;
-    const rankBuffer = Math.max(100, Math.round(userRank * rankBufferPercentage));
-    
-    // Check both opening and closing ranks
-    baseFilters.$or = [
-      {
-        openingRank: { $lte: userRank + rankBuffer },
-        closingRank: { $gte: userRank - rankBuffer }
-      },
-      {
-        closingRank: { 
-          $gte: userRank - (rankBuffer * 2),
-          $lte: userRank + (rankBuffer * 2)
-        }
-      }
-    ];
+    // Add rank filter - widen buffer for reserved categories (SC/ST/OBC)
+    const baseRankBufferPercentage = String(typeOfExam).toUpperCase() === 'CUET' ? 0.20 : 0.10;
+    let rankBuffer = Math.max(100, Math.round(userRank * baseRankBufferPercentage));
 
-    // Add gender filter (optional)
+    if (normalizedCategory && ['SC', 'ST', 'OBC-NCL'].includes(normalizedCategory)) {
+      rankBuffer = Math.round(rankBuffer * 1.5);
+      console.log(`Widened rank buffer for reserved category ${normalizedCategory}: ${rankBuffer}`);
+    }
+
+    baseFilters.$or = baseFilters.$or || [];
+    baseFilters.$or.push({
+      openingRank: { $lte: userRank + rankBuffer },
+      closingRank: { $gte: userRank - rankBuffer }
+    });
+    baseFilters.$or.push({
+      closingRank: {
+        $gte: userRank - (rankBuffer * 2),
+        $lte: userRank + (rankBuffer * 2)
+      }
+    });
+
+    // Gender filter handling (unchanged, but kept here)
     if (gender && gender !== 'All') {
       let genderFilterMap;
-      
-      if (typeOfExam === 'CUET') {
+      if (String(typeOfExam).toUpperCase() === 'CUET') {
         genderFilterMap = {
           'Male': ['Gender-Neutral', 'Male', 'M', 'BOYS'],
           'Female': ['Female-only', 'Female', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
@@ -2366,285 +2336,209 @@ exports.getCutoffs = async (req, res) => {
           'Female-only': ['Gender-Neutral', 'Female-only', 'F', 'GIRLS', 'Female-only (including Supernumerary)'],
           'Other': ['Gender-Neutral', 'Other', 'Transgender'],
           'Gender-neutral': ['Gender-Neutral', 'Gender-neutral'],
-          'All': ['Gender-Neutral', 'Male-only', 'Female-only', 'Other', 
-                  'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
+          'All': ['Gender-Neutral', 'Male-only', 'Female-only', 'Other', 'Male (including Supernumerary)', 'Female-only (including Supernumerary)']
         };
       }
-      
-      baseFilters[examSpecificConfig.genderField] = { 
-        $in: genderFilterMap[gender] || ['Gender-Neutral'] 
-      };
+
+      baseFilters[examSpecificConfig.genderField] = { $in: genderFilterMap[gender] || ['Gender-Neutral'] };
     } else {
-      // If gender is 'All' or not specified, include all genders for CUET
-      if (typeOfExam === 'CUET') {
-        baseFilters[examSpecificConfig.genderField] = { 
-          $in: ['Gender-Neutral', 'Female-only', 'Male', 'Female-only (including Supernumerary)'] 
-        };
+      if (String(typeOfExam).toUpperCase() === 'CUET') {
+        baseFilters[examSpecificConfig.genderField] = { $in: ['Gender-Neutral', 'Female-only', 'Male', 'Female-only (including Supernumerary)'] };
       }
     }
 
-    // Add additional filters
-    if (year && year !== 'all') {
-      baseFilters.year = parseInt(year);
-    } else {
-      // Default to 2025 for CUET if not specified
-      if (typeOfExam === 'CUET') {
-        baseFilters.year = 2025;
-      }
-    }
-    
-    if (round && round !== 'all') {
-      baseFilters.round = parseInt(round);
-    } else {
-      // Default to round 1 for CUET if not specified
-      if (typeOfExam === 'CUET') {
-        baseFilters.round = 1;
-      }
-    }
-    
-    if (branch && branch !== 'all') {
-      baseFilters[examSpecificConfig.programField] = { $regex: branch, $options: 'i' };
-    }
-    
-    if (institute && institute !== 'all') {
-      baseFilters[examSpecificConfig.instituteField] = { $regex: institute, $options: 'i' };
-    }
-    
-    if (quota && quota !== 'all') {
-      baseFilters.quota = quota;
-    }
+    // Additional filters
+    if (year && year !== 'all') baseFilters.year = parseInt(year);
+    else if (String(typeOfExam).toUpperCase() === 'CUET') baseFilters.year = 2025;
 
-    // For CUET, always include Home State quota if not specified
-    if (typeOfExam === 'CUET' && (!quota || quota === 'all')) {
-      baseFilters.quota = 'Home State';
-    }
+    if (round && round !== 'all') baseFilters.round = parseInt(round);
+    else if (String(typeOfExam).toUpperCase() === 'CUET') baseFilters.round = 1;
+
+    if (branch && branch !== 'all') baseFilters[examSpecificConfig.programField] = { $regex: branch, $options: 'i' };
+    if (institute && institute !== 'all') baseFilters[examSpecificConfig.instituteField] = { $regex: institute, $options: 'i' };
+    if (quota && quota !== 'all') baseFilters.quota = quota;
+    if (String(typeOfExam).toUpperCase() === 'CUET' && (!quota || quota === 'all')) baseFilters.quota = 'Home State';
 
     // Try STRICT search first
-    results = await performSearch(baseFilters, 'STRICT');
-    
-    // FALLBACK 1: If too few results, relax gender filter for CUET
-    if (results.total < minResultsRequired && searchMode === 'STRICT' && typeOfExam === 'CUET') {
+    let results = await performSearch(baseFilters, 'STRICT');
+    let searchMode = 'STRICT';
+    const minResultsRequired = 5;
+
+    // FALLBACK 1: relax gender for CUET
+    if (results.total < minResultsRequired && searchMode === 'STRICT' && String(typeOfExam).toUpperCase() === 'CUET') {
       searchMode = 'FALLBACK_1';
-      // For CUET, include Gender-Neutral in all cases
       if (baseFilters[examSpecificConfig.genderField]) {
-        const currentGenderFilters = baseFilters[examSpecificConfig.genderField].$in || [];
-        if (!currentGenderFilters.includes('Gender-Neutral')) {
-          baseFilters[examSpecificConfig.genderField].$in = [...currentGenderFilters, 'Gender-Neutral'];
-        }
+        const current = baseFilters[examSpecificConfig.genderField].$in || [];
+        if (!current.includes('Gender-Neutral')) baseFilters[examSpecificConfig.genderField].$in = [...current, 'Gender-Neutral'];
       }
-      console.log('Expanding gender filter to include Gender-Neutral');
       results = await performSearch(baseFilters, 'FALLBACK_1');
     }
 
-    // FALLBACK 2: If still too few, expand rank range
+    // FALLBACK 2: expand rank range
     if (results.total < minResultsRequired && searchMode === 'FALLBACK_1') {
       searchMode = 'FALLBACK_2';
       const expandedRankBuffer = Math.max(500, Math.round(userRank * 0.30));
-      
-      // Update the rank filters
       baseFilters.$or = [
-        {
-          openingRank: { $lte: userRank + expandedRankBuffer },
-          closingRank: { $gte: userRank - expandedRankBuffer }
-        },
-        {
-          closingRank: { 
-            $gte: userRank - (expandedRankBuffer * 2),
-            $lte: userRank + (expandedRankBuffer * 2)
-          }
-        }
+        { openingRank: { $lte: userRank + expandedRankBuffer }, closingRank: { $gte: userRank - expandedRankBuffer } },
+        { closingRank: { $gte: userRank - (expandedRankBuffer * 2), $lte: userRank + (expandedRankBuffer * 2) } }
       ];
-      
-      console.log(`Expanding rank range to ±${expandedRankBuffer}`);
       results = await performSearch(baseFilters, 'FALLBACK_2');
     }
 
-    // FALLBACK 3: If still too few, remove gender filter completely
+    // FALLBACK 3: remove gender
     if (results.total < minResultsRequired && searchMode === 'FALLBACK_2' && baseFilters[examSpecificConfig.genderField]) {
       searchMode = 'FALLBACK_3';
       delete baseFilters[examSpecificConfig.genderField];
-      console.log('Removing gender filter completely');
       results = await performSearch(baseFilters, 'FALLBACK_3');
     }
 
-    // FALLBACK 4: If still too few, remove category filter if exists
+    // FALLBACK 4: remove category
     if (results.total < minResultsRequired && searchMode === 'FALLBACK_3' && baseFilters[examSpecificConfig.categoryField]) {
       searchMode = 'FALLBACK_4';
       delete baseFilters[examSpecificConfig.categoryField];
-      console.log('Removing category filter completely');
       results = await performSearch(baseFilters, 'FALLBACK_4');
     }
 
-    // FALLBACK 5: Last resort - show any colleges within wider rank range
+    // FALLBACK 5: wide rank range
     if (results.total < minResultsRequired && searchMode === 'FALLBACK_4') {
       searchMode = 'FALLBACK_5';
-      
-      // Wide rank filter
-      const wideRankBuffer = typeOfExam === 'CUET' ? 100000 : 5000;
-      let lastResortFilters = {
-        closingRank: { 
-          $gte: userRank - wideRankBuffer,
-          $lte: userRank + wideRankBuffer
-        }
-      };
-      
-      // Keep essential filters
+      const wideRankBuffer = String(typeOfExam).toUpperCase() === 'CUET' ? 100000 : 5000;
+      let lastResortFilters = { closingRank: { $gte: userRank - wideRankBuffer, $lte: userRank + wideRankBuffer } };
       if (year && year !== 'all') lastResortFilters.year = parseInt(year);
       if (round && round !== 'all') lastResortFilters.round = parseInt(round);
-      if (typeOfExam === 'CUET') lastResortFilters.quota = 'Home State';
-      
-      console.log('Using last resort fallback with wide rank range');
+      if (String(typeOfExam).toUpperCase() === 'CUET') lastResortFilters.quota = 'Home State';
       results = await performSearch(lastResortFilters, 'FALLBACK_5');
     }
 
-    const { cutoffs, total } = results;
-    
-    // Calculate probability for each cutoff
+    // NEW: If still no results, try top-rank snapshot for very small ranks, a HIGH_RANKS fallback for very large JEE ranks, or remove category as last attempt
+    if (results.total === 0) {
+      // TOP_RANKS: for ambitious users (very small ranks)
+      if (userRank <= 1000) {
+        searchMode = 'TOP_RANKS';
+        const match = {};
+        if (year && year !== 'all') match.year = parseInt(year);
+        if (round && round !== 'all') match.round = parseInt(round);
+        if (String(typeOfExam).toUpperCase() === 'CUET') match.quota = 'Home State';
+
+        const topAgg = [ { $match: match }, { $addFields: { useRank: { $ifNull: ["$openingRank", "$closingRank"] } } }, { $sort: { useRank: 1 } }, { $limit: parseInt(limit) } ];
+        const cutoffsTop = await CutoffModel.aggregate(topAgg);
+        results = { cutoffs: cutoffsTop, total: cutoffsTop.length };
+        console.log('TOP_RANKS fallback used for very small rank');
+      }
+      // HIGH_RANKS: for very large JEE ranks, return colleges with highest closingRank (easier seats)
+      else if ((String(typeOfExam).toUpperCase() === 'JEE_MAINS' || String(typeOfExam).toUpperCase() === 'JEE_ADVANCE' || String(typeOfExam).toUpperCase() === 'JEE') && userRank >= 125000) {
+        searchMode = 'HIGH_RANKS';
+
+        // Build filters from non-rank base filters to keep user's preferences (year, round, branch, institute, quota, category, gender)
+        const highFilters = {};
+        if (year && year !== 'all') highFilters.year = parseInt(year);
+        if (round && round !== 'all') highFilters.round = parseInt(round);
+        if (branch && branch !== 'all') highFilters[examSpecificConfig.programField] = { $regex: branch, $options: 'i' };
+        if (institute && institute !== 'all') highFilters[examSpecificConfig.instituteField] = { $regex: institute, $options: 'i' };
+        if (quota && quota !== 'all') highFilters.quota = quota;
+        if (baseFilters[examSpecificConfig.categoryField]) highFilters[examSpecificConfig.categoryField] = baseFilters[examSpecificConfig.categoryField];
+        if (baseFilters[examSpecificConfig.genderField]) highFilters[examSpecificConfig.genderField] = baseFilters[examSpecificConfig.genderField];
+
+        // Return records with the highest closingRank values (easiest seats) to help high-ranked users
+        const highAgg = [ { $match: highFilters }, { $sort: { closingRank: -1 } }, { $limit: parseInt(limit) } ];
+        const cutoffsHigh = await CutoffModel.aggregate(highAgg);
+        results = { cutoffs: cutoffsHigh, total: cutoffsHigh.length };
+        console.log('HIGH_RANKS fallback used for very large JEE rank');
+      }
+      // RELAXED_NO_CATEGORY: remove category filter as last resort
+      else if (baseFilters[examSpecificConfig.categoryField]) {
+        searchMode = 'RELAXED_NO_CATEGORY';
+        delete baseFilters[examSpecificConfig.categoryField];
+        results = await performSearch(baseFilters, 'RELAXED_NO_CATEGORY');
+        console.log('RELAXED_NO_CATEGORY fallback used');
+      }
+    }
+
+    let { cutoffs, total } = results;
+
+    // Calculate probability for each cutoff (unchanged logic)
     const cutoffsWithProbability = cutoffs.map(cutoff => {
       const cutoffObj = cutoff;
       let probabilityPercentage = 0;
 
-      if (typeOfExam === 'CUET') {
-        // CUET probability calculation
+      if (String(typeOfExam).toUpperCase() === 'CUET') {
         const closingRank = cutoff.closingRank;
         const openingRank = cutoff.openingRank || closingRank;
-        
         if (!closingRank) {
           probabilityPercentage = 20;
         } else {
-          // If user rank is within opening-closing range
           if (userRank >= openingRank && userRank <= closingRank) {
             const range = closingRank - openingRank;
-            if (range === 0) {
-              probabilityPercentage = 80;
-            } else {
+            if (range === 0) probabilityPercentage = 80;
+            else {
               const positionInRange = (userRank - openingRank) / range;
-              probabilityPercentage = 80 - (positionInRange * 40); // 80-40%
+              probabilityPercentage = 80 - (positionInRange * 40);
             }
-          } 
-          // If user rank is better than opening rank
-          else if (userRank < openingRank) {
+          } else if (userRank < openingRank) {
             const distance = openingRank - userRank;
             const relativeDistance = distance / Math.max(openingRank, 1);
             probabilityPercentage = Math.min(95, 85 + (relativeDistance * 50));
-          }
-          // If user rank is worse than closing rank
-          else {
+          } else {
             const distance = userRank - closingRank;
             const relativeDistance = distance / Math.max(closingRank, 1);
             probabilityPercentage = Math.max(15, 60 - (relativeDistance * 100));
           }
         }
       } else {
-        // JEE probability calculation
         const openingRank = cutoff.openingRank;
         const closingRank = cutoff.closingRank;
-
-        if (!openingRank || !closingRank) {
-          probabilityPercentage = 20;
-        } else {
+        if (!openingRank || !closingRank) probabilityPercentage = 20;
+        else {
           const range = closingRank - openingRank;
-
-          // DOMINANT ZONE (TOPPER LOGIC)
           if (userRank <= openingRank) {
             const dominance = Math.min(1, (openingRank - userRank) / Math.max(range, 1));
-            probabilityPercentage = 80 + dominance * 15; // 80–95
-          }
-          // SAFE ZONE (INSIDE CUTOFF)
-          else if (userRank > openingRank && userRank <= closingRank) {
+            probabilityPercentage = 80 + dominance * 15;
+          } else if (userRank > openingRank && userRank <= closingRank) {
             const closeness = 1 - (userRank - openingRank) / Math.max(range, 1);
-            probabilityPercentage = 60 + closeness * 30; // 60–90
-          }
-          // RISK ZONE (OUTSIDE CUTOFF)
-          else {
+            probabilityPercentage = 60 + closeness * 30;
+          } else {
             const distance = userRank - closingRank;
             const tolerance = Math.max(range * 0.6, userRank * 0.08);
-
-            if (distance <= tolerance) {
-              probabilityPercentage = 35 + (1 - distance / tolerance) * 25; // 35–60
-            } else {
-              probabilityPercentage = 15 + Math.max(0, 1 - distance / (tolerance * 2)) * 15; // 15–30
-            }
+            if (distance <= tolerance) probabilityPercentage = 35 + (1 - distance / tolerance) * 25;
+            else probabilityPercentage = 15 + Math.max(0, 1 - distance / (tolerance * 2)) * 15;
           }
         }
       }
 
-      // Search-mode adjustment
-      const modeFactor = {
-        STRICT: 1.05,
-        FALLBACK_1: 1.0,
-        FALLBACK_2: 0.97,
-        FALLBACK_3: 0.94,
-        FALLBACK_4: 0.9,
-        FALLBACK_5: 0.85
-      };
-
+      const modeFactor = { STRICT: 1.05, FALLBACK_1: 1.0, FALLBACK_2: 0.97, FALLBACK_3: 0.94, FALLBACK_4: 0.9, FALLBACK_5: 0.85, TOP_RANKS: 1.0, RELAXED_NO_CATEGORY: 0.95 };
       probabilityPercentage *= modeFactor[searchMode] || 0.95;
+      probabilityPercentage = Math.round(Math.max(15, Math.min(probabilityPercentage, 95)));
 
-      probabilityPercentage = Math.round(
-        Math.max(15, Math.min(probabilityPercentage, 95))
-      );
-
-      // Labels
       let probability, probabilityColor;
-      if (probabilityPercentage >= 70) {
-        probability = "High Chance";
-        probabilityColor = "green";
-      } else if (probabilityPercentage >= 45) {
-        probability = "Moderate Chance";
-        probabilityColor = "yellow";
-      } else {
-        probability = "Low Chance";
-        probabilityColor = "orange";
-      }
+      if (probabilityPercentage >= 70) { probability = "High Chance"; probabilityColor = "green"; }
+      else if (probabilityPercentage >= 45) { probability = "Moderate Chance"; probabilityColor = "yellow"; }
+      else { probability = "Low Chance"; probabilityColor = "red"; }
 
       cutoffObj.probabilityPercentage = probabilityPercentage;
       cutoffObj.probability = probability;
       cutoffObj.probabilityColor = probabilityColor;
       cutoffObj.searchMode = searchMode;
       cutoffObj.examType = typeOfExam;
-
       return cutoffObj;
     });
 
-    // Get summary statistics
     const summary = {
       examType: typeOfExam || 'JEE',
       totalColleges: total,
       collegesShown: cutoffs.length,
-      highestProbability: cutoffsWithProbability.length > 0 
-        ? Math.max(...cutoffsWithProbability.map(c => c.probabilityPercentage))
-        : 0,
-      lowestProbability: cutoffsWithProbability.length > 0 
-        ? Math.min(...cutoffsWithProbability.map(c => c.probabilityPercentage))
-        : 0,
-      averageProbability: cutoffsWithProbability.length > 0 
-        ? Math.round(cutoffsWithProbability.reduce((sum, c) => sum + c.probabilityPercentage, 0) / cutoffsWithProbability.length)
-        : 0,
+      highestProbability: cutoffsWithProbability.length > 0 ? Math.max(...cutoffsWithProbability.map(c => c.probabilityPercentage)) : 0,
+      lowestProbability: cutoffsWithProbability.length > 0 ? Math.min(...cutoffsWithProbability.map(c => c.probabilityPercentage)) : 0,
+      averageProbability: cutoffsWithProbability.length > 0 ? Math.round(cutoffsWithProbability.reduce((sum, c) => sum + c.probabilityPercentage, 0) / cutoffsWithProbability.length) : 0,
       searchModeUsed: searchMode,
       userRank: userRank,
-      category: category || 'Not Specified'
+      category: normalizedCategory || category || 'Not Specified'
     };
-    
-    res.status(200).json({
-      success: true,
-      data: cutoffsWithProbability,
-      summary,
-      pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
-        total,
-        pages: Math.ceil(total / parseInt(limit))
-      }
-    });
-    
+
+    res.status(200).json({ success: true, data: cutoffsWithProbability, summary, pagination: { page: parseInt(page), limit: parseInt(limit), total, pages: Math.ceil(total / parseInt(limit)) } });
+
   } catch (error) {
     console.error('Get cutoffs error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error fetching cutoff data',
-      error: process.env.NODE_ENV === "development" ? error.message : undefined,
-    });
+    res.status(500).json({ success: false, message: 'Error fetching cutoff data', error: process.env.NODE_ENV === "development" ? error.message : undefined });
   }
 };
 
