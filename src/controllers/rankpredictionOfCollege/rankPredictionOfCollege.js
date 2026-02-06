@@ -326,52 +326,64 @@ exports.getFilterOptions = async (req, res) => {
 
 exports.userDetailsFromRankPredictions = async (req, res) => {
   try {
-    const { mobileNumber, firstName,lastName, emailId } = req.body;
+    const { mobileNumber, firstName, emailId, city , homeState } = req.body;
 
     // ✅ Validation
-    if (!mobileNumber || !firstName || !emailId || !lastName) {
+    if (!mobileNumber || !firstName || !emailId || !city || !homeState) {
       return res.status(400).json({
         success: false,
         message: "Please fill all required fields correctly",
       });
     }
 
-      const checkEntry = {
+    const checkEntry = {
       mobileNumber,
-       firstName,
-       lastName,
-        emailId,
-        gainLeedFrom :"FROM_COLLEGE_SEARCH"
-        
+      firstName,
+      // lastName: req.body.lastName || null,
+      emailId,
+      city,
+      homeState,
+      gainLeedFrom: "FROM_COLLEGE_SEARCH",
+      timestamp: new Date() // Add timestamp for tracking
     };
 
     // ✅ Check if user already exists
-    const existingUser = await UserData.findOne({ mobileNumber });
+    let existingUser = await UserData.findOne({ mobileNumber });
 
     if (existingUser) {
-
-       existingUser.checkHistory.push(checkEntry);
+      // ✅ Add new check entry to history
+      existingUser.checkHistory.push(checkEntry);
       existingUser.totalChecks += 1;
-      // ❌ Do NOT create new entry
+      existingUser.updatedAt = new Date(); // Update timestamp
+      
+      // ✅ IMPORTANT: Save the updated user to database
+      await existingUser.save();
+      
+      logger.info(`Updated existing user for mobile: ${mobileNumber}, total checks: ${existingUser.totalChecks}`);
+
       return res.status(200).json({
         success: true,
-        message: "User already exists",
+        message: "User check history updated successfully",
         data: existingUser,
         isNewUser: false,
+        totalChecks: existingUser.totalChecks,
       });
     }
-
-  
 
     // ✅ Create NEW user if mobile not found
     const userData = await UserData.create({
       mobileNumber,
       firstName,
-      lastName,
+      // lastName,
       emailId,
+      city,
+      homeState,
+
       checkHistory: [checkEntry],
       totalChecks: 1,
       isDataExport: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
     });
 
     logger.info(`New user created for mobile: ${mobileNumber}`);
@@ -393,7 +405,7 @@ exports.userDetailsFromRankPredictions = async (req, res) => {
 
     return res.status(500).json({
       success: false,
-      message: "Failed to create user data",
+      message: "Failed to create/update user data",
     });
   }
 };

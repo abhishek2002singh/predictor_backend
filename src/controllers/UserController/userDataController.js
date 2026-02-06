@@ -483,10 +483,8 @@ const updateUserByAdminOrAssistance = async (req, res) => {
 // Add this function BEFORE the exportUserData function
 const generateCSVContentUpdated = (users, examType = null) => {
   const headers = [
-    'Mobile Number', 'Exam Type', 'Rank', 'Category', 'Gender', 
-    'Home State', 'Checked At', 'Total Checks', 'Exams Checked',
-    'Negative Response', 'Positive Response', 'Data Export Status', 
-    'Created At', 'Updated At'
+    'first Name','city', 'Mobile Number', 'Exam Type', 'Email ID',  
+    'Home State'
   ];
 
   const rows = users.flatMap(user => {
@@ -505,20 +503,13 @@ const generateCSVContentUpdated = (users, examType = null) => {
     }
     
     return checksToInclude.map(check => [
+      user.firstName,
+      user.city,
       user.mobileNumber,
       check.examType,
-      check.rank || '',
-      check.category || '',
-      check.gender || '',
-      check.homeState || '',
-      new Date(check.checkedAt).toISOString(),
-      user.totalChecks,
-      `"${user.examsChecked?.join(', ') || ''}"`,
-      user.isNegativeResponse ? 'Yes' : 'No',
-      user.isPositiveResponse ? 'Yes' : 'No',
-      user.isDataExport ? 'Yes' : 'No', // Use user-level isDataExport
-      new Date(user.createdAt).toISOString(),
-      new Date(user.updatedAt).toISOString()
+      user.emailId,
+      user.homeState,
+      
     ].join(','));
   });
 
