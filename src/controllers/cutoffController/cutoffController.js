@@ -33,6 +33,61 @@ const getCategoryFromSeatType = (seatType) => {
   return seatTypeToCategory[seatType] || 'GENERAL';
 };
 
+// CUET Category Parser
+const getCategoryFromSeatTypeCUET = (seatType) => {
+  if (!seatType || typeof seatType !== 'string') {
+    return 'GENERAL';
+  }
+  
+  const normalized = seatType.trim().toUpperCase();
+  
+  // Map CUET seat types
+  const cuetCategoryMap = {
+    'GENERAL': 'GENERAL',
+    'OPEN': 'GENERAL',
+    'OPEN(AF)': 'GENERAL',
+    'OPEN(FF)': 'GENERAL',
+    'OPEN(PH)': 'GENERAL',
+    'EWS': 'EWS',
+    'EWS(OPEN)': 'EWS',
+    'EWS(GL)': 'EWS',
+    'EWS(AF)': 'EWS',
+    'EWS(PH)': 'EWS',
+    'BC': 'OBC-NCL',
+    'BC(GIRL)': 'OBC-NCL',
+    'BC(AF)': 'OBC-NCL',
+    'BC(FF)': 'OBC-NCL',
+    'BC(PH)': 'OBC-NCL',
+    'OBC': 'OBC-NCL',
+    'OBC-NCL': 'OBC-NCL',
+    'SC': 'SC',
+    'SC(GIRL)': 'SC',
+    'SC(AF)': 'SC',
+    'SC(PH)': 'SC',
+    'ST': 'ST',
+    'ST(GIRL)': 'ST',
+    'ST(AF)': 'ST',
+    'ST(PH)': 'ST'
+  };
+  
+  // Direct lookup
+  if (cuetCategoryMap[normalized]) {
+    return cuetCategoryMap[normalized];
+  }
+  
+  // Try pattern matching for unrecognized patterns
+  const match = normalized.match(/^([A-Z]+)(?:\([A-Z]+\))?$/);
+  if (match) {
+    const base = match[1];
+    if (base === 'BC' || base === 'OBC') return 'OBC-NCL';
+    if (base === 'SC') return 'SC';
+    if (base === 'ST') return 'ST';
+    if (base === 'EWS') return 'EWS';
+  }
+  
+  return 'GENERAL';
+};
+
 const cleanSeatType = (seatType) => {
   if (!seatType) return 'OPEN';
   
@@ -490,10 +545,20 @@ exports.uploadCutoffCSV = async (req, res) => {
           rowCount++;
           
           try {
-            // Extract and clean data
-            const seatType = cleanSeatType(row['Seat Type'] || row['Seat Type'] || 'OPEN');
-            const category = getCategoryFromSeatType(seatType);
-            
+            // Extract and clean data. CSVs sometimes use different headers: prefer explicit `Seat Type`, `Category`, and `Seat Gender`.
+            const seatTypeRaw = (row['Seat Type'] || row['seatType'] || row['Category'] || row['category'] || '').toString().trim();
+            const seatType = seatTypeRaw || 'OPEN';
+
+            // Category from CSV `Category` column should be authoritative when present
+            const categoryRaw = (row['Category'] || row['category'] || '').toString().trim();
+            const category = categoryRaw
+              ? getCategoryFromSeatTypeCUET(categoryRaw)
+              : (examType === 'CUET' ? getCategoryFromSeatTypeCUET(seatType) : getCategoryFromSeatType(cleanSeatType(seatType)));
+
+            // Gender may be in `Seat Gender` column in CUET CSVs
+            const genderRaw = (row['Seat Gender'] || row['SeatGender'] || row.Gender || row.gender || '').toString().trim();
+            const gender = cleanGender(genderRaw || 'Gender-Neutral');
+
             const cleanedRow = {
               institute: (row.Institute || row.institute || '').toString().trim().slice(0, 500),
               academicProgramName: (row['Academic Program Name'] || 
@@ -502,13 +567,13 @@ exports.uploadCutoffCSV = async (req, res) => {
                                    '').toString().trim().slice(0, 500),
               typeOfExam: examType, // Use the validated exam type
               seatType: seatType,
-              gender: cleanGender(row.Gender || row.gender || 'Gender-Neutral'),
+              gender: gender,
               openingRank: cleanRank(row['Opening Rank'] || row.openingRank),
               closingRank: cleanRank(row['Closing Rank'] || row.closingRank),
               year: parsedYear,
               round: parsedRound,
               category: category,
-              isPwd: seatType.includes('PwD')
+              isPwd: seatType.toUpperCase().includes('PH') || seatType.toUpperCase().includes('PWD')
             };
             
             // Add uploadedBy if available
@@ -596,15 +661,18 @@ exports.uploadCutoffCSV = async (req, res) => {
       
       for (const record of batch) {
         try {
-          // Find existing record - search criteria includes exam type
+          // Find existing record - search criteria includes ranks to allow multiple seat allocations
+          // Different opening/closing ranks = different seat allocations (not duplicates)
           const existing = await Model.findOne({
             institute: record.institute,
             academicProgramName: record.academicProgramName,
-            typeOfExam: record.typeOfExam, // Include exam type in search
+            typeOfExam: record.typeOfExam,
             seatType: record.seatType,
             gender: record.gender,
             year: record.year,
-            round: record.round
+            round: record.round,
+            openingRank: record.openingRank,
+            closingRank: record.closingRank
           });
 
           if (existing) {
@@ -708,20 +776,27 @@ exports.uploadCutoffCSVDirect = async (req, res) => {
         .on('data', (row) => {
           rowCount++;
           
-          const seatType = cleanSeatType(row['Seat Type'] || 'OPEN');
-          const category = getCategoryFromSeatType(seatType);
-          
+          // Prefer CSV `Category` and `Seat Gender` when available
+          const seatTypeRaw = (row['Seat Type'] || row['seatType'] || row['Category'] || row['category'] || '').toString().trim();
+          const seatType = seatTypeRaw || 'OPEN';
+
+          const categoryRaw = (row['Category'] || row['category'] || '').toString().trim();
+          const category = categoryRaw ? getCategoryFromSeatTypeCUET(categoryRaw) : getCategoryFromSeatType(seatType);
+
+          const genderRaw = (row['Seat Gender'] || row['SeatGender'] || row.Gender || row.gender || '').toString().trim();
+          const gender = cleanGender(genderRaw || 'Gender-Neutral');
+
           const record = {
             institute: (row.Institute || '').trim(),
             academicProgramName: (row['Academic Program Name'] || '').trim(),
             seatType: seatType,
-            gender: cleanGender(row.Gender || 'Gender-Neutral'),
+            gender: gender,
             openingRank: cleanRank(row['Opening Rank']),
             closingRank: cleanRank(row['Closing Rank']),
             year: parsedYear,
             round: parsedRound,
             category: category,
-            isPwd: seatType.includes('PwD'),
+            isPwd: (seatType || '').toUpperCase().includes('PH') || (seatType || '').toUpperCase().includes('PWD'),
             uploadedBy: req.user?.id || null
           };
           
@@ -2191,7 +2266,8 @@ exports.getCutoffs = async (req, res) => {
 
     if (String(typeOfExam).toUpperCase() === 'CUET') {
       CutoffModel = CuetCutoffData;
-      // CUET-specific defaults kept in filters below
+      // CUET uses `category` field (not `seatType`) for normalized categories
+      examSpecificConfig.categoryField = 'category';
     }
 
     // Helper: build categorySeatTypeMap only once and keep keys consistent

@@ -77,7 +77,8 @@ const jeeCutoffSchema = new mongoose.Schema({
     { institute: 1, academicProgramName: 1 },
     { seatType: 1, gender: 1, year: 1 },
     { category: 1, year: 1, round: 1 },
-    { closingRank: 1, year: 1, seatType: 1 }
+    { closingRank: 1, year: 1, seatType: 1 },
+    // Unique index to prevent true duplicates (same seat allocation)\n    { institute: 1, academicProgramName: 1, seatType: 1, gender: 1, year: 1, round: 1, openingRank: 1, closingRank: 1, typeOfExam: 1, sparse: true }
   ]
 });
 

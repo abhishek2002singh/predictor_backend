@@ -30,8 +30,8 @@ const cuetCutoffSchema = new mongoose.Schema({
   quota: {
     type: String,
     trim: true,
-    enum: ['Home State', 'All India', 'Other State'],
-    default: 'Home State'
+    // enum: ['Home State', 'All India', 'Other State'],
+    // default: 'Home State'
   },
   seatType: {
     type: String,
@@ -67,16 +67,8 @@ const cuetCutoffSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: [
-      'GENERAL', 'EWS', 'OBC-NCL', 'SC', 'ST',
-      'GENERAL-PwD', 'EWS-PwD', 'OBC-NCL-PwD', 'SC-PwD', 'ST-PwD',
-      'BC', 'BC-PwD', 'OPEN', 'OPEN(AF)', 'OPEN(FF)'
-    ]
-  },
-  subCategory: {
-    type: String,
-    enum: ['', 'Girl', 'AF', 'FF', 'PH', 'GL', 'PwD'],
-    default: ''
+    required: true,
+    default: 'GENERAL'
   },
   isPwd: {
     type: Boolean,
@@ -103,108 +95,69 @@ const cuetCutoffSchema = new mongoose.Schema({
     { category: 1, year: 1, round: 1 },
     { closingRank: 1, year: 1, seatType: 1 },
     { quota: 1, year: 1 },
-    { typeOfExam: 1, year: 1 }
+    { typeOfExam: 1, year: 1 },
+    // Unique index to prevent true duplicates (same seat allocation)
+    { institute: 1, academicProgramName: 1, seatType: 1, gender: 1, year: 1, round: 1, openingRank: 1, closingRank: 1, typeOfExam: 1, sparse: true }
   ]
 });
 
-// Enhanced mapping for CSV seatType to standardized category and subCategory
+// Simplified mapping for CSV seatType to standardized category
 const seatTypeMapping = {
-  // GENERAL category
-  'GENERAL': { category: 'GENERAL', subCategory: '' },
-  'OPEN': { category: 'OPEN', subCategory: '' },
-  'OPEN(AF)': { category: 'OPEN(AF)', subCategory: 'AF' },
-  'OPEN(FF)': { category: 'OPEN(FF)', subCategory: 'FF' },
-  'OPEN(PH)': { category: 'GENERAL-PwD', subCategory: 'PH', isPwd: true },
-  
-  // EWS category
-  'EWS': { category: 'EWS', subCategory: '' },
-  'EWS(OPEN)': { category: 'EWS', subCategory: '' },
-  'EWS(GL)': { category: 'EWS', subCategory: 'GL' },
-  'EWS(AF)': { category: 'EWS', subCategory: 'AF' },
-  
-  // OBC/BC category
-  'BC': { category: 'BC', subCategory: '' },
-  'BC(Girl)': { category: 'BC', subCategory: 'Girl' },
-  'BC(AF)': { category: 'BC', subCategory: 'AF' },
-  'BC(FF)': { category: 'BC', subCategory: 'FF' },
-  'BC(PH)': { category: 'BC-PwD', subCategory: 'PH', isPwd: true },
-  
-  // SC category
-  'SC': { category: 'SC', subCategory: '' },
-  'SC(Girl)': { category: 'SC', subCategory: 'Girl' },
-  'SC(AF)': { category: 'SC', subCategory: 'AF' },
-  
-  // ST category
-  'ST': { category: 'ST', subCategory: '' },
-  'ST(Girl)': { category: 'ST', subCategory: 'Girl' },
-  
-  // Default fallback
-  'DEFAULT': { category: 'GENERAL', subCategory: '' }
+  'GENERAL': 'GENERAL',
+  'OPEN': 'GENERAL',
+  'OPEN(AF)': 'GENERAL',
+  'OPEN(FF)': 'GENERAL',
+  'OPEN(PH)': 'GENERAL',
+  'EWS': 'EWS',
+  'EWS(OPEN)': 'EWS',
+  'EWS(GL)': 'EWS',
+  'EWS(AF)': 'EWS',
+  'EWS(PH)': 'EWS',
+  'BC': 'OBC-NCL',
+  'BC(Girl)': 'OBC-NCL',
+  'BC(AF)': 'OBC-NCL',
+  'BC(FF)': 'OBC-NCL',
+  'BC(PH)': 'OBC-NCL',
+  'OBC': 'OBC-NCL',
+  'OBC-NCL': 'OBC-NCL',
+  'SC': 'SC',
+  'SC(Girl)': 'SC',
+  'SC(AF)': 'SC',
+  'SC(PH)': 'SC',
+  'ST': 'ST',
+  'ST(Girl)': 'ST',
+  'ST(AF)': 'ST',
+  'ST(PH)': 'ST'
 };
 
-// Helper function to parse seatType - FIXED VERSION
+// Helper function to parse seatType and return category
 function parseSeatType(seatType) {
   if (!seatType || typeof seatType !== 'string') {
-    return seatTypeMapping['DEFAULT'];
+    return 'GENERAL';
   }
   
-  const trimmedSeatType = seatType.trim();
+  const trimmedSeatType = seatType.trim().toUpperCase();
   
-  // Check exact match first
+  // Direct lookup
   if (seatTypeMapping[trimmedSeatType]) {
     return seatTypeMapping[trimmedSeatType];
   }
   
-  // Handle patterns like X(Y)
-  const match = trimmedSeatType.match(/^(\w+)(?:\((\w+)\))?$/);
+  // Extract base category from patterns like "BC(Girl)" or "OPEN(AF)"
+  const match = trimmedSeatType.match(/^([A-Z]+)(?:\([A-Z]+\))?$/);
   if (match) {
-    const main = match[1];
-    const sub = match[2] || '';
+    const baseCategory = match[1];
     
-    // Handle PwD cases
-    if (sub.includes('PH') || sub.includes('PwD') || main.includes('PH')) {
-      let baseCategory = 'GENERAL';
-      if (main === 'BC' || main === 'OBC') baseCategory = 'BC';
-      else if (main === 'SC') baseCategory = 'SC';
-      else if (main === 'ST') baseCategory = 'ST';
-      else if (main === 'EWS') baseCategory = 'EWS';
-      else if (main === 'OPEN' || main === 'GENERAL') baseCategory = 'GENERAL';
-      
-      return { 
-        category: `${baseCategory}-PwD`, 
-        subCategory: sub.replace('PH', '').replace('PwD', '').trim() || 'PH',
-        isPwd: true 
-      };
-    }
-    
-    // Handle Girl cases
-    if (sub.includes('Girl')) {
-      let baseCategory = 'GENERAL';
-      if (main === 'BC' || main === 'OBC') baseCategory = 'BC';
-      else if (main === 'SC') baseCategory = 'SC';
-      else if (main === 'ST') baseCategory = 'ST';
-      else if (main === 'EWS') baseCategory = 'EWS';
-      
-      return { 
-        category: baseCategory, 
-        subCategory: 'Girl'
-      };
-    }
-    
-    // Handle other subcategories
-    if (sub) {
-      return {
-        category: seatTypeMapping[main]?.category || 'GENERAL',
-        subCategory: sub,
-        isPwd: sub.includes('PH') || sub.includes('PwD')
-      };
-    }
-    
-    // Return base category if no subcategory
-    return seatTypeMapping[main] || seatTypeMapping['DEFAULT'];
+    // Map base to standard category
+    if (baseCategory === 'BC' || baseCategory === 'OBC') return 'OBC-NCL';
+    if (baseCategory === 'SC') return 'SC';
+    if (baseCategory === 'ST') return 'ST';
+    if (baseCategory === 'EWS') return 'EWS';
+    if (baseCategory === 'OPEN' || baseCategory === 'GENERAL') return 'GENERAL';
   }
   
-  return seatTypeMapping['DEFAULT'];
+  // Default fallback
+  return 'GENERAL';
 }
 
 // **FIXED: Pre-save middleware - SIMPLIFIED VERSION**
@@ -230,86 +183,70 @@ cuetCutoffSchema.pre('save', function(next) {
 
 // **ADDED: Method to process fields (can be called manually)**
 cuetCutoffSchema.methods.processFields = function() {
-  // Parse seatType to get category and subCategory
-  const parsed = parseSeatType(this.seatType);
-  this.category = parsed.category || 'GENERAL';
-  this.subCategory = parsed.subCategory || '';
+  // Parse seatType to get category
+  this.category = parseSeatType(this.seatType);
   
-  // Set isPwd flag
-  this.isPwd = parsed.isPwd || 
-              (this.seatType && (
-                this.seatType.toUpperCase().includes('PH') || 
-                this.seatType.toUpperCase().includes('PWD') || 
-                this.category.includes('-PwD')
-              ));
+  // Set isPwd flag based on seatType
+  this.isPwd = (this.seatType && (
+    this.seatType.toUpperCase().includes('PH') || 
+    this.seatType.toUpperCase().includes('PWD')
+  )) || false;
   
-  // Set isFemaleOnly flag
+  // Set isFemaleOnly flag based on gender or seatType
   this.isFemaleOnly = (this.gender && this.gender.includes('Female-only')) ||
-                     (this.seatType && this.seatType.includes('(Girl)')) ||
-                     (this.subCategory === 'Girl');
+                     (this.seatType && (this.seatType.includes('(Girl)') || this.seatType.includes('Girl'))) ||
+                     false;
   
-  // Set year from scrapedAt if available
-  if (this.scrapedAt && !this.year) {
-    this.year = new Date(this.scrapedAt).getFullYear();
-  }
-  
-  // Set round from round string if it's in format "Round X"
-  if (typeof this.round === 'string' && this.round.includes('Round')) {
-    const roundMatch = this.round.match(/Round (\d+)/);
-    if (roundMatch) {
-      this.round = parseInt(roundMatch[1]);
-    }
+  // Ensure typeOfExam is set
+  if (!this.typeOfExam) {
+    this.typeOfExam = 'CUET';
   }
 };
 
-// Static method to process CSV data - FIXED VERSION
+// Static method to process CSV data
 cuetCutoffSchema.statics.processCSVData = function(csvData) {
   return csvData.map(row => {
-    // Parse seatType first
-    const seatType = row['Seat Type'] || row.seatType || '';
-    const parsed = parseSeatType(seatType);
+    // Parse seatType (fall back to CSV Category if Seat Type missing)
+    const seatType = (row['Seat Type'] || row.seatType || row['seatType'] || row['Category'] || row['category'] || '').toString().trim();
+    const category = (row['Category'] || row['category'])
+      ? parseSeatType((row['Category'] || row['category']).toString().trim())
+      : parseSeatType(seatType);
     
     // Parse year
     let year = new Date().getFullYear();
-    if (row.Year) {
-      year = parseInt(row.Year);
-    } else if (row['Scraped At']) {
-      year = new Date(row['Scraped At']).getFullYear();
-    }
+    if (row.Year) year = parseInt(row.Year);
+    else if (row['Scraped At']) year = new Date(row['Scraped At']).getFullYear();
     
     // Parse round
     let round = 1;
-    const roundStr = row.Round || '';
+    const roundStr = row.Round || row.round || '';
     if (roundStr.includes('Round')) {
-      const roundMatch = roundStr.match(/Round (\d+)/);
+      const roundMatch = roundStr.match(/(\d+)/);
       round = roundMatch ? parseInt(roundMatch[1]) : 1;
+    } else if (!isNaN(parseInt(roundStr))) {
+      round = parseInt(roundStr);
     }
     
     // Create document object
     const docData = {
       year: year,
       round: round,
-      institute: row.Institute || row.institute || '',
-      academicProgramName: row['Academic Program Name'] || row.academicProgramName || '',
-      quota: row.Quota || row.quota || 'Home State',
-      seatType: seatType,
-      gender: row.Gender || row.gender || 'Gender-Neutral',
-      openingRank: parseFloat(row['Opening Rank'] || row.openingRank || 0),
-      closingRank: parseFloat(row['Closing Rank'] || row.closingRank || 0),
-      remark: row.Remark || row.remark || '',
-      typeOfExam: row['Type of Exam'] || row.typeOfExam || 'CUET',
+      institute: (row.Institute || row.institute || '').trim(),
+      academicProgramName: (row['Academic Program Name'] || row.academicProgramName || row.Program || '').trim(),
+      quota: (row.Quota || row.quota || 'Home State').trim(),
+      seatType: seatType || 'OPEN',
+      gender: (row['Seat Gender'] || row['SeatGender'] || row.Gender || row.gender || 'Gender-Neutral').toString().trim(),
+      openingRank: parseInt(row['Opening Rank'] || row.openingRank || 0) || 0,
+      closingRank: parseInt(row['Closing Rank'] || row.closingRank || 0) || 0,
+      remark: (row.Remark || row.remark || '').trim(),
+      typeOfExam: 'CUET',
       scrapedAt: row['Scraped At'] ? new Date(row['Scraped At']) : new Date(),
-      category: parsed.category || 'GENERAL',
-      subCategory: parsed.subCategory || '',
-      isPwd: parsed.isPwd || false,
-      isFemaleOnly: parsed.isFemaleOnly || false
+      category: category,
+      isPwd: (seatType || '').toUpperCase().includes('PH') || (seatType || '').toUpperCase().includes('PWD'),
+      isFemaleOnly: ((row['Seat Gender'] || row['SeatGender'] || row.Gender || row.gender || '').toString().includes('Female-only')) || (seatType || '').includes('Girl')
     };
     
-    // Create a temporary document to trigger field processing
-    const tempDoc = new this(docData);
-    tempDoc.processFields();
-    
-    return tempDoc.toObject();
+    return docData;
   });
 };
 
@@ -318,29 +255,22 @@ cuetCutoffSchema.statics.saveBulk = async function(dataArray) {
   // Process all data first
   const processedData = this.processCSVData(dataArray);
   
-  // Use insertMany with { validateBeforeSave: false } to bypass middleware
-  // Then update each document with processed fields
   const savedDocs = [];
   
   for (const data of processedData) {
     try {
-      // Create document without triggering save middleware
+      // Create and save document
       const doc = new this(data);
-      
-      // Manually process fields
       doc.processFields();
-      
-      // Save the document
       const savedDoc = await doc.save();
       savedDocs.push(savedDoc);
     } catch (error) {
       console.error('Failed to save record:', {
         institute: data.institute,
         program: data.academicProgramName,
-        examType: data.typeOfExam,
+        category: data.category,
         error: error.message
       });
-      // Continue with next record
       continue;
     }
   }
@@ -354,9 +284,24 @@ cuetCutoffSchema.statics.bulkInsert = async function(csvData) {
   return this.insertMany(processedData, { ordered: false });
 };
 
-// Create indexes
-cuetCutoffSchema.index({ institute: 1, academicProgramName: 1, year: 1, round: 1 });
-cuetCutoffSchema.index({ category: 1, closingRank: 1 });
-cuetCutoffSchema.index({ seatType: 1, gender: 1 });
+// Create additional indexes
+cuetCutoffSchema.index({ category: 1, year: 1 });
+cuetCutoffSchema.index({ typeOfExam: 1, year: 1, round: 1 });
+
+// Ensure compound unique index is created to prevent exact duplicates
+cuetCutoffSchema.index(
+  { 
+    institute: 1, 
+    academicProgramName: 1, 
+    seatType: 1, 
+    gender: 1, 
+    year: 1, 
+    round: 1, 
+    openingRank: 1, 
+    closingRank: 1, 
+    typeOfExam: 1 
+  }, 
+  { unique: true, sparse: true, name: 'unique_cuet_cutoff' }
+);
 
 module.exports = mongoose.model('CuetCutoff', cuetCutoffSchema);
